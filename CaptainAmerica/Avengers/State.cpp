@@ -1,6 +1,6 @@
 #include "State.h"
 #include "Captain.h"
-#include "../GameComponents/Game.h"
+#include "GameComponents/Game.h"
 //#include "Enemy.h"
 
 void State::Update(DWORD dt)

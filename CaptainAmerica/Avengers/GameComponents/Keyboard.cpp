@@ -140,7 +140,6 @@ void Keyboard::UpdateKeyStates()
 		if (IsKeyDown(DIK_S))
 		{
 			captain->SetIsCrouching(true);
-			captain->Attack();
 		}
 	}
 	else
@@ -181,6 +180,7 @@ void Keyboard::OnKeyUp(int KeyCode)
 			break;
 		case DIK_LEFT:
 		case DIK_RIGHT:
+			if (false == captain->IsCrouching())
 		{
 			captain->SetSpeedX(0);
 			captain->SetState(captain->GetIdleState());

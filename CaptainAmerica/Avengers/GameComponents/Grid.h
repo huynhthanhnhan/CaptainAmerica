@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Constants.h" 
 #include "GridCell.h"
-#include "../Captain/Captain.h"
+#include "../Captain.h"
 
 #include <vector>
 
@@ -41,6 +41,7 @@ public:
 	void LoadCells();
 
 	void GetCameraPosOnGrid(int &l, int &r, int &t, int &b);
+	void GetNinjaPosOnGrid(int &l, int &r, int &t, int &b);
 
 	vector<Tile *> GetCurTiles() { return this->curTiles; }
 	vector<Tile *> GetCollisionTiles() { return this->CollisionTiles; }

@@ -14,10 +14,10 @@ class LoadTXT
 {
 public:
 	static LoadTXT* instance;
-	LoadTXT() {};
-	static LoadTXT* Instance() {};
-	RECT* LoadRect(char* path) { RECT *result = new RECT(); result->left = 0; result->top; result->right = 0; result->bottom = 0; return result; };
-	~LoadTXT() {};
+	LoadTXT();
+	static LoadTXT* Instance();
+	RECT* LoadRect(char* path);
+	~LoadTXT();
 };
 
 #pragma once

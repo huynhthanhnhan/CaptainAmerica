@@ -52,6 +52,15 @@ void Grid::LoadCells()
 	}
 }
 
+void Grid::GetNinjaPosOnGrid(int &l, int &r, int &t, int &b)
+{
+	RECT rect = captain->GetRect();
+	l = (int)(rect.left / GRID_SIZE);
+	t = (int)(rect.top % GRID_SIZE == 0 ? rect.top / GRID_SIZE - 1 : rect.top / GRID_SIZE);
+	r = (int)(rect.right / GRID_SIZE);
+	b = (int)(rect.bottom / GRID_SIZE);
+}
+
 void Grid::GetCameraPosOnGrid(int &l, int &r, int &t, int &b) {
 	RECT rect = viewport->GetRect();
 	l = (int)(rect.left / GRID_SIZE);
@@ -65,7 +74,7 @@ void Grid::Update(DWORD dt)
 	int lCell, rCell, tCell, bCell;
 	this->GetCameraPosOnGrid(lCell, rCell, tCell, bCell);
 
-	//Update ninja
+	//Update captian
 	curTiles.clear();
 
 	for (size_t i = 0; i < cells.size(); i++)
@@ -75,6 +84,59 @@ void Grid::Update(DWORD dt)
 			cells[i][j]->clear();
 		}
 	}
+
+	int captainLCell, captainRCell, captainTCell, captainBCell;
+
+	this->GetNinjaPosOnGrid(captainLCell, captainRCell, captainTCell, captainBCell);
+
+	for (int i = captainBCell; i <= captainTCell; i++)
+	{
+		if (captainLCell - 2 >= 0)
+		{
+			if (captainRCell + 5 < 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS)
+			{
+				/*for (int j = captainLCell - 2; j <= captainRCell + 5; j++)
+				{
+					cells[i][j]->InsertEnemies(curEnemies);
+				}*/
+				for (int j = captainLCell; j <= captainRCell; j++)
+				{
+					cells[i][j]->InsertTiles(curTiles);
+				}
+			}
+			else if (captainRCell + 5 >= 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS)
+			{
+				/*for (int j = captainLCell - 2; j <= captainRCell; j++)
+				{
+					cells[i][j]->InsertEnemies(curEnemies);
+				}*/
+				for (int j = captainLCell; j <= captainRCell; j++)
+				{
+					cells[i][j]->InsertTiles(curTiles);
+				}
+			}
+			else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS)
+			{
+				for (int j = captainLCell; j <= captainRCell; j++)
+				{
+					cells[i][j]->InsertTiles(curTiles);
+					//cells[i][j]->InsertEnemies(curEnemies);
+				}
+			}
+		}
+		else {
+			if (captainRCell + 5 < 34)
+			{
+				for (int j = captainLCell; j <= captainRCell + 5; j++)
+				{
+					cells[i][j]->InsertTiles(curTiles);
+					//cells[i][j]->InsertEnemies(curEnemies);
+				}
+			}
+		}
+	}
+
+	captain->Update(dt);
 }
 void Grid::Render()
 {
@@ -89,6 +151,8 @@ void Grid::Render()
 			cells[i][j]->Render();
 		}
 	}
+	
+	captain->Render();
 }
 
 Grid * Grid::GetInstance()

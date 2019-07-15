@@ -1,6 +1,6 @@
 #pragma once
 #include "State.h"
-#include "../GameComponents/Constants.h"
+#include "GameComponents/Constants.h"
 #include "Captain.h"
 
 class CaptainState : public State
@@ -16,7 +16,6 @@ public:
 	void Walk() override;
 	void Jump() override;
 	void Crouch() override;
-	void Attack() override {};
 
 	void Update(DWORD dt) override;
 	void Render() override;

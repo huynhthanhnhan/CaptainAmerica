@@ -4,7 +4,7 @@
 #include "Keyboard.h"
 #include "TiledMap.h"
 #include "Grid.h"
-#include "../Captain/Captain.h"
+#include "../Captain.h"
 
 #include <chrono>
 

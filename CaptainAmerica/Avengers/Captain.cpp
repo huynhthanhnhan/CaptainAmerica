@@ -14,7 +14,7 @@ Captain::Captain()
 
 	state = idleState;
 
-	this->x = 100;
+	this->x = 300;
 	this->y = 100;
 	this->width = 25;
 	this->height = 45;
@@ -128,8 +128,8 @@ void Captain::TurnRight()
 }
 void Captain::Reset()
 {
-	this->stamina = 100;
-	this->SetPositionX(100);
+	this->stamina = 300;
+	this->SetPositionX(300);
 	this->SetPositionY(100);
 	Viewport::GetInstance()->Reset();
 	//Hud::GetInstance()->Reset();

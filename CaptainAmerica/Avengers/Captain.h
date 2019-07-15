@@ -1,8 +1,8 @@
 #pragma once
-#include "../GameComponents/GameObject.h"
+#include "GameComponents/GameObject.h"
 #include "State.h"
-#include "../GameComponents/Constants.h"
-#include "../GameComponents/Game.h"
+#include "GameComponents/Constants.h"
+#include "GameComponents/Game.h"
 #include "CaptainState.h"
 
 class Captain : public GameObject
@@ -50,13 +50,9 @@ public:
 	bool IsFlipped() { isFlipped = isLeft ? false : true; return isFlipped; }
 
 	void Idle();
-	void Attack() {};
 	void Walk();
 	void Jump();
 	void Crouch();
-	void Climb() {};
-	void JumpAttack() {};
-	void Attacked() {};
 
 	void SetColliderDemension(float width, float height)
 	{
@@ -66,14 +62,11 @@ public:
 	void SetScore(int value) { this->score = value; }
 	int GetScore() { return this->score; }
 
-	void SetUntouchableTime(int dt);
 
-	void DescreaseShuriken();
 	int GetStamina() { return this->stamina; }
 	int GetSupportItem() { return this->support_item; }
 	void TakeDamage(int value) { this->stamina -= value; }
 	void Reset();
-	void CreateThrownWeapon();
 	void TurnLeft();
 	void TurnRight();
 

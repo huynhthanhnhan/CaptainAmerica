@@ -20,9 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{1B4F4450-0B1F-47D7-A285-D6A5B134DC05}</ProjectGuid>
-    <RootNamespace>CaptainAmerica</RootNamespace>
+    <ProjectGuid>{9C1EA460-FBC4-492F-8401-D39586D7F0EB}</ProjectGuid>
+    <RootNamespace>Avengers</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>CaptainAmerica</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -81,7 +82,9 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -121,9 +124,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Captain\Captain.h" />
-    <ClInclude Include="Captain\CaptainState.h" />
-    <ClInclude Include="Captain\State.h" />
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Captain.h" />
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\CaptainState.h" />
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameComponents\LoadTXT.h" />
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\State.h" />
     <ClInclude Include="GameComponents\Animation.h" />
     <ClInclude Include="GameComponents\Brick.h" />
     <ClInclude Include="GameComponents\Constants.h" />
@@ -134,16 +138,16 @@
     <ClInclude Include="GameComponents\Grid.h" />
     <ClInclude Include="GameComponents\GridCell.h" />
     <ClInclude Include="GameComponents\Keyboard.h" />
-    <ClInclude Include="GameComponents\LoadTXT.h" />
     <ClInclude Include="GameComponents\resource.h" />
     <ClInclude Include="GameComponents\Sprite.h" />
     <ClInclude Include="GameComponents\TiledMap.h" />
     <ClInclude Include="GameComponents\Viewport.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Captain\Captain.cpp" />
-    <ClCompile Include="Captain\CaptainState.cpp" />
-    <ClCompile Include="Captain\State.cpp" />
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Captain.cpp" />
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\CaptainState.cpp" />
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\LoadTXT.cpp" />
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\State.cpp" />
     <ClCompile Include="GameComponents\Animation.cpp" />
     <ClCompile Include="GameComponents\Brick.cpp" />
     <ClCompile Include="GameComponents\Debug.cpp" />
@@ -153,10 +157,10 @@
     <ClCompile Include="GameComponents\Grid.cpp" />
     <ClCompile Include="GameComponents\GridCell.cpp" />
     <ClCompile Include="GameComponents\Keyboard.cpp" />
+    <ClCompile Include="GameComponents\Main.cpp" />
     <ClCompile Include="GameComponents\Sprite.cpp" />
     <ClCompile Include="GameComponents\TiledMap.cpp" />
     <ClCompile Include="GameComponents\Viewport.cpp" />
-    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
