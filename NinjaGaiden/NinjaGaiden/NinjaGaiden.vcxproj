@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\%40GitHub\GameSangThu7\NinjaGaiden\LoadTXT.cpp" />
+    <ClCompile Include="BossBullet.cpp" />
+    <ClCompile Include="GameComponents\Animation.cpp" />
+    <ClCompile Include="GameComponents\BloodyBird.cpp" />
+    <ClCompile Include="GameComponents\BloodyBirdState.cpp" />
+    <ClCompile Include="GameComponents\BonusPointBlue.cpp" />
+    <ClCompile Include="GameComponents\BonusPointRed.cpp" />
+    <ClCompile Include="GameComponents\Boss.cpp" />
+    <ClCompile Include="GameComponents\BossState.cpp" />
+    <ClCompile Include="GameComponents\BrownBird.cpp" />
+    <ClCompile Include="GameComponents\BrownBirdState.cpp" />
+    <ClCompile Include="GameComponents\Bullet.cpp" />
+    <ClCompile Include="GameComponents\DeathAnimation.cpp" />
+    <ClCompile Include="GameComponents\Debug.cpp" />
+    <ClCompile Include="GameComponents\Enemy.cpp" />
+    <ClCompile Include="GameComponents\EnemyState.cpp" />
+    <ClCompile Include="GameComponents\FireWheels.cpp" />
+    <ClCompile Include="GameComponents\Flames.cpp" />
+    <ClCompile Include="GameComponents\Game.cpp" />
+    <ClCompile Include="GameComponents\GameItem.cpp" />
+    <ClCompile Include="GameComponents\GameObject.cpp" />
+    <ClCompile Include="GameComponents\Graphics.cpp" />
+    <ClCompile Include="GameComponents\GreenCannonSoldierBullet.cpp" />
+    <ClCompile Include="GameComponents\GreenCanonSoldier.cpp" />
+    <ClCompile Include="GameComponents\GreenCanonSoldierState.cpp" />
+    <ClCompile Include="GameComponents\GreenRunningSoldier.cpp" />
+    <ClCompile Include="GameComponents\GreenRunningSoldierState.cpp" />
+    <ClCompile Include="GameComponents\GreenSoldierBullet.cpp" />
+    <ClCompile Include="GameComponents\GreenSolider.cpp" />
+    <ClCompile Include="GameComponents\GreenSoliderState.cpp" />
+    <ClCompile Include="GameComponents\Grid.cpp" />
+    <ClCompile Include="GameComponents\GridCell.cpp" />
+    <ClCompile Include="GameComponents\HealthItem.cpp" />
+    <ClCompile Include="GameComponents\Hud.cpp" />
+    <ClCompile Include="GameComponents\PinkWitchBullet.cpp" />
+    <ClCompile Include="GameComponents\WindmillStar.cpp" />
+    <ClCompile Include="GameComponents\Keyboard.cpp" />
+    <ClCompile Include="GameComponents\PinkWitch.cpp" />
+    <ClCompile Include="GameComponents\PinkWitchState.cpp" />
+    <ClCompile Include="GameComponents\RedBird.cpp" />
+    <ClCompile Include="GameComponents\RedBirdState.cpp" />
+    <ClCompile Include="GameComponents\SpiritPointBlue.cpp" />
+    <ClCompile Include="GameComponents\SpiritPointRed.cpp" />
+    <ClCompile Include="GameComponents\Sprite.cpp" />
+    <ClCompile Include="GameComponents\Sword.cpp" />
+    <ClCompile Include="GameComponents\ThrowingStar.cpp" />
+    <ClCompile Include="GameComponents\TimeFreeze.cpp" />
+    <ClCompile Include="GameComponents\Viewport.cpp" />
+    <ClCompile Include="GameComponents\YellowPanther.cpp" />
+    <ClCompile Include="GameComponents\YellowPantherState.cpp" />
+    <ClCompile Include="GameComponents\YellowSolider.cpp" />
+    <ClCompile Include="GameComponents\YellowSoliderState.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Ninja\Ninja.cpp" />
+    <ClCompile Include="Ninja\NinjaSate.cpp" />
+    <ClCompile Include="Ninja\Shuriken.cpp" />
+    <ClCompile Include="Ninja\State.cpp" />
+    <ClCompile Include="Ninja\Subweapon.cpp" />
+    <ClCompile Include="Ninja\ThrowingState.cpp" />
+    <ClCompile Include="GameComponents\TiledMap.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\%40GitHub\GameSangThu7\NinjaGaiden\GameComponents\LoadTXT.h" />
+    <ClInclude Include="BossBullet.h" />
+    <ClInclude Include="GameComponents\Animation.h" />
+    <ClInclude Include="GameComponents\BloodyBird.h" />
+    <ClInclude Include="GameComponents\BloodyBirdState.h" />
+    <ClInclude Include="GameComponents\BonusPointBlue.h" />
+    <ClInclude Include="GameComponents\BonusPointRed.h" />
+    <ClInclude Include="GameComponents\Boss.h" />
+    <ClInclude Include="GameComponents\BossState.h" />
+    <ClInclude Include="GameComponents\BrownBird.h" />
+    <ClInclude Include="GameComponents\BrownBirdState.h" />
+    <ClInclude Include="GameComponents\Bullet.h" />
+    <ClInclude Include="GameComponents\Constants.h" />
+    <ClInclude Include="GameComponents\DeathAnimation.h" />
+    <ClInclude Include="GameComponents\Debug.h" />
+    <ClInclude Include="GameComponents\Enemy.h" />
+    <ClInclude Include="GameComponents\EnemyState.h" />
+    <ClInclude Include="GameComponents\FireWheels.h" />
+    <ClInclude Include="GameComponents\Flames.h" />
+    <ClInclude Include="GameComponents\Game.h" />
+    <ClInclude Include="GameComponents\GameItem.h" />
+    <ClInclude Include="GameComponents\GameObject.h" />
+    <ClInclude Include="GameComponents\Graphics.h" />
+    <ClInclude Include="GameComponents\GreenCannonSoldierBullet.h" />
+    <ClInclude Include="GameComponents\GreenCanonSoldier.h" />
+    <ClInclude Include="GameComponents\GreenCanonSoldierState.h" />
+    <ClInclude Include="GameComponents\GreenRunningSoldier.h" />
+    <ClInclude Include="GameComponents\GreenRunningSoldierState.h" />
+    <ClInclude Include="GameComponents\GreenSolider.h" />
+    <ClInclude Include="GameComponents\GreenSoliderState.h" />
+    <ClInclude Include="GameComponents\Grid.h" />
+    <ClInclude Include="GameComponents\GridCell.h" />
+    <ClInclude Include="GameComponents\HealthItem.h" />
+    <ClInclude Include="GameComponents\Hud.h" />
+    <ClInclude Include="GameComponents\PinkWitchBullet.h" />
+    <ClInclude Include="GameComponents\WindmillStar.h" />
+    <ClInclude Include="GameComponents\Keyboard.h" />
+    <ClInclude Include="GameComponents\PinkWitch.h" />
+    <ClInclude Include="GameComponents\PinkWitchState.h" />
+    <ClInclude Include="GameComponents\RedBird.h" />
+    <ClInclude Include="GameComponents\RedBirdState.h" />
+    <ClInclude Include="GameComponents\resource.h" />
+    <ClInclude Include="GameComponents\SpiritPointBlue.h" />
+    <ClInclude Include="GameComponents\SpiritPointRed.h" />
+    <ClInclude Include="GameComponents\Sprite.h" />
+    <ClInclude Include="GameComponents\Sword.h" />
+    <ClInclude Include="GameComponents\ThrowingStar.h" />
+    <ClInclude Include="GameComponents\TimeFreeze.h" />
+    <ClInclude Include="GameComponents\YellowPanther.h" />
+    <ClInclude Include="GameComponents\YellowPantherState.h" />
+    <ClInclude Include="GameComponents\YellowSolider.h" />
+    <ClInclude Include="GameComponents\YellowSoliderState.h" />
+    <ClInclude Include="GreenSoldierBullet.h" />
+    <ClInclude Include="Ninja\Ninja.h" />
+    <ClInclude Include="Ninja\NinjaSate.h" />
+    <ClInclude Include="Ninja\Shuriken.h" />
+    <ClInclude Include="Ninja\State.h" />
+    <ClInclude Include="Ninja\Subweapon.h" />
+    <ClInclude Include="Ninja\ThrowingState.h" />
+    <ClInclude Include="GameComponents\TiledMap.h" />
+    <ClInclude Include="GameComponents\Viewport.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{ABCACA7B-2579-4E1C-AC64-3E7DE7ACF882}</ProjectGuid>
+    <RootNamespace>NinjaGaiden</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;.\GameComponents;.\Ninja;.\StaticObject;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;.\GameComponents;.\Ninja;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
