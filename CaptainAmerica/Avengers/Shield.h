@@ -13,6 +13,11 @@ class Shield : public GameItem
 
 	bool Active;
 
+	bool isStart = true;
+	bool isEnd;
+
+	float maxDistance;
+
 	float distance;
 public:
 	Shield();
@@ -20,6 +25,8 @@ public:
 	int GetDamage() { return this->damage; }
 	bool IsActive() { return this->Active; }
 	bool SetActive(bool value) { this->Active = value; }
+
+	void SheildAttacking();
 
 	static Shield * GetInstance();
 

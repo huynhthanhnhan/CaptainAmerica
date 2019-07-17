@@ -28,6 +28,8 @@ Shield::Shield()
 	collider.width = 16;
 	collider.height = 16;
 
+	maxDistance = SCREEN_WIDTH / 2;
+
 	state = SHIELD_LEFT;
 }
 //void Shuriken::CreateShuriken(float posx, float posy, float dt, bool isLeft)
@@ -108,8 +110,47 @@ void Shield::Update(DWORD dt)
 		this->SetPositionY(captain->GetPositionY() - 26);
 	}
 
+	if (captain->GetStateNum() == CAPTAIN_ANI_THROW_SHIELD) {
+		this->state = SHIELD_UP;
+		SheildAttacking();
+	}
+
 	this->SetPositionX((float)(this->GetPositionX() + this->GetSpeedX()* dt*(isLeft == true ? -1 : 1)));
 	this->SetPositionY((float)(this->GetPositionY() + this->GetSpeedY()* dt));
+}
+
+void Shield::SheildAttacking() 
+{
+	Captain* captain = Captain::GetInstance();
+	if (isStart)
+	{
+		this->SetPositionX(captain->GetPositionX() - 10);
+		this->distance = captain->GetPositionX() + this->maxDistance;
+		this->SetSpeedX(SHIELD_SPEED);
+		//this->SetPositionY(captain->GetPositionY());
+		this->isStart = false;
+	}
+	else
+	{
+		
+		/*if (this->GetPositionX() >= 400)
+		{
+			this->SetSpeedX(SHIELD_SPEED * -1);
+		}*/
+		if (abs(this->GetPositionY() - captain->GetPositionY()) >= 5)
+		{
+			if (this->GetPositionY() > captain->GetPositionY())
+			{
+				float temp = this->GetPositionY() - 0.5;
+				this->SetPositionY(temp);
+			}
+			else
+			{
+				float temp = this->GetPositionY() + 0.5;
+				this->SetPositionY(temp);
+			}
+		}
+	}
 }
 //
 //void Shield::Update(DWORD dt)

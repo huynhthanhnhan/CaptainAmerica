@@ -227,51 +227,61 @@ State * Captain::GetThrowShieldState()
 
 State * Captain::GetRollState()
 {
+	this->SetStateNum(CAPTAIN_ANI_ROLL);
 	return rollState;
 }
 
 State * Captain::GetKickState()
 {
+	this->SetStateNum(CAPTAIN_ANI_KICK);
 	return kickState;
 }
 
 State * Captain::GetStandHitState()
 {
+	this->SetStateNum(CAPTAIN_ANI_STAND_HIT);
 	return standHitState;
 }
 
 State * Captain::GetCrouchHitState()
 {
+	this->SetStateNum(CAPTAIN_ANI_CROUCH_HIT);
 	return crouchHitState;
 }
 
 State * Captain::GetSitOnShieldState()
 {
+	this->SetStateNum(CAPTAIN_ANI_SIT_ON_SHIELD);
 	return sitOnShieldState;
 }
 
 State * Captain::GetSwingState()
 {
+	this->SetStateNum(CAPTAIN_ANI_SWING);
 	return swingState;
 }
 
 State * Captain::GetWadeState()
 {
+	this->SetStateNum(CAPTAIN_ANI_WADE);
 	return wadeState;
 }
 
 State * Captain::GetShieldUpState()
 {
+	this->SetStateNum(CAPTAIN_ANI_SHIELD_UP);
 	return shieldUpState;
 }
 
 State * Captain::GetGetHurtState()
 {
+	this->SetStateNum(CAPTAIN_ANI_GET_HURT);
 	return getHurtState;
 }
 
 State * Captain::GetDeadState()
 {
+	this->SetStateNum(CAPTAIN_ANI_DEAD);
 	return deadState;
 }
 

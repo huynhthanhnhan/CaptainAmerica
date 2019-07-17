@@ -164,6 +164,15 @@ void Keyboard::OnKeyDown(int KeyCode)
 			break;
 		case DIK_UP:
 			break;
+		case DIK_F:
+		{
+			if (!captain->isThrowing)
+			{
+				captain->ThrowShield();
+				captain->isThrowing = true;
+			}
+			break;
+		}
 	}
 }
 void Keyboard::OnKeyUp(int KeyCode)
@@ -180,11 +189,17 @@ void Keyboard::OnKeyUp(int KeyCode)
 			break;
 		case DIK_LEFT:
 		case DIK_RIGHT:
-			if (false == captain->IsCrouching())
-		{
+			if (captain->IsGrounded())
+
+			{
+				if (false == captain->IsCrouching())
+				{
+					
+					captain->SetState(captain->GetIdleState());
+				}
+			}
 			captain->SetSpeedX(0);
-			captain->SetState(captain->GetIdleState());
-		}
+			
 			break;
 		case DIK_D:
 			captain->SetState(captain->GetIdleState());

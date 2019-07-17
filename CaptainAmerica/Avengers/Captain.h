@@ -35,6 +35,7 @@ class Captain : public GameObject
 
 	bool isGrounded = false;
 	bool isCrouching = false;
+	
 
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
@@ -54,6 +55,7 @@ public:
 	void SetStateNum(int num) { this->StateNum = num; }
 	State * GetState() { return this->state; }
 	static Captain * GetInstance();
+	bool isThrowing = false;
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
 
