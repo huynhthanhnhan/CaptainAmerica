@@ -63,3 +63,10 @@ enum ObjectType
 #define CAPTAIN_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(0, 168, 80, 1)
 #define CAPTAIN_SPRITE_WIDTH 26
 #define CAPTAIN_SPRITE_HEIGHT 36
+
+
+//Các số để chạy animation của Shield
+#define SHIELD_LEFT 0
+#define SHIELD_CENTER 1
+#define SHIELD_UP 2
+#define SHIELD_DOWN 3

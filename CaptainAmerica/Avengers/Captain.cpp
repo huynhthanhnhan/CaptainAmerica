@@ -26,6 +26,8 @@ Captain::Captain()
 
 	stamina = 100;
 
+	shield = new Shield();
+
 	/*  // Throw a lot of suriken
 		Shurikens.push_back(new Shuriken());
 		Shurikens.push_back(new Shuriken());
@@ -86,6 +88,7 @@ void Captain::SetState(State * state)
 {
 	this->state = state;
 }
+
 State * Captain::GetIdleState()
 {
 	return idleState;
@@ -186,8 +189,10 @@ void Captain::Update(DWORD dt)
 		this->SetPositionX(0);
 	}
 	state->Update(dt);
+	shield->Update(dt);
 }
 void Captain::Render()
 {
 	state->Render();
+	shield->Render();
 }

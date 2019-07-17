@@ -11,6 +11,11 @@ CaptainState::~CaptainState()
 {
 }
 
+int CaptainState::GetState() 
+{
+	return this->states;
+}
+
 void CaptainState::Idle()
 {
 	int state = this->states;

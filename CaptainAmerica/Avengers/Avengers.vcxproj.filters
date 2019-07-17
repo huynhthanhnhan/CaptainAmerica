@@ -81,6 +81,12 @@
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameComponents\LoadTXT.h">
       <Filter>Header Files\GameComponents</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameItem.h">
+      <Filter>Header Files\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Shield.h">
+      <Filter>Header Files\Captain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameComponents\Animation.cpp">
@@ -133,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\LoadTXT.cpp">
       <Filter>Source Files\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameItem.cpp">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Shield.cpp">
+      <Filter>Source Files\Captain</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

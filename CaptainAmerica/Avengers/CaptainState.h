@@ -12,6 +12,8 @@ public:
 	CaptainState(Captain * ninja, int states);
 	~CaptainState();
 
+	int GetState();
+
 	void Idle() override;
 	void Walk() override;
 	void Jump() override;

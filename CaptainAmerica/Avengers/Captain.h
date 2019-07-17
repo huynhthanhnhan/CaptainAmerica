@@ -4,6 +4,7 @@
 #include "GameComponents/Constants.h"
 #include "GameComponents/Game.h"
 #include "CaptainState.h"
+#include "Shield.h"
 
 class Captain : public GameObject
 {
@@ -16,6 +17,8 @@ class Captain : public GameObject
 	State * jumpingState;
 
 	State * state;
+
+	Shield* shield;
 
 	bool isGrounded = false;
 	bool isCrouching = false;
@@ -34,7 +37,7 @@ public:
 	void SetIsCrouching(bool isCrouching) { this->isCrouching = isCrouching; }
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
 	void SetState(State * state);
-	State * GetSate() { return this->state; }
+	State * GetState() { return this->state; }
 	static Captain * GetInstance();
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
