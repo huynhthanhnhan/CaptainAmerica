@@ -1,7 +1,7 @@
 ﻿#include "TiledMap.h"
 #include "Game.h"
-TiledMap * TiledMap::__instance = NULL;
-TiledMap * TiledMap::GetInstance(LPCWSTR filePath)
+TiledMap *TiledMap::__instance = NULL;
+TiledMap *TiledMap::GetInstance(LPCWSTR filePath)
 {
 	if (__instance == NULL || filePath != NULL)
 	{
@@ -40,27 +40,38 @@ Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
 		curTile.colider->height = TILES_HEIGHT_PER_TILE;
 
 		curTile.tileId = stoi(token);
-		if (Stage::STAGE_31 == stage)
+		if (Stage::STAGE_1 == stage)
 		{
-			if (find(_BrickStage_31.begin(), _BrickStage_31.end(), curTile.tileId) != _BrickStage_31.end())
+			if (find(_BrickStage_1.begin(), _BrickStage_1.end(), curTile.tileId) != _BrickStage_1.end())
 				curTile.type = ObjectType::BRICK;
+			else if (curTile.tileId == 101)
+				curTile.type = ObjectType::RIVER;
 			else
 				curTile.type = ObjectType::DEFAULT;
 		}
-		else if (Stage::STAGE_32 == stage)
+		else if (Stage::STAGE_2 == stage)
 		{
-			if (find(_BrickStage_32.begin(), _BrickStage_32.end(), curTile.tileId) != _BrickStage_32.end())
+			if (find(_BrickStage_2.begin(), _BrickStage_2.end(), curTile.tileId) != _BrickStage_2.end())
 				curTile.type = ObjectType::BRICK;
-			else if (curTile.tileId == 25)
-				curTile.type = ObjectType::VINES;
-			else if (curTile.tileId == 28 || curTile.tileId == 29)
-				curTile.type = ObjectType::BRICK_NOCOLLISION_BOTTOM;
+			else if (curTile.tileId == 44)
+				curTile.type = ObjectType::ON_BUTTON;
+			else if (curTile.tileId == 61 || curTile.tileId == 62 || curTile.tileId == 74 || curTile.tileId == 96)
+				curTile.type = ObjectType::SWING;
 			else
 				curTile.type = ObjectType::DEFAULT;
 		}
-		else if (Stage::STAGE_BOSS == stage)
+		else if (Stage::STAGE_BOSS_1 == stage)
 		{
-			if (find(_BrickStage_BOSS.begin(), _BrickStage_BOSS.end(), curTile.tileId) != _BrickStage_BOSS.end())
+			if (find(_BrickStage_BOSS_1.begin(), _BrickStage_BOSS_1.end(), curTile.tileId) != _BrickStage_BOSS_1.end())
+				curTile.type = ObjectType::BRICK;
+			else if (curTile.tileId == 6)
+				curTile.type = ObjectType::ON_BUTTON;
+			else
+				curTile.type = ObjectType::DEFAULT;
+		}
+		else if (Stage::STAGE_BOSS_2 == stage)
+		{
+			if (find(_BrickStage_BOSS_2.begin(), _BrickStage_BOSS_2.end(), curTile.tileId) != _BrickStage_BOSS_2.end())
 				curTile.type = ObjectType::BRICK;
 			else
 				curTile.type = ObjectType::DEFAULT;
@@ -77,7 +88,7 @@ std::wstring s2ws(const string& s)
 	int len;
 	int slength = (int)s.length() + 1;
 	len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
-	wchar_t* buf = new wchar_t[len];
+	wchar_t *buf = new wchar_t[len];
 	MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
 	std::wstring r(buf);
 	delete[] buf;
@@ -117,7 +128,7 @@ string TiledMap::LoadMatrix(LPCWSTR filePath)
 		int lineNum = 0;
 		while (getline(tilesInfo, line))
 		{
-			matrixRow = GetMatrixRow(lineNum,line, TILES_MATRIX_DELIMITER);
+			matrixRow = GetMatrixRow(lineNum, line, TILES_MATRIX_DELIMITER);
 			this->matrix.push_back(matrixRow);
 			lineNum++;
 		}
@@ -142,21 +153,25 @@ void TiledMap::LoadTileSet(LPCWSTR tilesLocation)
 	this->tileSetWidth = info.Width / TILES_WIDTH_PER_TILE;
 	this->tileSetHeight = info.Height / TILES_HEIGHT_PER_TILE;
 
-	if (Game::GetInstance()->GetStage() == STAGE_31)
+	if (Game::GetInstance()->GetStage() == STAGE_1)
 	{
-		result = D3DXGetImageInfoFromFile(BACKGROUND_3_1, &info);
+		result = D3DXGetImageInfoFromFile(BACKGROUND_1, &info);
 	}
-	else if (Game::GetInstance()->GetStage() == STAGE_32)
+	else if (Game::GetInstance()->GetStage() == STAGE_2)
 	{
-		result = D3DXGetImageInfoFromFile(BACKGROUND_3_2, &info);
+		result = D3DXGetImageInfoFromFile(BACKGROUND_2, &info);
 	}
-	else if (Game::GetInstance()->GetStage() == STAGE_BOSS)
+	else if (Game::GetInstance()->GetStage() == STAGE_BOSS_1)
 	{
-		result = D3DXGetImageInfoFromFile(BACKGROUND_BOSS, &info);
+		result = D3DXGetImageInfoFromFile(BACKGROUND_BOSS_1, &info);
+	}
+	else if (Game::GetInstance()->GetStage() == STAGE_BOSS_2)
+	{
+		result = D3DXGetImageInfoFromFile(BACKGROUND_BOSS_2, &info);
 	}
 	this->mapWidth = info.Width;
 	this->mapHeight = info.Height;
-	
+
 	tiles[0] = NULL;
 	for (int i = 0; i < this->tileSetWidth; i++)
 	{
@@ -166,7 +181,7 @@ void TiledMap::LoadTileSet(LPCWSTR tilesLocation)
 		rect.top = (i / this->tileSetWidth) * TILES_HEIGHT_PER_TILE;
 		rect.bottom = rect.top + TILES_HEIGHT_PER_TILE;
 
-		Sprite * tile = new Sprite(tilesLocation, rect, TILES_TRANSCOLOR);
+		Sprite *tile = new Sprite(tilesLocation, rect, TILES_TRANSCOLOR);
 
 		tiles[i + 1] = tile;
 	}
@@ -174,7 +189,7 @@ void TiledMap::LoadTileSet(LPCWSTR tilesLocation)
 
 void TiledMap::AddObjects(Stage stage)
 {
-	
+
 }
 
 TiledMap::~TiledMap()
@@ -214,14 +229,14 @@ void TiledMap::Render()
 				spriteData.y = (matrix.size() - i) * TILES_HEIGHT_PER_TILE;
 				spriteData.scale = 1;
 				spriteData.angle = 0;
-				
+
 				tiles.at(curRow[j].tileId)->SetData(spriteData);
 				Graphics::GetInstance()->Draw(tiles.at(curRow[j].tileId));
 			}
 		}
 	}
 }
-void TiledMap::RenderTile(Tile * curTile)
+void TiledMap::RenderTile(Tile *curTile)
 {
 	SpriteData spriteData;
 	spriteData.width = TILES_WIDTH_PER_TILE;

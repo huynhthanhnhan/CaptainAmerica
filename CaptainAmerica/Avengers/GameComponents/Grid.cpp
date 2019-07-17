@@ -1,7 +1,7 @@
 ﻿#include"Grid.h"
 #include "Game.h"
 
-Grid * Grid::__instance = NULL;
+Grid *Grid::__instance = NULL;
 
 Grid::Grid()
 {
@@ -16,7 +16,7 @@ Grid::Grid()
 		CellRow curRow;
 		for (int j = 0; j < width; j++)
 		{
-			GridCell * curCell = new GridCell(j, i);
+			GridCell *curCell = new GridCell(j, i);
 			curRow.push_back(curCell);
 		}
 		cells.push_back(curRow);
@@ -25,6 +25,7 @@ Grid::Grid()
 
 	//Luu viewport
 	this->viewport = Viewport::GetInstance();
+
 	//Lưu captain
 	this->captain = Captain::GetInstance();
 
@@ -41,7 +42,7 @@ void Grid::LoadCells()
 			int cellX = POSXTOCELL(tiledMapMatrix[i][j].x);
 			int cellY = POSYTOCELL(tiledMapMatrix[i][j].y);
 
-			Tile * dummyPtr = &tiledMapMatrix[i][j];
+			Tile *dummyPtr = &tiledMapMatrix[i][j];
 			cells[cellY][cellX]->AddTile(dummyPtr);
 
 			if (tiledMapMatrix[i][j].type == ObjectType::BRICK)
@@ -52,7 +53,7 @@ void Grid::LoadCells()
 	}
 }
 
-void Grid::GetNinjaPosOnGrid(int &l, int &r, int &t, int &b)
+void Grid::GetCaptainPosOnGrid(int &l, int &r, int &t, int &b)
 {
 	RECT rect = captain->GetRect();
 	l = (int)(rect.left / GRID_SIZE);
@@ -74,7 +75,7 @@ void Grid::Update(DWORD dt)
 	int lCell, rCell, tCell, bCell;
 	this->GetCameraPosOnGrid(lCell, rCell, tCell, bCell);
 
-	//Update captian
+	//Update captain
 	curTiles.clear();
 
 	for (size_t i = 0; i < cells.size(); i++)
@@ -87,50 +88,38 @@ void Grid::Update(DWORD dt)
 
 	int captainLCell, captainRCell, captainTCell, captainBCell;
 
-	this->GetNinjaPosOnGrid(captainLCell, captainRCell, captainTCell, captainBCell);
+	this->GetCaptainPosOnGrid(captainLCell, captainRCell, captainTCell, captainBCell);
 
 	for (int i = captainBCell; i <= captainTCell; i++)
 	{
-		if (captainLCell - 2 >= 0)
+		//if (captainLCell - 2 >= 0)
 		{
-			if (captainRCell + 5 < 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS)
+			if (captainRCell + 5 < 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
 			{
-				/*for (int j = captainLCell - 2; j <= captainRCell + 5; j++)
-				{
-					cells[i][j]->InsertEnemies(curEnemies);
-				}*/
 				for (int j = captainLCell; j <= captainRCell; j++)
 				{
 					cells[i][j]->InsertTiles(curTiles);
 				}
 			}
-			else if (captainRCell + 5 >= 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS)
+			else if (captainRCell + 5 >= 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
 			{
-				/*for (int j = captainLCell - 2; j <= captainRCell; j++)
-				{
-					cells[i][j]->InsertEnemies(curEnemies);
-				}*/
 				for (int j = captainLCell; j <= captainRCell; j++)
 				{
 					cells[i][j]->InsertTiles(curTiles);
 				}
 			}
-			else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS)
+			else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS_1)
 			{
 				for (int j = captainLCell; j <= captainRCell; j++)
 				{
 					cells[i][j]->InsertTiles(curTiles);
-					//cells[i][j]->InsertEnemies(curEnemies);
 				}
 			}
-		}
-		else {
-			if (captainRCell + 5 < 34)
+			else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS_2)
 			{
-				for (int j = captainLCell; j <= captainRCell + 5; j++)
+				for (int j = captainLCell; j <= captainRCell; j++)
 				{
 					cells[i][j]->InsertTiles(curTiles);
-					//cells[i][j]->InsertEnemies(curEnemies);
 				}
 			}
 		}
@@ -151,11 +140,11 @@ void Grid::Render()
 			cells[i][j]->Render();
 		}
 	}
-	
+
 	captain->Render();
 }
 
-Grid * Grid::GetInstance()
+Grid *Grid::GetInstance()
 {
 	if (__instance == NULL)
 		__instance = new Grid();

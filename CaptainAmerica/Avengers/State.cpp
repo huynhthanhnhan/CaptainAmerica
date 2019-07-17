@@ -1,7 +1,4 @@
 #include "State.h"
-#include "Captain.h"
-#include "GameComponents/Game.h"
-//#include "Enemy.h"
 
 void State::Update(DWORD dt)
 {
@@ -20,10 +17,6 @@ void State::Idle()
 {
 
 }
-void State::Attack()
-{
-
-}
 void State::Walk()
 {
 
@@ -34,5 +27,59 @@ void State::Jump()
 }
 void State::Crouch()
 {
+}
+
+void State::ThrowShield()
+{
+}
+
+void State::Roll()
+{
 
 }
+
+void State::Kick()
+{
+
+}
+
+void State::StandHit()
+{
+
+}
+
+void State::CrouchHit()
+{
+
+}
+
+void State::SitOnShield()
+{
+
+}
+
+void State::Swing()
+{
+
+}
+
+void State::Wade()
+{
+
+}
+
+void State::ShieldUp()
+{
+
+}
+
+void State::GetHurt()
+{
+
+}
+
+void State::Dead()
+{
+
+}
+

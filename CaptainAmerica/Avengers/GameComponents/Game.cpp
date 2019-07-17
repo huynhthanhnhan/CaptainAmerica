@@ -16,7 +16,7 @@ void Game::Init()
 	keyboard = Keyboard::GetInstance();
 	keyboard->InitKeyboard(hWnd);
 
-	this->stage = STAGE_31;
+	this->stage = STAGE_1;
 	LoadResources();
 	OutputDebugString(L"[INFO] InitGame done;\n");
 }
@@ -79,7 +79,7 @@ void Game::LoadResources()
 	if (NULL == captain)
 		captain = Captain::GetInstance();
 	if (NULL == tiledMap)
-		tiledMap = TiledMap::GetInstance(TILES_MATRIX_STAGE_31);
+		tiledMap = TiledMap::GetInstance(TILES_MATRIX_STAGE_1);
 	if (viewport == NULL)
 		viewport = Viewport::GetInstance();
 	if (grid == NULL)

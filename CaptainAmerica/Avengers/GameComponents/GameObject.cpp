@@ -91,15 +91,6 @@ void GameObject::CalcPotentialMapCollisions(
 				delete e;
 			}
 		}
-		else if (curTile->type == ObjectType::VINES)
-		{
-			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
-			e->collisionID = 1;
-		}
-		else 
-		{
-			
-		}
 	}
 }
 

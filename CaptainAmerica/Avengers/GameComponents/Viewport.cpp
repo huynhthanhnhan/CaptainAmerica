@@ -6,10 +6,10 @@ Viewport * Viewport::__instance = NULL;
 
 Viewport::Viewport()
 {
-	width = 450;
-	height = 250;
+	width = SCREEN_WIDTH;
+	height = SCREEN_HEIGHT;
 	x = 0;
-	y = 250;
+	y = 235;
 }
 
 
@@ -37,10 +37,10 @@ Viewport * Viewport::GetInstance()
 }
 void Viewport::Reset()
 {
-	width = 450;
-	height = 250;
+	width = SCREEN_WIDTH;
+	height = SCREEN_HEIGHT;
 	x = 0;
-	y = 250;
+	y = 235;
 }
 void Viewport::Update(DWORD dt)
 {

@@ -11,29 +11,30 @@
 #include "Sprite.h"
 #include "Debug.h"
 #include "Constants.h"
-#include "Brick.h"
+#include "GameObject.h"
 
 using namespace std;
 
 struct Tile {
 	int tileId;
-	ObjectType type; 
+	ObjectType type;
 	int x, y;
 	int width = 16, height = 16;
-	Collider * colider;
+	Collider *colider;
 };
 
 typedef vector<Tile> Row;
 typedef vector<Row> Matrix;
 
-const vector<int> _BrickStage_31{ 11, 12, 13, 34, 42, 65, 92, 93, 96, 97, 101 };
-const vector<int> _BrickStage_32{ 1, 2, 7, 8, 9, 11 };
-const vector<int> _BrickStage_BOSS{ 40 , 68 , 23 , 151 , 130 , 113 , 99 , 78 , 47 , 31 , 4 , 154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175, 1000 };
+const vector<int> _BrickStage_1{ 11, 12, 13, 34, 42, 65, 92, 93, 96, 97 };
+const vector<int> _BrickStage_2{ 5, 11, 12, 13, 14, 15, 21, 22, 54, 55, 56, 57, 58, 76, 77, 78, 79, 80, 94, 98, 119, 126, 127, 128, 239, 240, 241, 242, 243, 253, 254 };
+const vector<int> _BrickStage_BOSS_1{ 1, 2, 7, 8, 9, 11 };
+const vector<int> _BrickStage_BOSS_2{  };
 
 class TiledMap
 {
 private:
-	static TiledMap * __instance;
+	static TiledMap *__instance;
 
 	void LoadMap(LPCWSTR filePath);
 	string LoadMatrix(LPCWSTR filePath);
@@ -50,7 +51,7 @@ private:
 	unordered_map<int, Sprite*> tiles;
 
 public:
-	static TiledMap * GetInstance(LPCWSTR filePath = NULL);
+	static TiledMap *GetInstance(LPCWSTR filePath = NULL);
 	TiledMap(LPCWSTR filePath);
 
 	int GetWidth();
@@ -64,7 +65,7 @@ public:
 	{
 		__instance = NULL;
 	}
-	void RenderTile(Tile * curTile);
+	void RenderTile(Tile *curTile);
 	void Render();
 
 	~TiledMap();

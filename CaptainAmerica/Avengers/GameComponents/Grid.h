@@ -41,7 +41,7 @@ public:
 	void LoadCells();
 
 	void GetCameraPosOnGrid(int &l, int &r, int &t, int &b);
-	void GetNinjaPosOnGrid(int &l, int &r, int &t, int &b);
+	void GetCaptainPosOnGrid(int &l, int &r, int &t, int &b);
 
 	vector<Tile *> GetCurTiles() { return this->curTiles; }
 	vector<Tile *> GetCollisionTiles() { return this->CollisionTiles; }

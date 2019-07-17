@@ -15,27 +15,32 @@
 
 //
 enum Stage {
-	STAGE_31,
-	STAGE_32,
-	STAGE_BOSS
+	STAGE_1,
+	STAGE_2,
+	STAGE_BOSS_1,
+	STAGE_BOSS_2,
 };
 enum ObjectType
 {
 	DEFAULT,
 	BRICK,
 	VINES,
-	BRICK_NOCOLLISION_BOTTOM
+	BRICK_NOCOLLISION_BOTTOM,
+	SWING,
+	ON_BUTTON,
+	RIVER,
 };
 //TiledMap
 //
 // MAP
-#define BACKGROUND_3_1 L"Resources\\TiledMap\\Map-Charleston.png"
-#define BACKGROUND_3_2 L"Resources\\TiledMap\\Map-Charleston.png"
-#define BACKGROUND_BOSS L"Resources\\TiledMap\\Map-Charleston.png"
+#define BACKGROUND_1 L"Resources\\TiledMap\\Map-Charleston.png"
+#define BACKGROUND_2 L"Resources\\TiledMap\\Map-Charleston.png"
+#define BACKGROUND_BOSS_1 L"Resources\\TiledMap\\Map-Charleston.png"
+#define BACKGROUND_BOSS_2 L"Resources\\TiledMap\\Map-Charleston.png"
 // TILE
-#define TILES_MATRIX_STAGE_31 L"Resources\\TiledMap\\Map-Charleston-Matrix.txt"
-#define TILES_MATRIX_STAGE_32 L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
-#define TILES_MATRIX_STAGE_BOSS L"Resources\\TiledMap\\Map-Boss1-Matrix.txt"
+#define TILES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Map-Charleston-Matrix.txt"
+#define TILES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
+#define TILES_MATRIX_STAGE_BOSS_1 L"Resources\\TiledMap\\Map-Boss1-Matrix.txt"
 
 #define TILES_MATRIX_DELIMITER ","
 #define TILES_WIDTH_PER_TILE	16
@@ -54,10 +59,21 @@ enum ObjectType
 //Các số để chạy animation của Captain
 
 #define  ATTACKTIME 300
-#define CAPTAIN_ANI_IDLE					0
-#define CAPTAIN_ANI_WALKING 				1
-#define CAPTAIN_ANI_JUMPING 				2
-#define CAPTAIN_ANI_CROUCHING 				3
+#define CAPTAIN_ANI_IDLE				0
+#define CAPTAIN_ANI_WALK				1
+#define CAPTAIN_ANI_JUMP				2
+#define CAPTAIN_ANI_CROUCH 				3
+#define CAPTAIN_ANI_THROW_SHIELD 		4
+#define CAPTAIN_ANI_ROLL				5
+#define CAPTAIN_ANI_KICK				6
+#define CAPTAIN_ANI_STAND_HIT			7
+#define CAPTAIN_ANI_CROUCH_HIT			8
+#define CAPTAIN_ANI_SIT_ON_SHIELD		9
+#define CAPTAIN_ANI_SWING				10
+#define CAPTAIN_ANI_WADE				11
+#define CAPTAIN_ANI_SHIELD_UP			12
+#define CAPTAIN_ANI_GET_HURT			13
+#define CAPTAIN_ANI_DEAD				14
 
 #define CAPTAIN_TEXTURE_LOCATION L"Resources\\CAPTAIN\\Character.png"
 #define CAPTAIN_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(0, 168, 80, 1)

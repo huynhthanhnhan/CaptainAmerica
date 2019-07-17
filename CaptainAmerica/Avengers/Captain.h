@@ -11,14 +11,27 @@ class Captain : public GameObject
 	Captain();
 	static Captain * __instance;
 
-	State * idleState;
-	State * walkingState;
-	State * crouchingState;
-	State * jumpingState;
+	State *idleState;
+	State *walkState;
+	State *jumpState;
+	State *crouchState;
+	State *throwShieldState;
+	State *rollState;
+	State *kickState;
+	State *standHitState;
+	State *crouchHitState;
+	State *sitOnShieldState;
+	State *swingState;
+	State *wadeState;
+	State *shieldUpState;
+	State *getHurtState;
+	State *deadState;
 
 	State * state;
 
 	Shield* shield;
+
+	int StateNum;
 
 	bool isGrounded = false;
 	bool isCrouching = false;
@@ -37,15 +50,28 @@ public:
 	void SetIsCrouching(bool isCrouching) { this->isCrouching = isCrouching; }
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
 	void SetState(State * state);
+	int GetStateNum() { return this->StateNum; }
+	void SetStateNum(int num) { this->StateNum = num; }
 	State * GetState() { return this->state; }
 	static Captain * GetInstance();
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
 
-	State * GetIdleState();
-	State * GetWalkingState();
-	State * GetJumpingState();
-	State * GetCrouchingState();
+	State *GetIdleState();
+	State *GetWalkState();
+	State *GetJumpState();
+	State *GetCrouchState();
+	State *GetThrowShieldState();
+	State *GetRollState();
+	State *GetKickState();
+	State *GetStandHitState();
+	State *GetCrouchHitState();
+	State *GetSitOnShieldState();
+	State *GetSwingState();
+	State *GetWadeState();
+	State *GetShieldUpState();
+	State *GetGetHurtState();
+	State *GetDeadState();
 
 	bool IsGrounded() { return isGrounded; }
 	bool IsCrouching() { return isCrouching; }
@@ -56,6 +82,17 @@ public:
 	void Walk();
 	void Jump();
 	void Crouch();
+	void ThrowShield();
+	void Roll();
+	void Kick();
+	void StandHit();
+	void CrouchHit();
+	void SitOnShield();
+	void Swing();
+	void Wade();
+	void ShieldUp();
+	void GetHurt();
+	void Dead();
 
 	void SetColliderDemension(float width, float height)
 	{
