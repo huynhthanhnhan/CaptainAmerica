@@ -127,7 +127,7 @@ void Shield::SheildAttacking()
 		this->isCaptainLeft = captain->IsLeft();
 		this->SetPositionX(captain->GetPositionX() - 20);
 		this->distance = captain->GetPositionX() + maxDistance*(isCaptainLeft ? -1 : 1);
-		this->SetSpeedX(SHIELD_SPEED*3*(isCaptainLeft ? -1 : 1));
+		this->SetSpeedX(SHIELD_SPEED*4*(isCaptainLeft ? -1 : 1));
 		this->SetPositionY(captain->GetPositionY() - 10);
 
 		this->isStart = false;
@@ -137,7 +137,7 @@ void Shield::SheildAttacking()
 		
 		if ((isCaptainLeft ? (this->GetPositionX() < this->distance): (this->GetPositionX() >= this->distance) && isReturn))
 		{
-			this->SetSpeedX(SHIELD_SPEED * -3 * (isCaptainLeft ? -1 : 1));
+			this->SetSpeedX(SHIELD_SPEED * -4 * (isCaptainLeft ? -1 : 1));
 			isReturn = false;
 		}
 		if (abs(this->GetPositionY() - captain->GetPositionY()) >= 1)
