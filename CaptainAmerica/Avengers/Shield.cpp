@@ -114,6 +114,36 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX() + 12);
 			this->SetPositionY(captain->GetPositionY() - 26);
 		}
+		if (captain->GetStateNum() == CAPTAIN_ANI_SHIELD_UP)
+		{
+			this->state = SHIELD_UP;
+			this->SetSpeedX(0);
+			if (captain->IsLeft())
+				this->SetPositionX(captain->GetPositionX());
+			else
+				this->SetPositionX(captain->GetPositionX() + 8);
+			this->SetPositionY(captain->GetPositionY() + 2);
+		}
+		if (captain->GetStateNum() == CAPTAIN_ANI_KICK)
+		{
+			this->state = SHIELD_LEFT;
+			this->SetSpeedX(0);
+			if (captain->IsLeft())
+				this->SetPositionX(captain->GetPositionX() + 28);
+			else
+				this->SetPositionX(captain->GetPositionX() - 18);
+			this->SetPositionY(captain->GetPositionY() - 5);
+		}
+		if (captain->GetStateNum() == CAPTAIN_ANI_CROUCH_HIT)
+		{
+			this->state = SHIELD_CENTER;
+			this->SetSpeedX(0);
+			if (captain->IsLeft())
+				this->SetPositionX(captain->GetPositionX() + 6);
+			else
+				this->SetPositionX(captain->GetPositionX() + 3);
+			this->SetPositionY(captain->GetPositionY() - 25);
+		}
 	}
 	this->SetPositionX((float)(this->GetPositionX() + this->GetSpeedX()* dt*(isLeft == true ? -1 : 1)));
 	this->SetPositionY((float)(this->GetPositionY() + this->GetSpeedY()* dt));
@@ -127,7 +157,7 @@ void Shield::SheildAttacking()
 		this->isCaptainLeft = captain->IsLeft();
 		this->SetPositionX(captain->GetPositionX() - 20);
 		this->distance = captain->GetPositionX() + maxDistance*(isCaptainLeft ? -1 : 1);
-		this->SetSpeedX(SHIELD_SPEED*4*(isCaptainLeft ? -1 : 1));
+		this->SetSpeedX(SHIELD_SPEED*(isCaptainLeft ? -1 : 1));
 		this->SetPositionY(captain->GetPositionY() - 10);
 
 		this->isStart = false;
@@ -137,7 +167,7 @@ void Shield::SheildAttacking()
 		
 		if ((isCaptainLeft ? (this->GetPositionX() < this->distance): (this->GetPositionX() >= this->distance) && isReturn))
 		{
-			this->SetSpeedX(SHIELD_SPEED * -4 * (isCaptainLeft ? -1 : 1));
+			this->SetSpeedX(SHIELD_SPEED * -1 * (isCaptainLeft ? -1 : 1));
 			isReturn = false;
 		}
 		if (abs(this->GetPositionY() - captain->GetPositionY()) >= 1)

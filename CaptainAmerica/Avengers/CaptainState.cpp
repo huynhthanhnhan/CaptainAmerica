@@ -145,6 +145,12 @@ void CaptainState::Roll()
 void CaptainState::Kick()
 {
 	int state = this->states;
+
+	if (CAPTAIN_ANI_JUMP == state)
+	{
+		captain->SetIsGrounded(false);
+		captain->SetState(captain->GetKickState());
+	}
 }
 
 void CaptainState::StandHit()
@@ -154,7 +160,7 @@ void CaptainState::StandHit()
 
 void CaptainState::CrouchHit()
 {
-	int state = this->states;
+	captain->SetState(captain->GetCrouchHitState());
 }
 
 void CaptainState::SitOnShield()
@@ -175,6 +181,26 @@ void CaptainState::Wade()
 void CaptainState::ShieldUp()
 {
 	int state = this->states;
+
+	switch (state)
+	{
+	case CAPTAIN_ANI_SHIELD_UP:
+	case CAPTAIN_ANI_JUMP:
+		break;
+	case CAPTAIN_ANI_IDLE:
+	{
+		captain->SetIsShieldUp(true);
+		captain->SetState(captain->GetShieldUpState());
+	}
+	break;
+	case CAPTAIN_ANI_WALK:
+	{
+		captain->SetSpeedX(0);
+		captain->SetIsShieldUp(true);
+		captain->SetState(captain->GetShieldUpState());
+	}
+	break;
+	}
 }
 
 void CaptainState::GetHurt()
@@ -192,6 +218,7 @@ void CaptainState::Update(DWORD dt)
 	int state = this->states;
 	switch (state)
 	{
+	case CAPTAIN_ANI_KICK:
 	case CAPTAIN_ANI_JUMP:
 	{
 		if (captain->IsGrounded())

@@ -86,4 +86,4 @@ enum ObjectType
 #define SHIELD_CENTER 1
 #define SHIELD_UP 2
 #define SHIELD_DOWN 3
-#define SHIELD_SPEED 0.15f
+#define SHIELD_SPEED 0.6f

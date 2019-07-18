@@ -136,11 +136,18 @@ void Keyboard::UpdateKeyStates()
 	}
 	else if (IsKeyDown(DIK_DOWN))
 	{
-		captain->Crouch();
-		if (IsKeyDown(DIK_S))
-		{
-			captain->SetIsCrouching(true);
-		}
+		if (IsKeyDown(DIK_A))
+			captain->CrouchHit();
+		else captain->Crouch();
+	}
+	else if (IsKeyDown(DIK_UP))
+	{
+		captain->ShieldUp();
+	}
+	else if (IsKeyDown(DIK_A))
+	{
+		if (captain->IsGrounded())
+			captain->ThrowShield();
 	}
 	else
 	{
@@ -173,7 +180,16 @@ void Keyboard::OnKeyDown(int KeyCode)
 			break;
 		case DIK_UP:
 			break;
-		
+		case DIK_A:
+			if (true == captain->IsGrounded())
+			{
+				captain->ThrowShield();
+			}
+			else
+			{
+				captain->Kick();
+			}
+			break;
 	}
 }
 void Keyboard::OnKeyUp(int KeyCode)
@@ -186,8 +202,6 @@ void Keyboard::OnKeyUp(int KeyCode)
 			break;
 		case DIK_DOWN:
 			captain->SetIsCrouching(false);
-		case DIK_S:
-			break;
 		case DIK_LEFT:
 		case DIK_RIGHT:
 			if (captain->IsGrounded())
