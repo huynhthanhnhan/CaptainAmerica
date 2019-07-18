@@ -14,7 +14,10 @@ class Shield : public GameItem
 	bool Active;
 
 	bool isStart = true;
-	bool isEnd;
+
+	bool isReturn = true;
+
+	bool isCaptainLeft;
 
 	float maxDistance;
 

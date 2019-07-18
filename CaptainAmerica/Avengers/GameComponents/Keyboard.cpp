@@ -146,6 +146,15 @@ void Keyboard::UpdateKeyStates()
 	{
 		captain->Idle();
 	}
+	if(IsKeyDown(DIK_F))
+	{
+		if (!captain->isThrowing)
+		{
+			captain->ThrowShield();
+			captain->isThrowing = true;
+		}
+	}
+	
 }
 void Keyboard::OnKeyDown(int KeyCode)
 {
@@ -164,15 +173,7 @@ void Keyboard::OnKeyDown(int KeyCode)
 			break;
 		case DIK_UP:
 			break;
-		case DIK_F:
-		{
-			if (!captain->isThrowing)
-			{
-				captain->ThrowShield();
-				captain->isThrowing = true;
-			}
-			break;
-		}
+		
 	}
 }
 void Keyboard::OnKeyUp(int KeyCode)

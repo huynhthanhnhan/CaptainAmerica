@@ -93,7 +93,7 @@ void Captain::LoadResources()
 
 	// CAPTAIN_ANI_THROW_SHIELD
 	anim = new Animation(300);
-	for (int i = 11; i < 13; i++)
+	for (int i = 11; i < 16; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);

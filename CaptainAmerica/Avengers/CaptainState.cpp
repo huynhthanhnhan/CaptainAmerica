@@ -36,6 +36,9 @@ void CaptainState::Idle()
 		captain->SetState(captain->GetIdleState());
 	}
 	break;
+	case CAPTAIN_ANI_THROW_SHIELD:
+		captain->SetState(captain->GetIdleState());
+		break;
 	}
 }
 
@@ -59,6 +62,9 @@ void CaptainState::Walk()
 		captain->SetSpeedX(CAPTAIN_WALKING_SPEED * (captain->IsLeft() ? -1 : 1));
 	}
 	break;
+	case CAPTAIN_ANI_THROW_SHIELD:
+		captain->SetState(captain->GetIdleState());
+		break;
 	}
 }
 
@@ -116,17 +122,18 @@ void CaptainState::Crouch()
 void CaptainState::ThrowShield()
 {
 	int state = this->states;
-
 	switch (state)
 	{
 	case CAPTAIN_ANI_CROUCH:
-	case CAPTAIN_ANI_JUMP:
 	case CAPTAIN_ANI_IDLE:
 	case CAPTAIN_ANI_WALK:
 	{
 		captain->SetState(captain->GetThrowShieldState());
 	}
 	break;
+	case CAPTAIN_ANI_JUMP:
+		captain->SetState(captain->GetJumpState());
+		break;
 	}
 }
 
