@@ -1,5 +1,6 @@
-#include "CaptainState.h"
+﻿#include "CaptainState.h"
 #include <math.h>
+#include "GameComponents/Debug.h"
 
 CaptainState::CaptainState(Captain * captain, int states)
 {
@@ -24,31 +25,44 @@ void CaptainState::Idle()
 	{
 	case CAPTAIN_ANI_IDLE:
 		break;
-	case CAPTAIN_ANI_CROUCH:
-	{
-		captain->SetIsCrouching(false);
-		captain->SetState(captain->GetIdleState());
-	}
-	break;
 	case CAPTAIN_ANI_WALK:
 	{
 		captain->SetSpeedX(0);
 		captain->SetState(captain->GetIdleState());
 	}
+	case CAPTAIN_ANI_SHIELD_UP:
+	{
+		captain->SetState(captain->GetIdleState());
+	}
 	break;
 	case CAPTAIN_ANI_THROW_SHIELD:
+	{
 		captain->SetState(captain->GetIdleState());
+	}
 		break;
+	case CAPTAIN_ANI_CROUCH:
+	{
+		captain->SetState(captain->GetIdleState());
+	}
+	break;
 	}
 }
 
 void CaptainState::Walk()
 {
 	int state = this->states;
+
 	captain->SetColliderDemension(22, 45);
 	switch (state)
 	{
 	case CAPTAIN_ANI_CROUCH:
+		captain->SetState(captain->GetWalkState());
+		captain->SetSpeedX(CAPTAIN_WALKING_SPEED * (captain->IsLeft() ? -1 : 1));
+		break;
+	case CAPTAIN_ANI_SHIELD_UP:
+		captain->SetState(captain->GetWalkState());
+		captain->SetSpeedX(CAPTAIN_WALKING_SPEED * (captain->IsLeft() ? -1 : 1));
+		break;
 	case CAPTAIN_ANI_JUMP:
 		break;
 	case CAPTAIN_ANI_IDLE:
@@ -74,48 +88,46 @@ void CaptainState::Jump()
 
 	switch (state)
 	{
-	case CAPTAIN_ANI_CROUCH:
-	case CAPTAIN_ANI_JUMP:
-		break;
-	case CAPTAIN_ANI_IDLE:
-	case CAPTAIN_ANI_WALK:
-	{
-		if (captain->IsGrounded())
+		case CAPTAIN_ANI_IDLE:
+		case CAPTAIN_ANI_WALK:
 		{
-			captain->SetIsGrounded(false);
 			captain->SetSpeedY(CAPTAIN_JUMP_SPEED_Y);
 			captain->SetState(captain->GetJumpState());
 		}
+		break;
+		}
 	}
-	break;
-	}
-}
-
 
 void CaptainState::Crouch()
 {
-	{
-		int state = this->states;
+	int state = this->states;
 
-		switch (state)
+	switch (state)
+	{
+	case CAPTAIN_ANI_CROUCH:
+	case CAPTAIN_ANI_JUMP:
+		if(captain->IsGrounded())
 		{
-		case CAPTAIN_ANI_CROUCH:
-		case CAPTAIN_ANI_JUMP:
-			break;
-		case CAPTAIN_ANI_IDLE:
-		{
-			captain->SetIsCrouching(true);
 			captain->SetState(captain->GetCrouchState());
-		}
-		break;
-		case CAPTAIN_ANI_WALK:
-		{
 			captain->SetSpeedX(0);
-			captain->SetIsCrouching(true);
-			captain->SetState(captain->GetCrouchState());
 		}
 		break;
-		}
+	case CAPTAIN_ANI_IDLE:
+	{
+		captain->SetState(captain->GetCrouchState());
+	}
+	break;
+	case CAPTAIN_ANI_WALK:
+	{
+		captain->SetSpeedX(0);
+		captain->SetState(captain->GetCrouchState());
+	}
+	case CAPTAIN_ANI_CROUCH_HIT:
+	{
+		captain->SetSpeedX(0);
+		captain->SetState(captain->GetCrouchState());
+	}
+	break;
 	}
 }
 
@@ -124,16 +136,25 @@ void CaptainState::ThrowShield()
 	int state = this->states;
 	switch (state)
 	{
+	case CAPTAIN_ANI_THROW_SHIELD:
 	case CAPTAIN_ANI_CROUCH:
-	case CAPTAIN_ANI_IDLE:
+	case CAPTAIN_ANI_JUMP:
+		break;
 	case CAPTAIN_ANI_WALK:
 	{
 		captain->SetState(captain->GetThrowShieldState());
 	}
 	break;
-	case CAPTAIN_ANI_JUMP:
-		captain->SetState(captain->GetJumpState());
-		break;
+	case CAPTAIN_ANI_SHIELD_UP:
+	{
+		captain->SetState(captain->GetThrowShieldState());
+	}
+	break;
+	case CAPTAIN_ANI_IDLE:
+	{
+		captain->SetState(captain->GetThrowShieldState());
+	}
+	break;
 	}
 }
 
@@ -146,7 +167,7 @@ void CaptainState::Kick()
 {
 	int state = this->states;
 
-	if (CAPTAIN_ANI_JUMP == state)
+	if (state == CAPTAIN_ANI_JUMP)
 	{
 		captain->SetIsGrounded(false);
 		captain->SetState(captain->GetKickState());
@@ -155,7 +176,8 @@ void CaptainState::Kick()
 
 void CaptainState::StandHit()
 {
-	int state = this->states;
+	/*int state = this->states;*/
+	captain->SetState(captain->GetStandHitState());
 }
 
 void CaptainState::CrouchHit()
@@ -186,20 +208,27 @@ void CaptainState::ShieldUp()
 	{
 	case CAPTAIN_ANI_SHIELD_UP:
 	case CAPTAIN_ANI_JUMP:
+		if (captain->IsGrounded())
+		{
+			captain->SetState(captain->GetShieldUpState());
+			captain->SetSpeedX(0);
+		}
 		break;
 	case CAPTAIN_ANI_IDLE:
 	{
-		captain->SetIsShieldUp(true);
 		captain->SetState(captain->GetShieldUpState());
 	}
 	break;
 	case CAPTAIN_ANI_WALK:
 	{
 		captain->SetSpeedX(0);
-		captain->SetIsShieldUp(true);
 		captain->SetState(captain->GetShieldUpState());
 	}
-	break;
+	case CAPTAIN_ANI_THROW_SHIELD:
+	{
+		captain->SetSpeedX(0);
+		captain->SetState(captain->GetShieldUpState());
+	}
 	}
 }
 
@@ -302,81 +331,80 @@ void CaptainState::Render()
 
 	switch (state)
 	{
-	case CAPTAIN_ANI_IDLE:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_IDLE]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_CROUCH:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_CROUCH]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_JUMP:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_JUMP]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_WALK:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_WALK]->Render(spriteData);
-	}
-	break;
-
-	case CAPTAIN_ANI_THROW_SHIELD:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_THROW_SHIELD]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_ROLL:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_ROLL]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_KICK:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_KICK]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_STAND_HIT:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_STAND_HIT]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_CROUCH_HIT:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_CROUCH_HIT]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_SIT_ON_SHIELD:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_SIT_ON_SHIELD]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_SWING:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_SWING]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_WADE:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_WADE]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_SHIELD_UP:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_SHIELD_UP]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_GET_HURT:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_GET_HURT]->Render(spriteData);
-	}
-	break;
-	case CAPTAIN_ANI_DEAD:
-	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_DEAD]->Render(spriteData);
-	}
-	break;
+		case CAPTAIN_ANI_WALK:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_WALK]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_IDLE:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_IDLE]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_JUMP:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_JUMP]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_THROW_SHIELD:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_THROW_SHIELD]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_CROUCH:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_CROUCH]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_ROLL:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_ROLL]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_KICK:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_KICK]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_STAND_HIT:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_STAND_HIT]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_CROUCH_HIT:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_CROUCH_HIT]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_SIT_ON_SHIELD:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_SIT_ON_SHIELD]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_SWING:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_SWING]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_WADE:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_WADE]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_SHIELD_UP:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_SHIELD_UP]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_GET_HURT:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_GET_HURT]->Render(spriteData);
+		}
+		break;
+		case CAPTAIN_ANI_DEAD:
+		{
+			captain->GetAnimationsList()[CAPTAIN_ANI_DEAD]->Render(spriteData);
+		}
+		break;
 	}
 }

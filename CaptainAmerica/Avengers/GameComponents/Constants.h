@@ -2,8 +2,8 @@
 
 
 //Tên ứng dụng
-#define WINDOW_CLASS_NAME L"CaptainAmerica"
-#define MAIN_WINDOW_TITLE L"CaptainAmerica"
+#define WINDOW_CLASS_NAME L"Captain America And The Avangers"
+#define MAIN_WINDOW_TITLE L"Captain America And The Avangers"
 //Màu background, kích cỡ màn hình
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0)
 #define SCREEN_WIDTH 450
@@ -53,7 +53,7 @@ enum ObjectType
 
 //Giá trị tốc độ đi, tốc độ nhảy, trọng lực
 #define CAPTAIN_WALKING_SPEED		0.125f
-#define CAPTAIN_JUMP_SPEED_Y		0.4f
+#define CAPTAIN_JUMP_SPEED_Y		0.3f
 #define CAPTAIN_GRAVITY			0.02f
 
 //Các số để chạy animation của Captain
@@ -86,4 +86,4 @@ enum ObjectType
 #define SHIELD_CENTER 1
 #define SHIELD_UP 2
 #define SHIELD_DOWN 3
-#define SHIELD_SPEED 0.6f
+#define SHIELD_SPEED 0.4f

@@ -69,22 +69,22 @@
     <ClInclude Include="GameComponents\Debug.h">
       <Filter>Header Files\GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Captain.h">
-      <Filter>Header Files\Captain</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\State.h">
-      <Filter>Header Files\Captain</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\CaptainState.h">
-      <Filter>Header Files\Captain</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameComponents\LoadTXT.h">
       <Filter>Header Files\GameComponents</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameItem.h">
       <Filter>Header Files\GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Shield.h">
+    <ClInclude Include="Captain.h">
+      <Filter>Header Files\Captain</Filter>
+    </ClInclude>
+    <ClInclude Include="CaptainState.h">
+      <Filter>Header Files\Captain</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>Header Files\Captain</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
       <Filter>Header Files\Captain</Filter>
     </ClInclude>
   </ItemGroup>
@@ -128,23 +128,23 @@
     <ClCompile Include="GameComponents\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Captain.cpp">
+    <ClCompile Include="CaptainState.cpp">
       <Filter>Source Files\Captain</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\State.cpp">
+    <ClCompile Include="Shield.cpp">
       <Filter>Source Files\Captain</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\CaptainState.cpp">
+    <ClCompile Include="State.cpp">
       <Filter>Source Files\Captain</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\LoadTXT.cpp">
+    <ClCompile Include="Captain.cpp">
+      <Filter>Source Files\Captain</Filter>
+    </ClCompile>
+    <ClCompile Include="GameItem.cpp">
       <Filter>Source Files\GameComponents</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameItem.cpp">
+    <ClCompile Include="LoadTXT.cpp">
       <Filter>Source Files\GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Shield.cpp">
-      <Filter>Source Files\Captain</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

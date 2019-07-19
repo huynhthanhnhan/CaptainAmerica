@@ -34,6 +34,7 @@ Captain::Captain()
 	collider.y = y;
 	collider.vx = 0;
 	collider.vy = 0;
+	collider.height = 80;
 
 	stamina = 100;
 
@@ -97,6 +98,7 @@ void Captain::LoadResources()
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
+
 	}
 	animations.push_back(anim);
 
@@ -110,7 +112,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_KICK
-	anim = new Animation(300);
+	anim = new Animation(100);
 	for (int i = 10; i < 11; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
@@ -119,7 +121,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_STAND_HIT
-	anim = new Animation(300);
+	anim = new Animation(100);
 	for (int i = 13; i < 15; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);

@@ -2,6 +2,9 @@
 #include "Debug.h"
 Keyboard * Keyboard::__instance = NULL;
 
+DWORD frameStart;
+DWORD now;
+
 int Keyboard::IsKeyDown(int KeyCode)
 {
 	return (keyStates[KeyCode] & 0x80) > 0;
@@ -103,37 +106,61 @@ void Keyboard::UpdateKeyStates()
 {
 	Captain * captain = Captain::GetInstance();
 
+	if (frameStart-now > 2000)
+	{
+		DebugOut(L"[INFO] now: %d\n", now);
+
+		DebugOut(L"[INFO] frameStart: %d\n",frameStart);
+		frameStart = 0;
+		now = 0 ;
+
+	}
+
 	if (IsKeyDown(DIK_RIGHT))
 	{
-		if (!IsKeyDown(DIK_LEFT) &&  captain->IsGrounded())
+		if (captain->IsGrounded())
 		{
-			captain->TurnRight();
-			if (!IsKeyDown(DIK_DOWN))
+			if (captain->IsCrouching())
 			{
-				captain->Walk();
-			}
-			else
 				captain->Crouch();
+			}
+			else if (captain->IsShieldUp())
+			{
+				captain->ShieldUp();
+			}
+			else 
+				captain->Walk();
 		}
-		else if (!IsKeyDown(DIK_DOWN))
-			captain->Idle();
 	}
 	else if (IsKeyDown(DIK_LEFT))
 	{
-		if (!IsKeyDown(DIK_RIGHT)&& captain->IsGrounded())
+		if (captain->IsGrounded())
 		{
-			captain->TurnLeft();
-			if (IsKeyDown(DIK_DOWN))
+			if (captain->IsCrouching())
 			{
 				captain->Crouch();
-
+			}
+			else if (captain->IsShieldUp())
+			{
+				captain->ShieldUp();
 			}
 			else
 				captain->Walk();
 		}
-		else if (!IsKeyDown(DIK_DOWN))
-			captain->Idle();
-	}
+	}	//else if (IsKeyDown(DIK_SPACE))
+	//{
+	//	if (IsKeyDown(DIK_LEFT))
+	//		DebugOut(L"[INFO] KeyDown: left\n");
+	//	//if (captain->IsLeft())
+	//	//{
+	//	//	//captain->SetSpeedX(CAPTAIN_WALKING_SPEED * (captain->IsLeft() ? -1 : 1));
+	//	//	DebugOut(L"[INFO] KeyDown: left\n");
+	//	//}
+	//	//if (!captain->IsLeft())
+	//	//{
+	//	//	DebugOut(L"[INFO] KeyDown: right\n");
+	//	//}
+	//}
 	else if (IsKeyDown(DIK_DOWN))
 	{
 		if (IsKeyDown(DIK_A))
@@ -144,23 +171,33 @@ void Keyboard::UpdateKeyStates()
 	{
 		captain->ShieldUp();
 	}
+	else if (IsKeyDown(DIK_D))
+	{
+		if (!captain->IsGrounded())
+		{
+			captain->Kick();
+		}
+		else if (captain->IsCrouching())
+		{
+			captain->CrouchHit();
+		}
+		else if (!captain->IsThrowing()) {
+			captain->ThrowShield();
+			captain->SetIsThrowing(true);
+		}
+	}
+
 	else if (IsKeyDown(DIK_A))
 	{
-		if (captain->IsGrounded())
-			captain->ThrowShield();
+		DWORD frameStart = GetTickCount();
+		DWORD now = GetTickCount();
+		DWORD dt = now - frameStart;
 	}
 	else
 	{
 		captain->Idle();
 	}
-	if(IsKeyDown(DIK_F))
-	{
-		if (!captain->isThrowing)
-		{
-			captain->ThrowShield();
-			captain->isThrowing = true;
-		}
-	}
+
 	
 }
 void Keyboard::OnKeyDown(int KeyCode)
@@ -169,17 +206,41 @@ void Keyboard::OnKeyDown(int KeyCode)
 	DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 	switch (KeyCode)
 	{
-		case DIK_SPACE:
+		case DIK_RIGHT:
+			captain->TurnRight();
+			break;
+		case DIK_LEFT:
+			captain->TurnLeft();
+			break;
+		case DIK_SPACE: case DIK_F:
+			frameStart = GetTickCount();
 			captain->Jump();
-			break;
-		case DIK_S:
-			break;
-		case DIK_W:
-			break;
-		case DIK_D:
+			captain->SetIsGrounded(false);
 			break;
 		case DIK_UP:
+			captain->ShieldUp();
+			captain->SetIsShieldUp(true);
 			break;
+		case DIK_DOWN:
+			captain->SetIsCrouching(true);
+			captain->Crouch();
+			break;
+		case DIK_D:
+			if (!captain->IsGrounded())
+			{
+				captain->Kick();
+			}
+			else if (captain->IsCrouching())
+			{
+				captain->CrouchHit();
+			}
+			else if (!captain->IsThrowing()) {
+				captain->ThrowShield();
+				captain->SetIsThrowing(true);
+			}
+			break;
+
+
 		case DIK_A:
 			if (true == captain->IsGrounded())
 			{
@@ -198,27 +259,31 @@ void Keyboard::OnKeyUp(int KeyCode)
 	DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
 	switch (KeyCode)
 	{
-		case 0:
-			break;
-		case DIK_DOWN:
-			captain->SetIsCrouching(false);
 		case DIK_LEFT:
 		case DIK_RIGHT:
 			if (captain->IsGrounded())
-
 			{
-				if (false == captain->IsCrouching())
+				if (captain->IsCrouching() == false)
 				{
-					
 					captain->SetState(captain->GetIdleState());
 				}
 			}
 			captain->SetSpeedX(0);
-			
 			break;
-		case DIK_D:
-			captain->SetState(captain->GetIdleState());
+		case DIK_DOWN:
+			captain->SetIsCrouching(false);
 			break;
+		case DIK_UP:
+			captain->SetIsShieldUp(false);
+			break;
+		case DIK_SPACE: case DIK_F:
+			now = GetTickCount();
+			break;
+
+
+		//case DIK_D:
+		//	captain->SetState(captain->GetIdleState());
+		//	break;
 	}
 }
 

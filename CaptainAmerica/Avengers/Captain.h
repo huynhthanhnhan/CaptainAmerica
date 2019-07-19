@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "GameComponents/GameObject.h"
 #include "State.h"
 #include "GameComponents/Constants.h"
@@ -33,9 +33,12 @@ class Captain : public GameObject
 
 	int StateNum;
 
-	bool isGrounded = false;
-	bool isCrouching = false;
-	bool isShieldUp = false;
+	bool isGrounded = false; // trên mặt đất
+	bool isCrouching = false; // ngồi chắn khiên
+	bool isShieldUp = false; // giơ khiên lên đầu
+	bool isThrowing = false; // đã quăng khiên chưa
+	bool inRiver = false; // trong nước
+
 	
 
 	static vector<Animation *> animations;
@@ -50,15 +53,21 @@ public:
 
 	void SetIsGrounded(bool isGrounded) { this->isGrounded = isGrounded; }
 	void SetIsCrouching(bool isCrouching) { this->isCrouching = isCrouching; }
+	void SetIsShieldUp(bool isShieldUp) { this->isShieldUp = isShieldUp; }
+	void SetIsThrowing(bool isThrowing) { this->isThrowing = isThrowing; }
+
+	bool IsGrounded() { return isGrounded; }
+	bool IsCrouching() { return isCrouching; }
+	bool IsShieldUp() { return isShieldUp; }
+	bool IsThrowing() { return isThrowing; }
+
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
 	void SetState(State * state);
 	int GetStateNum() { return this->StateNum; }
 	void SetStateNum(int num) { this->StateNum = num; }
 	State * GetState() { return this->state; }
 	static Captain * GetInstance();
-	bool isThrowing = false;
 
-	void SetIsShieldUp(bool isShieldUp) { this->isShieldUp = isShieldUp; }
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
 
@@ -78,8 +87,6 @@ public:
 	State *GetGetHurtState();
 	State *GetDeadState();
 
-	bool IsGrounded() { return isGrounded; }
-	bool IsCrouching() { return isCrouching; }
 	bool IsLeft() { return isLeft; }
 	bool IsFlipped() { isFlipped = isLeft ? false : true; return isFlipped; }
 

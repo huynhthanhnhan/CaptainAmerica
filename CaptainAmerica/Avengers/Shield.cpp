@@ -77,8 +77,8 @@ void Shield::Update(DWORD dt)
 {
 	this->SetSpeedY(0);
 	Captain* captain = Captain::GetInstance();
-	if (captain->isThrowing) {
-		DebugOut(L"isThrowing: %d\n", captain->isThrowing);
+	if (captain->IsThrowing()) {
+		DebugOut(L"isThrowing: %d\n", captain->IsThrowing());
 		this->state = SHIELD_UP;
 		SheildAttacking();
 	}
@@ -174,21 +174,21 @@ void Shield::SheildAttacking()
 		{
 			if (this->GetPositionY() > captain->GetPositionY())
 			{
-				float temp = this->GetPositionY() - 0.75;
+				float temp = this->GetPositionY() - 3;
 				this->SetPositionY(temp);
 			}
 			else
 			{
-				float temp = this->GetPositionY() + 0.75;
+				float temp = this->GetPositionY() + 3;
 				this->SetPositionY(temp);
 			}
 		}
-		if (!isReturn && abs(this->GetPositionX() - captain->GetPositionX()) <= 10)
+		if (!isReturn && abs(this->GetPositionX() - captain->GetPositionX()) <= 20)
 		{
 			
 			isStart = true;
 			isReturn = true;
-			captain->isThrowing = false;
+			captain->SetIsThrowing(false);
 			
 		}
 	}
