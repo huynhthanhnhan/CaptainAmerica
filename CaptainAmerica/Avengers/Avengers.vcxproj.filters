@@ -13,138 +13,156 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\GameComponents">
-      <UniqueIdentifier>{f3896b20-e95b-4323-8167-aaf8633457f1}</UniqueIdentifier>
+    <Filter Include="Source Files\GameFramework">
+      <UniqueIdentifier>{b915f96a-0af2-4f3e-8672-876d820506d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameComponents">
-      <UniqueIdentifier>{1ee97e1d-0f7a-47ad-acf5-d2cf1604f4f9}</UniqueIdentifier>
+    <Filter Include="Header Files\GameFramework">
+      <UniqueIdentifier>{e499dc5c-9356-4fec-b221-c44660b4269e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Captain">
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{e28cfca5-c671-447d-8a25-724883df99a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{51b8678d-4489-43f5-b658-10bf2f25cb32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Captain">
       <UniqueIdentifier>{0cbd378b-842d-49b2-9a94-d51c6749ef03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Captain">
+    <Filter Include="Source Files\GameObject\GameComponents">
+      <UniqueIdentifier>{1ee97e1d-0f7a-47ad-acf5-d2cf1604f4f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\GameComponents">
+      <UniqueIdentifier>{f3896b20-e95b-4323-8167-aaf8633457f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Captain">
       <UniqueIdentifier>{4fa460df-b02b-4b7b-ac49-b9d6e11946df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameFramework\Map">
+      <UniqueIdentifier>{dced3585-b385-4c96-9ca8-8e7b0895ca25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameFramework\Map">
+      <UniqueIdentifier>{82dc48df-ae77-474b-812a-4ad735b01b2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameComponents\Animation.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Grid.h">
+      <Filter>Header Files\GameFramework\Map</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\Brick.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\GridCell.h">
+      <Filter>Header Files\GameFramework\Map</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\Constants.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\TiledMap.h">
+      <Filter>Header Files\GameFramework\Map</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\Game.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Viewport.h">
+      <Filter>Header Files\GameFramework\Map</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\GameObject.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Animation.h">
+      <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\Graphics.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Constants.h">
+      <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\Grid.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Debug.h">
+      <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\GridCell.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Graphics.h">
+      <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\Keyboard.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Keyboard.h">
+      <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\resource.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\LoadTXT.h">
+      <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\Sprite.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\State.h">
+      <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\TiledMap.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\Captain.h">
+      <Filter>Header Files\GameObject\Captain</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\Viewport.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\CaptainState.h">
+      <Filter>Header Files\GameObject\Captain</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponents\Debug.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\Shield.h">
+      <Filter>Header Files\GameObject\Captain</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Captain.h">
-      <Filter>Header Files\Captain</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\resource.h">
+      <Filter>Header Files\GameObject\GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\State.h">
-      <Filter>Header Files\Captain</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\Sprite.h">
+      <Filter>Header Files\GameObject\GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\CaptainState.h">
-      <Filter>Header Files\Captain</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\Brick.h">
+      <Filter>Header Files\GameObject\GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameComponents\LoadTXT.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\Game.h">
+      <Filter>Header Files\GameObject\GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameItem.h">
-      <Filter>Header Files\GameComponents</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\GameItem.h">
+      <Filter>Header Files\GameObject\GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Shield.h">
-      <Filter>Header Files\Captain</Filter>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\GameObject.h">
+      <Filter>Header Files\GameObject\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameComponents\Animation.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Viewport.cpp">
+      <Filter>Source Files\GameFramework\Map</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\Brick.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Grid.cpp">
+      <Filter>Source Files\GameFramework\Map</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\Game.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\GridCell.cpp">
+      <Filter>Source Files\GameFramework\Map</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\GameObject.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\TiledMap.cpp">
+      <Filter>Source Files\GameFramework\Map</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\Graphics.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Debug.cpp">
+      <Filter>Source Files\GameFramework</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\Grid.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Graphics.cpp">
+      <Filter>Source Files\GameFramework</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\GridCell.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Keyboard.cpp">
+      <Filter>Source Files\GameFramework</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\Keyboard.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\LoadTXT.cpp">
+      <Filter>Source Files\GameFramework</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\Sprite.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\State.cpp">
+      <Filter>Source Files\GameFramework</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\TiledMap.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Animation.cpp">
+      <Filter>Source Files\GameFramework</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\Viewport.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\Shield.cpp">
+      <Filter>Source Files\GameObject\Captain</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\Debug.cpp">
-      <Filter>Source Files\GameComponents</Filter>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\Captain.cpp">
+      <Filter>Source Files\GameObject\Captain</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\Main.cpp">
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\CaptainState.cpp">
+      <Filter>Source Files\GameObject\Captain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\Sprite.cpp">
+      <Filter>Source Files\GameObject\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\Brick.cpp">
+      <Filter>Source Files\GameObject\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\Game.cpp">
+      <Filter>Source Files\GameObject\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\GameItem.cpp">
+      <Filter>Source Files\GameObject\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\GameObject.cpp">
+      <Filter>Source Files\GameObject\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\Main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Captain.cpp">
-      <Filter>Source Files\Captain</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\State.cpp">
-      <Filter>Source Files\Captain</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\CaptainState.cpp">
-      <Filter>Source Files\Captain</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\LoadTXT.cpp">
-      <Filter>Source Files\GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameItem.cpp">
-      <Filter>Source Files\GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\Shield.cpp">
-      <Filter>Source Files\Captain</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
