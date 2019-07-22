@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "../../GameFramework/Constants.h"
+#include "../../GameFramework/Global.h"
 #include "../../GameFramework/Graphics.h"
 #include "../../GameFramework/Keyboard.h"
 #include "../../GameFramework/Map/TiledMap.h"
@@ -26,7 +26,7 @@ class Game
 	Captain* captain;
 
 	TiledMap * tiledMap;
-	Viewport * viewport;
+	Camera * Camera;
 
 	Grid * grid;
 

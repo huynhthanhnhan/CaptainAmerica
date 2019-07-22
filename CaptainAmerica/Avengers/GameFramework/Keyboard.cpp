@@ -149,9 +149,20 @@ void Keyboard::UpdateKeyStates()
 	else if (IsKeyDown(DIK_DOWN))
 	{
 		if (!IsKeyDown(DIK_F))
+			if (IsKeyDown(DIK_SPACE) && count == 0)
+			{
+				captain->SetPositionY(captain->GetPositionY() - 0.5);
+				count = 1;
+			}
+			else
 			captain->Crouch();
-		else 
-			captain->CrouchHit();
+		else  
+			//if (count == 0) 
+			{
+				captain->CrouchHit();
+				//count = 1;
+			}
+			
 	}
 	else if (IsKeyDown(DIK_UP))
 	{
@@ -166,7 +177,9 @@ void Keyboard::UpdateKeyStates()
 			if (captain->GetAnimationsList()[CAPTAIN_ANI_THROW_SHIELD]->GetCurFrame() == 5)
 				captain->Idle();
 		}*/
-		captain->Idle();
+		count = 0;
+		//if(!captain->isThrowing)
+			captain->Idle();
 	}
 	if(IsKeyDown(DIK_F)&&!captain->isWading)
 	{

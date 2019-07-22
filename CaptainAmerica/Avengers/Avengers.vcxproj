@@ -125,7 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Animation.h" />
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Constants.h" />
+    <ClInclude Include="GameFramework\Global.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Debug.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Graphics.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Keyboard.h" />
@@ -133,7 +133,7 @@
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Grid.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\GridCell.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\TiledMap.h" />
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Viewport.h" />
+    <ClInclude Include="GameFramework\Map\Camera.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\State.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\Captain.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\CaptainState.h" />
@@ -154,7 +154,7 @@
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Grid.cpp" />
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\GridCell.cpp" />
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\TiledMap.cpp" />
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Viewport.cpp" />
+    <ClCompile Include="GameFramework\Map\Camera.cpp" />
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\State.cpp" />
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\Captain.cpp" />
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\Captain\CaptainState.cpp" />

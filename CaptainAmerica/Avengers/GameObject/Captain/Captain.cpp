@@ -378,7 +378,7 @@ void Captain::Reset()
 	this->stamina = 300;
 	this->SetPositionX(300);
 	this->SetPositionY(100);
-	Viewport::GetInstance()->Reset();
+	Camera::GetInstance()->Reset();
 	//Hud::GetInstance()->Reset();
 }
 void Captain::Update(DWORD dt)
@@ -403,7 +403,7 @@ void Captain::Update(DWORD dt)
 			this->SetPositionX(0);
 			if (STAGE_2 == Game::GetInstance()->GetStage())
 			{
-				Viewport::GetInstance()->Reset();
+				Camera::GetInstance()->Reset();
 				Game::GetInstance()->GetTiledMap()->ResetTiledMap();
 				Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_2));
 				Grid::SetNewGrid();
@@ -413,7 +413,7 @@ void Captain::Update(DWORD dt)
 			}
 			else if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
 			{
-				Viewport::GetInstance()->Reset();
+				Camera::GetInstance()->Reset();
 				Game::GetInstance()->GetTiledMap()->ResetTiledMap();
 				Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_1));
 				Grid::SetNewGrid();
@@ -432,6 +432,7 @@ void Captain::Update(DWORD dt)
 	{
 		this->SetPositionX(0);
 	}
+	//if(this->GetPositionX()>)
 	state->Update(dt);
 	shield->Update(dt);
 }

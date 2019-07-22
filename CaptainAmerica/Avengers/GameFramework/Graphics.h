@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "../GameFramework/Map/Viewport.h"
+#include "../GameFramework/Map/Camera.h"
 #include "../GameObject/GameComponents/Sprite.h"
 
 class Sprite;
@@ -11,7 +11,7 @@ class Sprite;
 class Graphics
 {
 	static Graphics * __instance;
-	static Viewport * viewport;
+	static Camera * Camera;
 	HWND hWnd;									//Xử lí cửa sổ
 
 	LPDIRECT3D9 d3d = NULL;						//Đối tượng Direct3D9

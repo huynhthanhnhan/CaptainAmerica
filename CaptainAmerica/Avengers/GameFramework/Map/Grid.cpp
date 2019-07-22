@@ -8,8 +8,8 @@ Grid::Grid()
 	curTiles.clear();
 
 	//khoi tao danh sach cac o trong
-	this->width = (int)(Game::GetInstance()->GetTiledMap()->GetWidth() / 64) + 2;
-	this->height = (int)(Game::GetInstance()->GetTiledMap()->GetHeight() / 64) + 2;
+	this->width = (int)(Game::GetInstance()->GetTiledMap()->GetWidth() / 16) + 2;
+	this->height = (int)(Game::GetInstance()->GetTiledMap()->GetHeight() / 16) + 2;
 
 	for (int i = 0; i < height; i++)
 	{
@@ -23,8 +23,8 @@ Grid::Grid()
 	}
 	LoadCells();
 
-	//Luu viewport
-	this->viewport = Viewport::GetInstance();
+	//Luu Camera
+	this->Camera = Camera::GetInstance();
 
 	//Lưu captain
 	this->captain = Captain::GetInstance();
@@ -39,21 +39,16 @@ void Grid::LoadCells()
 		for (int j = 0; j < tiledMapMatrix[i].size(); j++)
 		{
 			//Tim vi tri o chua tile
-			int cellX = POSXTOCELL(tiledMapMatrix[i][j].x);
-			int cellY = POSYTOCELL(tiledMapMatrix[i][j].y);
+			int cellX = (int) tiledMapMatrix[i][j].x / GRID_SIZE;
+			int cellY = (int) (tiledMapMatrix[i][j].y % GRID_SIZE ? tiledMapMatrix[i][j].y / GRID_SIZE : tiledMapMatrix[i][j].y / GRID_SIZE - 1 );
 
 			Tile *dummyPtr = &tiledMapMatrix[i][j];
-			cells[cellY][cellX]->AddTile(dummyPtr);
-
-			if (tiledMapMatrix[i][j].type == ObjectType::BRICK)
-			{
-				CollisionTiles.push_back(dummyPtr);
-			}
+			cells[cellY][cellX]->AddTile(dummyPtr); // do cells có kiểu là mảng các GridCell (GridCell là mảng các cellRow trên dòng) nên truyền i của mảng GridCel trước
 		}
 	}
 }
 
-void Grid::GetCaptainPosOnGrid(int &l, int &r, int &t, int &b)
+void Grid::GetCaptainPosOnGrid(int &l, int &r, int &t, int &b) // lấy vị trí captain trên grid
 {
 	RECT rect = captain->GetRect();
 	l = (int)(rect.left / GRID_SIZE);
@@ -63,7 +58,7 @@ void Grid::GetCaptainPosOnGrid(int &l, int &r, int &t, int &b)
 }
 
 void Grid::GetCameraPosOnGrid(int &l, int &r, int &t, int &b) {
-	RECT rect = viewport->GetRect();
+	RECT rect = Camera->GetRect();
 	l = (int)(rect.left / GRID_SIZE);
 	t = (int)(rect.top % GRID_SIZE == 0 ? rect.top / GRID_SIZE - 1 : rect.top / GRID_SIZE);
 	r = (int)(rect.right / GRID_SIZE);
@@ -76,15 +71,15 @@ void Grid::Update(DWORD dt)
 	this->GetCameraPosOnGrid(lCell, rCell, tCell, bCell);
 
 	//Update captain
-	curTiles.clear();
+	//curTiles.clear();
 
-	for (size_t i = 0; i < cells.size(); i++)
-	{
-		for (size_t j = 0; j < cells[i].size(); j++)
-		{
-			cells[i][j]->clear();
-		}
-	}
+	//for (size_t i = 0; i < cells.size(); i++)
+	//{
+	//	for (size_t j = 0; j < cells[i].size(); j++)
+	//	{
+	//		cells[i][j]->clear();
+	//	}
+	//}
 
 	int captainLCell, captainRCell, captainTCell, captainBCell;
 
@@ -94,14 +89,14 @@ void Grid::Update(DWORD dt)
 	{
 		//if (captainLCell - 2 >= 0)
 		{
-			if (captainRCell + 5 < 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
+			//if (captainRCell + 5 < 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
 			{
 				for (int j = captainLCell; j <= captainRCell; j++)
 				{
 					cells[i][j]->InsertTiles(curTiles);
 				}
 			}
-			else if (captainRCell + 5 >= 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
+			/*else if (captainRCell + 5 >= 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
 			{
 				for (int j = captainLCell; j <= captainRCell; j++)
 				{
@@ -121,7 +116,7 @@ void Grid::Update(DWORD dt)
 				{
 					cells[i][j]->InsertTiles(curTiles);
 				}
-			}
+			}*/
 		}
 	}
 

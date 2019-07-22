@@ -210,7 +210,6 @@ void CaptainState::Swing()
 void CaptainState::Wade()
 {
 	int state = this->states;
-
 	captain->SetState(captain->GetWadeState());
 }
 
@@ -371,7 +370,7 @@ void CaptainState::Render()
 		}
 		else
 		{
-			Shield::GetInstance()->SetState(SHIELD_DOWN);
+			Shield::GetInstance()->SetState(SHIELD_CENTER);
 			if (captain->GetAnimationsList()[CAPTAIN_ANI_JUMP]->GetCurFrame() == 1)
 				captain->GetAnimationsList()[CAPTAIN_ANI_JUMP]->SetCurFrame(0);
 		}

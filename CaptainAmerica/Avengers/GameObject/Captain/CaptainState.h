@@ -1,7 +1,8 @@
 #pragma once
 #include "../../GameFramework/State.h"
-#include "../../GameFramework/Constants.h"
+#include "../../GameFramework/Global.h"
 #include "Captain.h"
+#include "Shield.h"
 
 class CaptainState : public State
 {

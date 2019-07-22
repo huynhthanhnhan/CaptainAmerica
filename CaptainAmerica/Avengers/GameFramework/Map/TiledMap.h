@@ -10,7 +10,7 @@
 
 #include "../../GameObject/GameComponents/Sprite.h"
 #include "../Debug.h"
-#include "../Constants.h"
+#include "../Global.h"
 #include "../../GameObject/GameComponents/GameObject.h"
 
 using namespace std;
@@ -36,7 +36,6 @@ class TiledMap
 private:
 	static TiledMap *__instance;
 
-	void LoadMap(LPCWSTR filePath);
 	string LoadMatrix(LPCWSTR filePath);
 	void LoadTileSet(LPCWSTR tilesLocation);
 	Matrix matrix;

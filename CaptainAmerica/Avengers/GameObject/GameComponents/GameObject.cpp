@@ -90,7 +90,7 @@ void GameObject::CalcPotentialMapCollisions(
 				delete e;
 			}
 		}
-		else if (curTile->type == ObjectType::RIVER)
+		else if (curTile->type == ObjectType::WATER)
 		{
 			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
 			e->collisionID = 2;

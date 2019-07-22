@@ -16,40 +16,80 @@ TiledMap *TiledMap::GetInstance(LPCWSTR filePath)
 
 TiledMap::TiledMap(LPCWSTR filePath)
 {
-	LoadMap(filePath);
+	string tilesFilePath = LoadMatrix(filePath); // lấy được đường dẫn đến file tiles
+
+	std::wstring stemp = std::wstring(tilesFilePath.begin(), tilesFilePath.end());// convert string sang wstring xử lí ở hàm sau
+	LPCWSTR tilesFilePath_wstr = stemp.c_str();
+
+	LoadTileSet(tilesFilePath_wstr);
+}
+string TiledMap::LoadMatrix(LPCWSTR filePath) // lấy ma trận vị trí các tile từ file matrix đồng thời trả về vị trí file tiles
+{
+	string tilesLocation;
+
+	ifstream tilesInfo;
+	DebugOut(L"filepath: %s\n", filePath);
+	tilesInfo.open(filePath);
+	if (tilesInfo.is_open())
+	{
+		getline(tilesInfo, tilesLocation); // truyền tilesInfo vào tilesLocation (lấy dòng đầu tiên trong file Maxtrix
+											// là đường dẫn đến file tiles)
+
+		string tmp;
+		getline(tilesInfo, tmp); // tilesInfo => tmp (dòng thứ 2 là width, thứ 3 là height
+		this->mapWidth = stoi(tmp); // convert string sang int
+		getline(tilesInfo, tmp);
+		this->mapHeight = stoi(tmp);
+
+		string line;
+		Row matrixRow;
+		this->matrix.clear();
+
+		int lineNum = 0;
+		while (getline(tilesInfo, line)) // chạy từng dòng trong matrix của map
+		{
+			matrixRow = GetMatrixRow(lineNum, line, " ");
+			this->matrix.push_back(matrixRow); // thêm hàng tile lấy dc vào matrix
+			lineNum++;
+		}
+		tilesInfo.close();
+	}
+	return tilesLocation; // trả về đường dẫn đến file hình tiles
+
 }
 Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
 {
-	size_t pos = 0;
+	size_t pos = 0; // size_t là kiểu dữ liệu không dấu có thể tự mở rộng (mặc định sẽ là unsigned int)
 	string token;
 	Row result = Row();
 	int rowNum = 0;
 	Stage stage = Game::GetInstance()->GetStage();
-	while ((pos = line.find(delimiter)) != string::npos)
+	while ((pos = line.find(delimiter)) != string::npos)  // npos dùng trong xử lí chuỗi với ý nghĩa "until the end of the string"
 	{
-		token = line.substr(0, pos);
+		token = line.substr(0, pos); // lấy kí tự đầu tiên trong hàng ( id của tile)
 
 		Tile curTile;
-		curTile.x = rowNum * TILES_WIDTH_PER_TILE;
-		curTile.y = this->mapHeight - lineNum * TILES_HEIGHT_PER_TILE;
+		curTile.x = rowNum * TILES_WIDTH_PER_TILE; // số thứ tự của tile trên hàng x kích thước tile (16)
+		curTile.y = this->mapHeight - lineNum * TILES_HEIGHT_PER_TILE; // vẽ map từ trên xuống, line = 0 => y = height là dòng đầu tiên 
 
 		curTile.colider = new Collider();
-		curTile.colider->x = rowNum * TILES_WIDTH_PER_TILE;
+		curTile.colider->x = rowNum * TILES_WIDTH_PER_TILE; // colider có vị trí như hình
 		curTile.colider->y = this->mapHeight - lineNum * TILES_HEIGHT_PER_TILE;
 		curTile.colider->width = TILES_WIDTH_PER_TILE;
 		curTile.colider->height = TILES_HEIGHT_PER_TILE;
 
-		curTile.tileId = stoi(token);
-		if (Stage::STAGE_1 == stage)
+		curTile.tileId = stoi(token); // convert id của tile từ string sang int
+		if (stage == Stage::STAGE_1)
 		{
+			// function find() lấy từng phần tử từ đầu đến cuối List để so sánh với val nếu không có trả về phần tử cuối
 			if (find(_BrickStage_1.begin(), _BrickStage_1.end(), curTile.tileId) != _BrickStage_1.end())
 				curTile.type = ObjectType::BRICK;
-			else if (curTile.tileId == 101)
-				curTile.type = ObjectType::RIVER;
+			else if (curTile.tileId == 101) // id = 101 là tile của nước
+				curTile.type = ObjectType::WATER;
 			else
 				curTile.type = ObjectType::DEFAULT;
 		}
-		else if (Stage::STAGE_2 == stage)
+		else if (stage == Stage::STAGE_2)
 		{
 			if (find(_BrickStage_2.begin(), _BrickStage_2.end(), curTile.tileId) != _BrickStage_2.end())
 				curTile.type = ObjectType::BRICK;
@@ -60,7 +100,7 @@ Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
 			else
 				curTile.type = ObjectType::DEFAULT;
 		}
-		else if (Stage::STAGE_BOSS_1 == stage)
+		else if (stage == Stage::STAGE_BOSS_1)
 		{
 			if (find(_BrickStage_BOSS_1.begin(), _BrickStage_BOSS_1.end(), curTile.tileId) != _BrickStage_BOSS_1.end())
 				curTile.type = ObjectType::BRICK;
@@ -69,119 +109,68 @@ Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
 			else
 				curTile.type = ObjectType::DEFAULT;
 		}
-		else if (Stage::STAGE_BOSS_2 == stage)
+		else if (stage == Stage::STAGE_BOSS_2)
 		{
 			if (find(_BrickStage_BOSS_2.begin(), _BrickStage_BOSS_2.end(), curTile.tileId) != _BrickStage_BOSS_2.end())
 				curTile.type = ObjectType::BRICK;
 			else
 				curTile.type = ObjectType::DEFAULT;
 		}
-		result.push_back(curTile);
-		line.erase(0, pos + delimiter.length());
-		rowNum++;
+		result.push_back(curTile); // đưa curTile vào list kiểu Row
+		line.erase(0, pos + delimiter.length()); //xóa phần tử đầu khỏi hàng
+		rowNum++; // qua phần tử tiếp theo trong hàng
 	}
 
-	return result;
+	return result; // trả về mảng các tile trong hàng
 }
-std::wstring s2ws(const string& s)
-{
-	int len;
-	int slength = (int)s.length() + 1;
-	len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
-	wchar_t *buf = new wchar_t[len];
-	MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
-	std::wstring r(buf);
-	delete[] buf;
-	return r;
-}
-//
-void TiledMap::LoadMap(LPCWSTR filePath)
-{
-	string tilesLocation = LoadMatrix(filePath);
 
-	std::wstring stemp = s2ws(tilesLocation);
-	LPCWSTR wstrTilesLocation = stemp.c_str();
-
-	LoadTileSet(wstrTilesLocation);
-}
-string TiledMap::LoadMatrix(LPCWSTR filePath)
-{
-	string tilesLocation;
-
-	ifstream tilesInfo;
-	DebugOut(L"filepath: %s\n", filePath);
-	tilesInfo.open(filePath);
-	if (tilesInfo.is_open())
-	{
-		getline(tilesInfo, tilesLocation);
-
-		string tmp;
-		getline(tilesInfo, tmp);
-		this->mapWidth = stoi(tmp);
-		getline(tilesInfo, tmp);
-		this->mapHeight = stoi(tmp);
-
-		string line;
-		Row matrixRow;
-		this->matrix.clear();
-
-		int lineNum = 0;
-		while (getline(tilesInfo, line))
-		{
-			matrixRow = GetMatrixRow(lineNum, line, TILES_MATRIX_DELIMITER);
-			this->matrix.push_back(matrixRow);
-			lineNum++;
-		}
-		tilesInfo.close();
-	}
-	return tilesLocation;
-
-}
-void TiledMap::LoadTileSet(LPCWSTR tilesLocation)
+void TiledMap::LoadTileSet(LPCWSTR tilesFilePath)
 {
 	HRESULT result;
-	//Thông tin tileset
-	D3DXIMAGE_INFO info;
-	//Lấy thông tin texture từ đường dẫn file
-	result = D3DXGetImageInfoFromFile(tilesLocation, &info);
+	D3DXIMAGE_INFO info; //Thông tin tileset
+	result = D3DXGetImageInfoFromFile(tilesFilePath, &info); //Lấy thông tin texture từ đường dẫn file
 	//Kiểm tra lỗi khi lấy thông tin
 	if (result != D3D_OK)
 	{
-		DebugOut(L"[ERROR] Load Map Tileset failed: %s\n", tilesLocation);
 		return;
 	}
-	this->tileSetWidth = info.Width / TILES_WIDTH_PER_TILE;
-	this->tileSetHeight = info.Height / TILES_HEIGHT_PER_TILE;
+	this->tileSetWidth = info.Width / TILES_WIDTH_PER_TILE; // lấy số lượng tile trên dòng
+	this->tileSetHeight = info.Height / TILES_HEIGHT_PER_TILE; // lấy số lượng tile trên cột
 
 	if (Game::GetInstance()->GetStage() == STAGE_1)
 	{
-		result = D3DXGetImageInfoFromFile(BACKGROUND_1, &info);
+		info.Width = 2048; // kích thước gốc của hình stage 1
+		info.Height = 476;
 	}
 	else if (Game::GetInstance()->GetStage() == STAGE_2)
 	{
-		result = D3DXGetImageInfoFromFile(BACKGROUND_2, &info);
+		info.Width = 1280; // kích thước gốc của hình stage 2
+		info.Height = 957;
 	}
 	else if (Game::GetInstance()->GetStage() == STAGE_BOSS_1)
 	{
-		result = D3DXGetImageInfoFromFile(BACKGROUND_BOSS_1, &info);
+		info.Width = 256; // kích thước gốc của hình stage boss 1
+		info.Height = 235;
 	}
-	else if (Game::GetInstance()->GetStage() == STAGE_BOSS_2)
+	else if (Game::GetInstance()->GetStage() == STAGE_BOSS_2) // chưa có hình cần sửa sau "edit"
 	{
-		result = D3DXGetImageInfoFromFile(BACKGROUND_BOSS_2, &info);
+		info.Width = 256; // kích thước gốc của hình stage boss 2
+		info.Height = 235;
 	}
 	this->mapWidth = info.Width;
 	this->mapHeight = info.Height;
 
-	tiles[0] = NULL;
+	tiles[0] = NULL; //tile id bắt đầu từ 1
 	for (int i = 0; i < this->tileSetWidth; i++)
 	{
+		// lấy vị trí của tile
 		RECT rect;
 		rect.left = (i % this->tileSetWidth) * TILES_WIDTH_PER_TILE;
 		rect.right = rect.left + TILES_WIDTH_PER_TILE;
 		rect.top = (i / this->tileSetWidth) * TILES_HEIGHT_PER_TILE;
 		rect.bottom = rect.top + TILES_HEIGHT_PER_TILE;
 
-		Sprite *tile = new Sprite(tilesLocation, rect, TILES_TRANSCOLOR);
+		Sprite *tile = new Sprite(tilesFilePath, rect, TILES_TRANSCOLOR); // lấy hình của tile
 
 		tiles[i + 1] = tile;
 	}
@@ -213,12 +202,12 @@ int TiledMap::GetTileHeight()
 {
 	return this->tileSetHeight;
 }
-void TiledMap::Render()
+void TiledMap::Render() // vẽ cả map bằng tile
 {
-	for (int i = 0; i < matrix.size(); i++)
+	for (int i = 0; i < matrix.size(); i++) // duyệt từng dòng của ma trận
 	{
 		Row curRow = matrix[i];
-		for (int j = 0; j < curRow.size(); j++)
+		for (int j = 0; j < curRow.size(); j++) // duyệt từng phần tử trên dòng
 		{
 			if (curRow[j].tileId != 0)
 			{
@@ -230,13 +219,13 @@ void TiledMap::Render()
 				spriteData.scale = 1;
 				spriteData.angle = 0;
 
-				tiles.at(curRow[j].tileId)->SetData(spriteData);
+				tiles.at(curRow[j].tileId)->SetData(spriteData); // lấy sprite ứng với id để gắn vào tile
 				Graphics::GetInstance()->Draw(tiles.at(curRow[j].tileId));
 			}
 		}
 	}
 }
-void TiledMap::RenderTile(Tile *curTile)
+void TiledMap::RenderTile(Tile *curTile) // vẽ tile dùng ở Grid
 {
 	SpriteData spriteData;
 	spriteData.width = TILES_WIDTH_PER_TILE;

@@ -103,6 +103,13 @@ void Shield::Update(DWORD dt)
 		if (captain->GetStateNum() == CAPTAIN_ANI_JUMP)
 		{
 			this->SetSpeedX(0);
+			this->state = NO_SHIELD;
+			if (captain->GetSpeedY() >= 0.25)
+				this->state = NO_SHIELD;
+			else
+			{
+				this->state = SHIELD_CENTER;
+			}
 			if (captain->IsLeft())
 				this->SetPositionX(captain->GetPositionX());
 			else

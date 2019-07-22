@@ -1,4 +1,4 @@
-#include "Sprite.h"
+﻿#include "Sprite.h"
 
 
 
@@ -44,7 +44,7 @@ void Sprite::SetRect(RECT rect)
 {
 	this->rect = rect;
 }
-D3DXVECTOR2 Sprite::GetCenter()
+D3DXVECTOR2 Sprite::GetCenter()  // dùng trong hàm draw của Graphics
 {
 	float x = (float)this->width / 2 * this->scale;
 	float y = (float)this->height / 2 * this->scale;

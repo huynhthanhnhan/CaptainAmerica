@@ -6,7 +6,7 @@
 
 #define KEYBOARD_BUFFER_SIZE 1024
 
-#include "Constants.h"
+#include "Global.h"
 class Keyboard
 {
 	static Keyboard * __instance;
@@ -29,6 +29,7 @@ public:
 	void OnKeyUp(int KeyCode);
 
 	float countTimeJump = 0;
+	int count = 0;
 
 	void Update();
 	//Kiểm tra phím được nhấn

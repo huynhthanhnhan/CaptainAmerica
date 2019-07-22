@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "../../GameFramework/Constants.h"
+#include "../../GameFramework/Global.h"
 
 class Brick : public GameObject
 {

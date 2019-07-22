@@ -54,13 +54,7 @@
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\TiledMap.h">
       <Filter>Header Files\GameFramework\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Viewport.h">
-      <Filter>Header Files\GameFramework\Map</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Animation.h">
-      <Filter>Header Files\GameFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Constants.h">
       <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Debug.h">
@@ -105,11 +99,14 @@
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\GameObject.h">
       <Filter>Header Files\GameObject\GameComponents</Filter>
     </ClInclude>
+    <ClInclude Include="GameFramework\Global.h">
+      <Filter>Header Files\GameFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameFramework\Map\Camera.h">
+      <Filter>Header Files\GameFramework\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Viewport.cpp">
-      <Filter>Source Files\GameFramework\Map</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameFramework\Map\Grid.cpp">
       <Filter>Source Files\GameFramework\Map</Filter>
     </ClCompile>
@@ -163,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmerica\CaptainAmerica\Avengers\GameObject\GameComponents\Main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFramework\Map\Camera.cpp">
+      <Filter>Source Files\GameFramework\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

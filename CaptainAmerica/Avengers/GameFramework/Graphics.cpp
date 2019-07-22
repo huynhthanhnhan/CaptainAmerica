@@ -2,7 +2,7 @@
 #include "../GameFramework/Debug.h"
 
 Graphics * Graphics::__instance = NULL;
-Viewport * Graphics::viewport = NULL;
+Camera * Graphics::Camera = NULL;
 //Khởi tạo Graphics chính
 void Graphics::Init(HWND hWnd)
 {
@@ -46,7 +46,7 @@ void Graphics::Init(HWND hWnd)
 	//Khởi tạo sprite handler
 	D3DXCreateSprite(d3ddv, &spriteHandler);
 
-	viewport = Viewport::GetInstance();
+	Camera = Camera::GetInstance();
 	//In ra khởi tạo Graphics thành công
 	OutputDebugString(L"[INFO] InitGraphics done;\n");
 }
@@ -104,7 +104,7 @@ void Graphics::Draw(Sprite * sprite, D3DCOLOR color)
 	D3DXVECTOR2 center = sprite->GetCenter();
 	D3DXVECTOR2 translate = sprite->GetTranslate();
 	D3DXVECTOR2 scaling = sprite->GetScaling();
-	viewport->SetRenderData(center, translate, scaling);
+	Camera->SetRenderData(center, translate, scaling);
 
 	D3DXMATRIX matrix;
 	D3DXMatrixTransformation2D(

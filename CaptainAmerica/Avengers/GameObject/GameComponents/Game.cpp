@@ -80,8 +80,8 @@ void Game::LoadResources()
 		captain = Captain::GetInstance();
 	if (NULL == tiledMap)
 		tiledMap = TiledMap::GetInstance(TILES_MATRIX_STAGE_1);
-	if (viewport == NULL)
-		viewport = Viewport::GetInstance();
+	if (Camera == NULL)
+		Camera = Camera::GetInstance();
 	if (grid == NULL)
 		grid = Grid::GetInstance();
 }
@@ -247,7 +247,7 @@ void Game::Update(DWORD dt)
 {
 	keyboard->Update();
 	grid->Update(dt);
-	viewport->Update(dt);
+	Camera->Update(dt);
 }
 void Game::Render()
 {

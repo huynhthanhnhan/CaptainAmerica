@@ -1,6 +1,6 @@
 #pragma once
 #include "../../GameObject/GameComponents/GameObject.h"
-#include "../Constants.h" 
+#include "../Global.h" 
 #include "GridCell.h"
 #include "../../GameObject/Captain/Captain.h"
 
@@ -30,7 +30,7 @@ private:
 
 	vector<Tile *> CollisionTiles;
 
-	Viewport *viewport;
+	Camera *Camera;
 
 	Captain * captain;
 

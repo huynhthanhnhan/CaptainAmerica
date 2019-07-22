@@ -2,8 +2,8 @@
 
 
 //Tên ứng dụng
-#define WINDOW_CLASS_NAME L"Game Captain America Adventure"
-#define MAIN_WINDOW_TITLE L"Game Captain America Adventure"
+#define WINDOW_CLASS_NAME L"Captain America"
+#define MAIN_WINDOW_TITLE L"Captain America"
 //Màu background, kích cỡ màn hình
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0)
 #define SCREEN_WIDTH 450
@@ -28,15 +28,9 @@ enum ObjectType
 	BRICK_NOCOLLISION_BOTTOM,
 	SWING,
 	ON_BUTTON,
-	RIVER,
+	WATER,
 };
 //TiledMap
-//
-// MAP
-#define BACKGROUND_1 L"Resources\\TiledMap\\Map-Charleston.png"
-#define BACKGROUND_2 L"Resources\\TiledMap\\Map-Charleston.png"
-#define BACKGROUND_BOSS_1 L"Resources\\TiledMap\\Map-Charleston.png"
-#define BACKGROUND_BOSS_2 L"Resources\\TiledMap\\Map-Charleston.png"
 // TILE
 #define TILES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Map-Charleston-Matrix.txt"
 #define TILES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
@@ -47,7 +41,7 @@ enum ObjectType
 #define TILES_HEIGHT_PER_TILE	16
 #define TILES_TRANSCOLOR D3DCOLOR_XRGB(255, 0, 255)
 
-#define GRID_SIZE 64
+#define GRID_SIZE 16
 #define GRID_MAX_X 48
 #define GRID_MAX_Y 5
 

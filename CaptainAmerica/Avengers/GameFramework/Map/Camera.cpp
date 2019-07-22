@@ -1,10 +1,10 @@
-#include "Viewport.h"
+#include "Camera.h"
 #include "../../GameObject/GameComponents/Game.h"
 #include "../Debug.h"
 
-Viewport * Viewport::__instance = NULL;
+Camera * Camera::__instance = NULL;
 
-Viewport::Viewport()
+Camera::Camera()
 {
 	width = SCREEN_WIDTH;
 	height = SCREEN_HEIGHT;
@@ -13,36 +13,36 @@ Viewport::Viewport()
 }
 
 
-Viewport::~Viewport()
+Camera::~Camera()
 {
 
 }
 
-RECT Viewport::GetRect()
+RECT Camera::GetRect()
 {
 	RECT rect;
-	rect.top = y;
 	rect.left = x;
+	rect.top = y;
 	rect.right = x + width;
 	rect.bottom = y - height;
 	return rect;
 }
 
 
-Viewport * Viewport::GetInstance()
+Camera * Camera::GetInstance()
 {
 	if (__instance == NULL)
-		__instance = new Viewport();
+		__instance = new Camera();
 	return __instance;
 }
-void Viewport::Reset()
+void Camera::Reset()
 {
 	width = SCREEN_WIDTH;
 	height = SCREEN_HEIGHT;
 	x = 0;
 	y = 235;
 }
-void Viewport::Update(DWORD dt)
+void Camera::Update(DWORD dt)
 {
 	Captain* captain = Game::GetInstance()->GetCaptain();
 	int right = (int)(Game::GetInstance()->GetTiledMap()->GetWidth() - SCREEN_WIDTH / 2);
@@ -59,7 +59,7 @@ void Viewport::Update(DWORD dt)
 	}
 }
 
-bool Viewport::IsObjectInCamera(GameObject * gameobject)
+bool Camera::IsObjectInCamera(GameObject * gameobject)
 {
 	RECT rec = GetRect();
 
@@ -70,7 +70,7 @@ bool Viewport::IsObjectInCamera(GameObject * gameobject)
 	return false;
 }
 
-void Viewport::SetRenderData(D3DXVECTOR2 &center, D3DXVECTOR2 &translate, D3DXVECTOR2 &scaling)
+void Camera::SetRenderData(D3DXVECTOR2 &center, D3DXVECTOR2 &translate, D3DXVECTOR2 &scaling)
 {
 	D3DXMATRIX mt;
 	D3DXMatrixIdentity(&mt);
@@ -86,4 +86,8 @@ void Viewport::SetRenderData(D3DXVECTOR2 &center, D3DXVECTOR2 &translate, D3DXVE
 	center.y = curCenter.y;
 	translate.x = curTranslate.x;
 	translate.y = curTranslate.y;
+	/*center.x = - center.y;
+	center.y = -center.x * this->x +  center.y* this->y;
+	translate.x =  - translate.y;
+	translate.y = -translate.x * this->x + translate.y* this->y;*/
 }
