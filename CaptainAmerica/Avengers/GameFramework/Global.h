@@ -69,6 +69,7 @@ enum ObjectType
 #define CAPTAIN_ANI_SHIELD_UP			12
 #define CAPTAIN_ANI_GET_HURT			13
 #define CAPTAIN_ANI_DEAD				14
+#define CAPTAIN_ANI_DASH				15
 
 #define CAPTAIN_TEXTURE_LOCATION L"Resources\\CAPTAIN\\Character.png"
 #define CAPTAIN_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(0, 168, 80, 1)

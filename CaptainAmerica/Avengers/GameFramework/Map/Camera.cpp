@@ -86,8 +86,4 @@ void Camera::SetRenderData(D3DXVECTOR2 &center, D3DXVECTOR2 &translate, D3DXVECT
 	center.y = curCenter.y;
 	translate.x = curTranslate.x;
 	translate.y = curTranslate.y;
-	/*center.x = - center.y;
-	center.y = -center.x * this->x +  center.y* this->y;
-	translate.x =  - translate.y;
-	translate.y = -translate.x * this->x + translate.y* this->y;*/
 }

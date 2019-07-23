@@ -30,6 +30,7 @@ public:
 	void ShieldUp() override;
 	void GetHurt() override;
 	void Dead() override;
+	void Dash() override;
 
 	void Update(DWORD dt) override;
 	void Render() override;

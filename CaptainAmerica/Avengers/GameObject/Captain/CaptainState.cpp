@@ -23,6 +23,7 @@ void CaptainState::Idle()
 	switch (state)
 	{
 	case CAPTAIN_ANI_IDLE:
+		captain->SetSpeedX(0);
 		break;
 	case CAPTAIN_ANI_CROUCH:
 	{
@@ -36,6 +37,11 @@ void CaptainState::Idle()
 		captain->SetState(captain->GetIdleState());
 	}
 	break;
+	case CAPTAIN_ANI_DASH:
+	{
+		captain->SetSpeedX(0);
+		captain->SetState(captain->GetIdleState());
+	}
 	case CAPTAIN_ANI_THROW_SHIELD:
 	case CAPTAIN_ANI_SHIELD_UP:
 		captain->SetState(captain->GetIdleState());
@@ -53,6 +59,7 @@ void CaptainState::Walk()
 	case CAPTAIN_ANI_JUMP:
 		break;
 	case CAPTAIN_ANI_IDLE:
+	case CAPTAIN_ANI_DASH:
 	{
 		captain->SetSpeedX(CAPTAIN_WALKING_SPEED * (captain->IsLeft() ? -1 : 1));
 		captain->SetState(captain->GetWalkState());
@@ -210,6 +217,7 @@ void CaptainState::Swing()
 void CaptainState::Wade()
 {
 	int state = this->states;
+	captain->SetSpeedX(0);
 	captain->SetState(captain->GetWadeState());
 }
 
@@ -246,6 +254,19 @@ void CaptainState::GetHurt()
 void CaptainState::Dead()
 {
 	int state = this->states;
+}
+void CaptainState::Dash()
+{
+	int state = this->states;
+	switch (state)
+	{
+		case CAPTAIN_ANI_WALK:
+		case CAPTAIN_ANI_IDLE:
+			captain->SetSpeedX(CAPTAIN_WALKING_SPEED * 2 * (captain->IsLeft() ? -1 : 1));
+			captain->SetState(captain->GetDashState());
+			break;
+
+	}
 }
 
 void CaptainState::Update(DWORD dt)
@@ -438,6 +459,13 @@ void CaptainState::Render()
 	case CAPTAIN_ANI_DEAD:
 	{
 		captain->GetAnimationsList()[CAPTAIN_ANI_DEAD]->Render(spriteData);
+	}
+	break;
+	case CAPTAIN_ANI_DASH:
+	{
+		if (captain->GetAnimationsList()[CAPTAIN_ANI_DASH]->GetCurFrame() == 0)
+			captain->GetAnimationsList()[CAPTAIN_ANI_DASH]->SetCurFrame(1);
+		captain->GetAnimationsList()[CAPTAIN_ANI_DASH]->Render(spriteData);
 	}
 	break;
 	}

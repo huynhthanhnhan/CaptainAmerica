@@ -103,13 +103,7 @@ void Shield::Update(DWORD dt)
 		if (captain->GetStateNum() == CAPTAIN_ANI_JUMP)
 		{
 			this->SetSpeedX(0);
-			this->state = NO_SHIELD;
-			if (captain->GetSpeedY() >= 0.25)
-				this->state = NO_SHIELD;
-			else
-			{
 				this->state = SHIELD_CENTER;
-			}
 			if (captain->IsLeft())
 				this->SetPositionX(captain->GetPositionX());
 			else
@@ -156,8 +150,18 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX()-3);
 			this->SetPositionY(captain->GetPositionY() - 25);
 		}
-		if (captain->GetStateNum() == CAPTAIN_ANI_WADE)
+		if (captain->GetStateNum() == CAPTAIN_ANI_WADE || (captain->GetStateNum() == CAPTAIN_ANI_JUMP && captain->GetSpeedY() >= 0.25))
 			this->state = NO_SHIELD;
+		if (captain->GetStateNum() == CAPTAIN_ANI_DASH)
+		{
+			this->state = SHIELD_LEFT;
+			this->SetSpeedX(0);
+			if (captain->IsLeft())
+				this->SetPositionX(captain->GetPositionX() - 10);
+			else
+				this->SetPositionX(captain->GetPositionX() + 15);
+			this->SetPositionY(captain->GetPositionY() - 28);
+		}
 	}
 	this->SetPositionX((float)(this->GetPositionX() + this->GetSpeedX()* dt*(isLeft == true ? -1 : 1)));
 	this->SetPositionY((float)(this->GetPositionY() + this->GetSpeedY()* dt));

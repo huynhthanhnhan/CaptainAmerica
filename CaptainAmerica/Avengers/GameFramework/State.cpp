@@ -83,3 +83,8 @@ void State::Dead()
 
 }
 
+void State::Dash()
+{
+
+}
+

@@ -26,6 +26,7 @@ class Captain : public GameObject
 	State *shieldUpState;
 	State *getHurtState;
 	State *deadState;
+	State *dashState;
 
 	State * state;
 
@@ -36,6 +37,7 @@ class Captain : public GameObject
 	bool isGrounded = false;
 	bool isCrouching = false;
 	bool isShieldUp = false;
+	bool isDash = false;
 	
 	
 
@@ -81,6 +83,7 @@ public:
 	State *GetShieldUpState();
 	State *GetGetHurtState();
 	State *GetDeadState();
+	State *GetDashState();
 
 	bool IsGrounded() { return isGrounded; }
 	bool IsCrouching() { return isCrouching; }
@@ -102,6 +105,7 @@ public:
 	void ShieldUp();
 	void GetHurt();
 	void Dead();
+	void Dash();
 
 	void SetColliderDemension(float width, float height)
 	{

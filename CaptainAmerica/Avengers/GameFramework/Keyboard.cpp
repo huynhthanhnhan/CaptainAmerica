@@ -108,12 +108,29 @@ void Keyboard::UpdateKeyStates()
 		if (!IsKeyDown(DIK_LEFT) && captain->IsGrounded())
 		{
 			captain->TurnRight();
-			if (!IsKeyDown(DIK_DOWN))
+			if (IsKeyDown(DIK_DOWN))
 			{
-				captain->Walk();
+				captain->Crouch();
 			}
 			else
-				captain->Crouch();
+				if (deltaDashRight < 10 && deltaDashRight > 0)
+				{
+					isCheckDashRight = false;
+					deltaTimeDash ++;
+					if (deltaTimeDash < MaxTimeDash) 
+					{
+						captain->Dash();
+					}
+					else
+					{
+						captain->Walk();
+					}
+				}
+				else
+				{
+					deltaTimeDash = 0;
+					captain->Walk();
+				}
 		}
 		else if (!IsKeyDown(DIK_LEFT) && captain->isWading)
 		{
@@ -135,7 +152,24 @@ void Keyboard::UpdateKeyStates()
 
 			}
 			else
-				captain->Walk();
+				if (deltaDashLeft < 10 && deltaDashLeft > 0) 
+				{
+					isCheckDashLeft = false;
+					deltaTimeDash ++;
+					if (deltaTimeDash < MaxTimeDash)
+					{
+						captain->Dash();
+					}
+					else
+					{
+						captain->Walk();
+					}
+				}
+				else
+				{
+					deltaTimeDash = 0;
+					captain->Walk();
+				}
 		}
 		else if (!IsKeyDown(DIK_RIGHT) && captain->isWading)
 		{
@@ -178,7 +212,7 @@ void Keyboard::UpdateKeyStates()
 				captain->Idle();
 		}*/
 		count = 0;
-		//if(!captain->isThrowing)
+		if(!captain->isThrowing /*|| (captain->isThrowing && captain->GetAnimationsList()[CAPTAIN_ANI_THROW_SHIELD]->GetCurFrame() == 1)*/ )
 			captain->Idle();
 	}
 	if(IsKeyDown(DIK_F)&&!captain->isWading)
@@ -213,25 +247,25 @@ void Keyboard::OnKeyDown(int KeyCode)
 	DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 	switch (KeyCode)
 	{
+
+	case DIK_S:
 		break;
-		case DIK_S:
-			break;
-		case DIK_W:
-			break;
-		case DIK_D:
-			break;
-		case DIK_UP:
-			break;
-		case DIK_A:
-			if (true == captain->IsGrounded())
-			{
-				captain->ThrowShield();
-			}
-			else
-			{
-				captain->Kick();
-			}
-			break;
+	case DIK_W:
+		break;
+	case DIK_D:
+		break;
+	case DIK_UP:
+		break;
+	case DIK_A:
+		if (true == captain->IsGrounded())
+		{
+			captain->ThrowShield();
+		}
+		else
+		{
+			captain->Kick();
+		}
+		break;
 	}
 }
 void Keyboard::OnKeyUp(int KeyCode)
@@ -243,18 +277,20 @@ void Keyboard::OnKeyUp(int KeyCode)
 		case DIK_DOWN:
 			captain->SetIsCrouching(false);
 		case DIK_LEFT:
-		case DIK_RIGHT:
-			if (captain->IsGrounded())
-
+			//if (!isCheckDashLeft)
 			{
-				if (false == captain->IsCrouching())
-				{
-					
-					captain->SetState(captain->GetIdleState());
-				}
+				deltaDashLeft = 0;
+				isCheckDashLeft = true;
 			}
-			captain->SetSpeedX(0);
 			
+			break;
+		case DIK_RIGHT:
+			//if (!isCheckDashRight)
+			{
+				deltaDashRight = 0;
+				isCheckDashRight = true;
+			}
+
 			break;
 	}
 }
@@ -262,6 +298,14 @@ void Keyboard::OnKeyUp(int KeyCode)
 void Keyboard::Update()
 {
 	//countTimeJump+
+	if (isCheckDashLeft)
+		deltaDashLeft++;
+	if (deltaDashLeft > 10)
+		isCheckDashLeft = false;
+	if (isCheckDashRight)
+		deltaDashRight++;
+	if (deltaDashRight > 10)
+		isCheckDashRight = false;
 
 	Poll_Keyboard();
 

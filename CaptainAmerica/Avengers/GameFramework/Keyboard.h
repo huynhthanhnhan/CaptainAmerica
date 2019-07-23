@@ -30,6 +30,12 @@ public:
 
 	float countTimeJump = 0;
 	int count = 0;
+	float deltaDashLeft = 0;
+	float deltaDashRight = 0;
+	bool isCheckDashRight = false;
+	bool isCheckDashLeft = false;
+	float MaxTimeDash = 40;
+	float deltaTimeDash = 0;
 
 	void Update();
 	//Kiểm tra phím được nhấn

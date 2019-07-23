@@ -22,6 +22,7 @@ Captain::Captain()
 	shieldUpState = new CaptainState(this, CAPTAIN_ANI_SHIELD_UP);
 	getHurtState = new CaptainState(this, CAPTAIN_ANI_GET_HURT);
 	deadState = new CaptainState(this, CAPTAIN_ANI_DEAD);
+	dashState = new CaptainState(this, CAPTAIN_ANI_DASH);
 
 	state = idleState;
 
@@ -195,6 +196,15 @@ void Captain::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	// CAPTAIN_ANI_DASH
+	anim = new Animation(300);
+	for (int i = 17; i < 19; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
 }
 void Captain::SetState(State * state)
 {
@@ -291,6 +301,11 @@ State * Captain::GetDeadState()
 	return deadState;
 }
 
+State * Captain::GetDashState()
+{
+	this->SetStateNum(CAPTAIN_ANI_DASH);
+	return dashState;
+}
 
 void Captain::Idle()
 {
@@ -362,6 +377,11 @@ void Captain::GetHurt()
 void Captain::Dead()
 {
 	state->Dead();
+}
+
+void Captain::Dash()
+{
+	state->Dash();
 }
 
 

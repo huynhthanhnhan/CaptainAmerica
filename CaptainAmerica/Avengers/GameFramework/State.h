@@ -24,6 +24,7 @@ public:
 	virtual void ShieldUp();
 	virtual void GetHurt();
 	virtual void Dead();
+	virtual void Dash();
 
 	virtual void Update(DWORD dt);
 	virtual void Render();
