@@ -74,7 +74,7 @@ void Keyboard::InitKeyboard(HWND hWnd)
 	DebugOut(L"[INFO] Keyboard has been initialized successfully\n");
 }
 
-void Keyboard::Poll_Keyboard()
+void Keyboard::AuthorizeKeyboard()
 {
 	//Lấy tất cả trạng thái của bàn phím
 	HRESULT hr = didv->GetDeviceState(sizeof(keyStates), keyStates);
@@ -93,13 +93,13 @@ void Keyboard::Poll_Keyboard()
 		}
 		else
 		{
-			DebugOut(L"[ERROR] DINPUT::GetDeviceState failed. Error: %d\n", hr);
+			DebugOut(L"[ERROR] DINPUT::GetDevicCaptainState failed. Error: %d\n", hr);
 			return;
 		}
 	}
 }
 // update trạng thái nhân vật khi nhấn nút
-void Keyboard::UpdateKeyStates()
+void Keyboard::ProcessKeyboard()
 {
 	Captain * captain = Captain::GetInstance();
 
@@ -307,9 +307,9 @@ void Keyboard::Update()
 	if (deltaDashRight > 10)
 		isCheckDashRight = false;
 
-	Poll_Keyboard();
+	AuthorizeKeyboard();
 
-	UpdateKeyStates();
+	ProcessKeyboard();
 
 	//Lấy các sự kiện bàn phím được đệm
 	DWORD dwElements = KEYBOARD_BUFFER_SIZE;

@@ -90,7 +90,7 @@ void Shield::Update(DWORD dt)
 	}
 	else
 	{
-		if (captain->GetStateNum() == CAPTAIN_ANI_IDLE || captain->GetStateNum() == CAPTAIN_ANI_WALK)
+		if (captain->GetEnumState() == eCaptainState::IDLE || captain->GetEnumState() == eCaptainState::WALK)
 		{
 			this->state = SHIELD_LEFT;
 			this->SetSpeedX(0);
@@ -100,7 +100,7 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX() + 12);
 			this->SetPositionY(captain->GetPositionY() - 8);
 		}
-		if (captain->GetStateNum() == CAPTAIN_ANI_JUMP)
+		if (captain->GetEnumState() == eCaptainState::JUMP)
 		{
 			this->SetSpeedX(0);
 				this->state = SHIELD_CENTER;
@@ -110,7 +110,7 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX() + 8);
 			this->SetPositionY(captain->GetPositionY() - 4);
 		}
-		if (captain->GetStateNum() == CAPTAIN_ANI_CROUCH)
+		if (captain->GetEnumState() == eCaptainState::CROUCH)
 		{
 			this->state = SHIELD_LEFT;
 			this->SetSpeedX(0);
@@ -120,7 +120,7 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX() + 12);
 			this->SetPositionY(captain->GetPositionY() - 26);
 		}
-		if (captain->GetStateNum() == CAPTAIN_ANI_SHIELD_UP)
+		if (captain->GetEnumState() == eCaptainState::SHIELD_TOP)
 		{
 			this->state = SHIELD_UP;
 			this->SetSpeedX(0);
@@ -130,7 +130,7 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX() + 8);
 			this->SetPositionY(captain->GetPositionY() + 2);
 		}
-		if (captain->GetStateNum() == CAPTAIN_ANI_KICK)
+		if (captain->GetEnumState() == eCaptainState::KICK)
 		{
 			this->state = SHIELD_LEFT;
 			this->SetSpeedX(0);
@@ -140,7 +140,7 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX() - 18);
 			this->SetPositionY(captain->GetPositionY() - 5);
 		}
-		if (captain->GetStateNum() == CAPTAIN_ANI_CROUCH_HIT)
+		if (captain->GetEnumState() == eCaptainState::CROUCH_HIT)
 		{
 			this->state = SHIELD_CENTER;
 			this->SetSpeedX(0);
@@ -150,9 +150,9 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX()-3);
 			this->SetPositionY(captain->GetPositionY() - 25);
 		}
-		if (captain->GetStateNum() == CAPTAIN_ANI_WADE || (captain->GetStateNum() == CAPTAIN_ANI_JUMP && captain->GetSpeedY() >= 0.25))
+		if (captain->GetEnumState() == eCaptainState::WADE || (captain->GetEnumState() == eCaptainState::JUMP && captain->GetSpeedY() >= 0.25))
 			this->state = NO_SHIELD;
-		if (captain->GetStateNum() == CAPTAIN_ANI_DASH)
+		if (captain->GetEnumState() == eCaptainState::DASH)
 		{
 			this->state = SHIELD_LEFT;
 			this->SetSpeedX(0);
@@ -215,64 +215,6 @@ void Shield::SheildAttacking()
 		}
 	}
 }
-//
-//void Shield::Update(DWORD dt)
-//{
-//	this->SetSpeedY(0);
-//	distance += abs(this->GetSpeedX() * dt);
-//	Captain* captain = Captain::GetInstance();
-//
-//	if (captain->GetIdleState() || captain->GetWalkingState())
-//	{
-//		this->state = SHIELD_LEFT;
-//		this->SetSpeedX(0);
-//		if(captain->IsLeft())
-//			this->SetPositionX(captain->GetPositionX() - 10);
-//		else
-//			this->SetPositionX(captain->GetPositionX() + 10);
-//		this->SetPositionY(captain->GetPositionY() - 10);
-//	}
-//	if (captain->GetJumpingState())
-//	{
-//		this->state = SHIELD_CENTER;
-//		this->SetSpeedX(0);
-//		this->SetPositionX(captain->GetPositionX());
-//		this->SetPositionY(captain->GetPositionY());
-//	}
-//	if (captain->GetCrouchingState())
-//	{
-//		this->state = SHIELD_DOWN;
-//		this->SetSpeedX(0);
-//		this->SetPositionX(captain->GetPositionX());
-//		this->SetPositionY(captain->GetPositionY());
-//	}
-//		
-//	/*if (abs(captain->GetPositionX() - this->GetPositionX()) >= 150)
-//	{
-//		distance = 0;
-//		this->SetSpeedX(this->GetSpeedX() * -1);
-//	}*/
-//	/*if (ninja->GetPositionY() > this->GetPositionY())
-//	{
-//		this->SetSpeedY(0.125f);
-//	}
-//	else if (ninja->GetPositionY() < this->GetPositionY())
-//	{
-//		this->SetSpeedY(-0.125f);
-//	}*/
-//
-//	this->SetPositionX((float)(this->GetPositionX() + this->GetSpeedX()* dt*(isLeft == true ? -1 : 1)));
-//	this->SetPositionY((float)(this->GetPositionY() + this->GetSpeedY()* dt));
-//
-//	//vector<LPCOLLISIONEVENT> coEvents;
-//	/*vector<Enemy* > enemies = Grid::GetInstance()->GetAllEnemies();
-//	if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS)
-//	{
-//		enemies = Grid::GetInstance()->GetAllEnemies();
-//	}
-//	this->CalcPotentialCollisionsAttackingEnemy(enemies, coEvents);*/
-//}
-//
 void Shield::Render()
 {
 	Captain * captain = Captain::GetInstance();
@@ -287,7 +229,7 @@ void Shield::Render()
 
 		spriteEnemyData.scale = 1;
 		spriteEnemyData.angle = 0;
-		if (captain->GetStateNum() != CAPTAIN_ANI_KICK) 
+		if (captain->GetEnumState() != eCaptainState::KICK) 
 		{
 			spriteEnemyData.isLeft = captain->IsLeft();
 			spriteEnemyData.isFlipped = captain->IsFlipped();

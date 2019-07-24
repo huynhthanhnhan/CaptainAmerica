@@ -1,10 +1,10 @@
 #include "CaptainState.h"
 #include <math.h>
 
-CaptainState::CaptainState(Captain * captain, int states)
+CaptainState::CaptainState(Captain * captain, eCaptainState state)
 {
 	this->captain = captain;
-	this->states = states;
+	this->state = state;
 }
 
 CaptainState::~CaptainState()
@@ -13,37 +13,37 @@ CaptainState::~CaptainState()
 
 int CaptainState::GetState() 
 {
-	return this->states;
+	return this->state;
 }
 
 void CaptainState::Idle()
 {
-	int state = this->states;
+	int state = this->state;
 	captain->SetColliderDemension(24, 45);
 	switch (state)
 	{
-	case CAPTAIN_ANI_IDLE:
+	case eCaptainState::IDLE:
 		captain->SetSpeedX(0);
 		break;
-	case CAPTAIN_ANI_CROUCH:
+	case eCaptainState::CROUCH:
 	{
 		captain->SetIsCrouching(false);
 		captain->SetState(captain->GetIdleState());
 	}
 	break;
-	case CAPTAIN_ANI_WALK:
+	case eCaptainState::WALK:
 	{
 		captain->SetSpeedX(0);
 		captain->SetState(captain->GetIdleState());
 	}
 	break;
-	case CAPTAIN_ANI_DASH:
+	case eCaptainState::DASH:
 	{
 		captain->SetSpeedX(0);
 		captain->SetState(captain->GetIdleState());
 	}
-	case CAPTAIN_ANI_THROW_SHIELD:
-	case CAPTAIN_ANI_SHIELD_UP:
+	case eCaptainState::THROW_SHIELD:
+	case eCaptainState::SHIELD_TOP:
 		captain->SetState(captain->GetIdleState());
 		break;
 	}
@@ -51,26 +51,26 @@ void CaptainState::Idle()
 
 void CaptainState::Walk()
 {
-	int state = this->states;
+	int state = this->state;
 	captain->SetColliderDemension(22, 45);
 	switch (state)
 	{
-	case CAPTAIN_ANI_CROUCH:
-	case CAPTAIN_ANI_JUMP:
+	case eCaptainState::CROUCH:
+	case eCaptainState::JUMP:
 		break;
-	case CAPTAIN_ANI_IDLE:
-	case CAPTAIN_ANI_DASH:
+	case eCaptainState::IDLE:
+	case eCaptainState::DASH:
 	{
 		captain->SetSpeedX(CAPTAIN_WALKING_SPEED * (captain->IsLeft() ? -1 : 1));
 		captain->SetState(captain->GetWalkState());
 	}
 	break;
-	case CAPTAIN_ANI_WALK:
+	case eCaptainState::WALK:
 	{
 		captain->SetSpeedX(CAPTAIN_WALKING_SPEED * (captain->IsLeft() ? -1 : 1));
 	}
 	break;
-	case CAPTAIN_ANI_THROW_SHIELD:
+	case eCaptainState::THROW_SHIELD:
 		captain->SetState(captain->GetIdleState());
 		break;
 	}
@@ -78,23 +78,23 @@ void CaptainState::Walk()
 
 void CaptainState::Jump()
 {
-	int state = this->states;
+	int state = this->state;
 
 	switch (state)
 	{
-	case CAPTAIN_ANI_CROUCH:
-	case CAPTAIN_ANI_CROUCH_HIT:
+	case eCaptainState::CROUCH:
+	case eCaptainState::CROUCH_HIT:
 		captain->SetSpeedY(0);
 		break;
-	case CAPTAIN_ANI_JUMP:
-	case CAPTAIN_ANI_KICK:
+	case eCaptainState::JUMP:
+	case eCaptainState::KICK:
 		if (captain->GetSpeedY() > 0.4) 
 		{
 			captain->isFalling = true;
 		}
 		break;
-	case CAPTAIN_ANI_IDLE:
-	case CAPTAIN_ANI_WALK:
+	case eCaptainState::IDLE:
+	case eCaptainState::WALK:
 	{
 		if (captain->IsGrounded())
 		{
@@ -104,7 +104,7 @@ void CaptainState::Jump()
 		}
 	}
 	break;
-	case CAPTAIN_ANI_WADE:
+	case eCaptainState::WADE:
 	{
 		if (captain->isWading)
 		{
@@ -121,21 +121,21 @@ void CaptainState::Jump()
 void CaptainState::Crouch()
 {
 	{
-		int state = this->states;
+		int state = this->state;
 
 		switch (state)
 		{
-		case CAPTAIN_ANI_CROUCH:
-		case CAPTAIN_ANI_JUMP:
+		case eCaptainState::CROUCH:
+		case eCaptainState::JUMP:
 			break;
-		case CAPTAIN_ANI_IDLE:
+		case eCaptainState::IDLE:
 		{
 			captain->SetIsCrouching(true);
 			captain->SetState(captain->GetCrouchState());
 		}
 		break;
-		case CAPTAIN_ANI_WALK:
-		case CAPTAIN_ANI_CROUCH_HIT:
+		case eCaptainState::WALK:
+		case eCaptainState::CROUCH_HIT:
 		{
 			captain->SetSpeedX(0);
 			captain->SetIsCrouching(true);
@@ -149,20 +149,20 @@ void CaptainState::Crouch()
 void CaptainState::ThrowShield()
 {
 
-	int state = this->states;
+	int state = this->state;
 	switch (state)
 	{
-	case CAPTAIN_ANI_CROUCH:
-	case CAPTAIN_ANI_CROUCH_HIT:
+	case eCaptainState::CROUCH:
+	case eCaptainState::CROUCH_HIT:
 		break;
-	case CAPTAIN_ANI_IDLE:
-	case CAPTAIN_ANI_WALK:
+	case eCaptainState::IDLE:
+	case eCaptainState::WALK:
 	{
 		captain->isThrowing = true;
 		captain->SetState(captain->GetThrowShieldState());
 	}
 	break;
-	case CAPTAIN_ANI_JUMP:
+	case eCaptainState::JUMP:
 		captain->SetState(captain->GetJumpState());
 		break;
 	}
@@ -170,21 +170,21 @@ void CaptainState::ThrowShield()
 
 void CaptainState::Roll()
 {
-	int state = this->states;
+	int state = this->state;
 }
 
 void CaptainState::Kick()
 {
-	int state = this->states;
+	int state = this->state;
 	switch (state)
 	{
-	case CAPTAIN_ANI_JUMP:
+	case eCaptainState::JUMP:
 	{
 		captain->SetIsGrounded(false);
 		captain->SetState(captain->GetKickState());
 		break;
 	}
-	case CAPTAIN_ANI_KICK:
+	case eCaptainState::KICK:
 		if (captain->GetSpeedY() > 0.4)
 		{
 			captain->isFalling = true;
@@ -195,48 +195,48 @@ void CaptainState::Kick()
 
 void CaptainState::StandHit()
 {
-	int state = this->states;
+	int state = this->state;
 }
 
 void CaptainState::CrouchHit()
 {
-	int state = this->states;
+	int state = this->state;
 	captain->SetState(captain->GetCrouchHitState());
 }
 
 void CaptainState::SitOnShield()
 {
-	int state = this->states;
+	int state = this->state;
 }
 
 void CaptainState::Swing()
 {
-	int state = this->states;
+	int state = this->state;
 }
 
 void CaptainState::Wade()
 {
-	int state = this->states;
+	int state = this->state;
 	captain->SetSpeedX(0);
 	captain->SetState(captain->GetWadeState());
 }
 
 void CaptainState::ShieldUp()
 {
-	int state = this->states;
+	int state = this->state;
 
 	switch (state)
 	{
-	case CAPTAIN_ANI_SHIELD_UP:
-	case CAPTAIN_ANI_JUMP:
+	case eCaptainState::SHIELD_TOP:
+	case eCaptainState::JUMP:
 		break;
-	case CAPTAIN_ANI_IDLE:
+	case eCaptainState::IDLE:
 	{
 		captain->SetIsShieldUp(true);
 		captain->SetState(captain->GetShieldUpState());
 	}
 	break;
-	case CAPTAIN_ANI_WALK:
+	case eCaptainState::WALK:
 	{
 		captain->SetSpeedX(0);
 		captain->SetIsShieldUp(true);
@@ -248,20 +248,20 @@ void CaptainState::ShieldUp()
 
 void CaptainState::GetHurt()
 {
-	int state = this->states;
+	int state = this->state;
 }
 
 void CaptainState::Dead()
 {
-	int state = this->states;
+	int state = this->state;
 }
 void CaptainState::Dash()
 {
-	int state = this->states;
+	int state = this->state;
 	switch (state)
 	{
-		case CAPTAIN_ANI_WALK:
-		case CAPTAIN_ANI_IDLE:
+		case eCaptainState::WALK:
+		case eCaptainState::IDLE:
 			captain->SetSpeedX(CAPTAIN_WALKING_SPEED * 2 * (captain->IsLeft() ? -1 : 1));
 			captain->SetState(captain->GetDashState());
 			break;
@@ -271,11 +271,11 @@ void CaptainState::Dash()
 
 void CaptainState::Update(DWORD dt)
 {
-	int state = this->states;
+	int state = this->state;
 	switch (state)
 	{
-	case CAPTAIN_ANI_KICK:
-	case CAPTAIN_ANI_JUMP:
+	case eCaptainState::KICK:
+	case eCaptainState::JUMP:
 	{
 		if (captain->IsGrounded())
 		{
@@ -354,7 +354,7 @@ void CaptainState::Update(DWORD dt)
 
 void CaptainState::Render()
 {
-	int state = this->states;
+	int state = this->state;
 
 	SpriteData spriteData;
 	if (this->captain != NULL)
@@ -371,101 +371,101 @@ void CaptainState::Render()
 
 	switch (state)
 	{
-	case CAPTAIN_ANI_IDLE:
+	case eCaptainState::IDLE:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_IDLE]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::IDLE]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_CROUCH:
+	case eCaptainState::CROUCH:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_CROUCH]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::CROUCH]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_JUMP:
+	case eCaptainState::JUMP:
 	{
 		if (captain->GetSpeedY() >= 0.25)
 		{
 			Shield::GetInstance()->SetState(NO_SHIELD);
-			if (captain->GetAnimationsList()[CAPTAIN_ANI_JUMP]->GetCurFrame() == 4)
-				captain->GetAnimationsList()[CAPTAIN_ANI_JUMP]->SetCurFrame(0);
+			if (captain->GetAnimationsList()[eCaptainState::JUMP]->GetCurFrame() == 4)
+				captain->GetAnimationsList()[eCaptainState::JUMP]->SetCurFrame(0);
 		}
 		else
 		{
 			Shield::GetInstance()->SetState(SHIELD_CENTER);
-			if (captain->GetAnimationsList()[CAPTAIN_ANI_JUMP]->GetCurFrame() == 1)
-				captain->GetAnimationsList()[CAPTAIN_ANI_JUMP]->SetCurFrame(0);
+			if (captain->GetAnimationsList()[eCaptainState::JUMP]->GetCurFrame() == 1)
+				captain->GetAnimationsList()[eCaptainState::JUMP]->SetCurFrame(0);
 		}
-		captain->GetAnimationsList()[CAPTAIN_ANI_JUMP]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::JUMP]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_WALK:
+	case eCaptainState::WALK:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_WALK]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::WALK]->Render(spriteData);
 	}
 	break;
 
-	case CAPTAIN_ANI_THROW_SHIELD:
+	case eCaptainState::THROW_SHIELD:
 	{
-		/*if (captain->GetAnimationsList()[CAPTAIN_ANI_THROW_SHIELD]->GetCurFrame() == 1)
-			captain->GetAnimationsList()[CAPTAIN_ANI_THROW_SHIELD]->SetCurFrame(0);*/
-		captain->GetAnimationsList()[CAPTAIN_ANI_THROW_SHIELD]->Render(spriteData);
+		/*if (captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->GetCurFrame() == 1)
+			captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->SetCurFrame(0);*/
+		captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_ROLL:
+	case eCaptainState::ROLL:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_ROLL]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::ROLL]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_KICK:
+	case eCaptainState::KICK:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_KICK]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::KICK]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_STAND_HIT:
+	case eCaptainState::STAND_HIT:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_STAND_HIT]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::STAND_HIT]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_CROUCH_HIT:
+	case eCaptainState::CROUCH_HIT:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_CROUCH_HIT]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::CROUCH_HIT]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_SIT_ON_SHIELD:
+	case eCaptainState::SIT_ON_SHIELD:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_SIT_ON_SHIELD]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::SIT_ON_SHIELD]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_SWING:
+	case eCaptainState::SWING:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_SWING]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::SWING]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_WADE:
+	case eCaptainState::WADE:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_WADE]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::WADE]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_SHIELD_UP:
+	case eCaptainState::SHIELD_TOP:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_SHIELD_UP]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::SHIELD_TOP]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_GET_HURT:
+	case eCaptainState::HURT:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_GET_HURT]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::HURT]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_DEAD:
+	case eCaptainState::DEAD:
 	{
-		captain->GetAnimationsList()[CAPTAIN_ANI_DEAD]->Render(spriteData);
+		captain->GetAnimationsList()[eCaptainState::DEAD]->Render(spriteData);
 	}
 	break;
-	case CAPTAIN_ANI_DASH:
+	case eCaptainState::DASH:
 	{
-		if (captain->GetAnimationsList()[CAPTAIN_ANI_DASH]->GetCurFrame() == 0)
-			captain->GetAnimationsList()[CAPTAIN_ANI_DASH]->SetCurFrame(1);
-		captain->GetAnimationsList()[CAPTAIN_ANI_DASH]->Render(spriteData);
+		if (captain->GetAnimationsList()[eCaptainState::DASH]->GetCurFrame() == 0)
+			captain->GetAnimationsList()[eCaptainState::DASH]->SetCurFrame(1);
+		captain->GetAnimationsList()[eCaptainState::DASH]->Render(spriteData);
 	}
 	break;
 	}

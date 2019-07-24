@@ -19,12 +19,14 @@ class Keyboard
 	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		//Dữ liệu đệm bàn phím
 
 public:
+
+	static Keyboard * GetInstance();
 	//Khởi tạo bàn phím
 	void InitKeyboard(HWND hWnd);
-	void Poll_Keyboard();
+	void AuthorizeKeyboard();
 
 	//Xử lí bàn phím
-	void UpdateKeyStates();
+	void ProcessKeyboard();
 	void OnKeyDown(int KeyCode);
 	void OnKeyUp(int KeyCode);
 
@@ -41,8 +43,7 @@ public:
 	//Kiểm tra phím được nhấn
 	int IsKeyDown(int KeyCode);
 	int IsKeyUp(int KeyCode);
-	//Lấy đối tượng
-	static Keyboard * GetInstance();
+
 	//Hàm hủy đối tượng
 	~Keyboard();
 };

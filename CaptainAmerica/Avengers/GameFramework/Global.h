@@ -26,10 +26,31 @@ enum ObjectType
 	BRICK,
 	VINES,
 	BRICK_NOCOLLISION_BOTTOM,
-	SWING,
+	SWING_PLATFORM,
 	ON_BUTTON,
 	WATER,
 };
+
+enum eCaptainState
+{
+	IDLE,
+	WALK,
+	JUMP,
+	CROUCH,
+	THROW_SHIELD,
+	ROLL,
+	KICK,
+	STAND_HIT,
+	CROUCH_HIT,
+	SIT_ON_SHIELD,
+	SWING,
+	WADE,
+	SHIELD_TOP,
+	HURT,
+	DEAD,
+	DASH,
+};
+
 //TiledMap
 // TILE
 #define TILES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Map-Charleston-Matrix.txt"
@@ -51,25 +72,6 @@ enum ObjectType
 #define CAPTAIN_GRAVITY			0.02f
 #define CAPTAIN_WADING_SPEED 0.08F
 
-//Các số để chạy animation của Captain
-
-#define  ATTACKTIME 300
-#define CAPTAIN_ANI_IDLE				0
-#define CAPTAIN_ANI_WALK				1
-#define CAPTAIN_ANI_JUMP				2
-#define CAPTAIN_ANI_CROUCH 				3
-#define CAPTAIN_ANI_THROW_SHIELD 		4
-#define CAPTAIN_ANI_ROLL				5
-#define CAPTAIN_ANI_KICK				6
-#define CAPTAIN_ANI_STAND_HIT			7
-#define CAPTAIN_ANI_CROUCH_HIT			8
-#define CAPTAIN_ANI_SIT_ON_SHIELD		9
-#define CAPTAIN_ANI_SWING				10
-#define CAPTAIN_ANI_WADE				11
-#define CAPTAIN_ANI_SHIELD_UP			12
-#define CAPTAIN_ANI_GET_HURT			13
-#define CAPTAIN_ANI_DEAD				14
-#define CAPTAIN_ANI_DASH				15
 
 #define CAPTAIN_TEXTURE_LOCATION L"Resources\\CAPTAIN\\Character.png"
 #define CAPTAIN_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(0, 168, 80, 1)

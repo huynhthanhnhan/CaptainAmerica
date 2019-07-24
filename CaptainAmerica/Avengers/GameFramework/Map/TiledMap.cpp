@@ -96,7 +96,7 @@ Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
 			else if (curTile.tileId == 44)
 				curTile.type = ObjectType::ON_BUTTON;
 			else if (curTile.tileId == 61 || curTile.tileId == 62 || curTile.tileId == 74 || curTile.tileId == 96)
-				curTile.type = ObjectType::SWING;
+				curTile.type = ObjectType::SWING_PLATFORM;
 			else
 				curTile.type = ObjectType::DEFAULT;
 		}

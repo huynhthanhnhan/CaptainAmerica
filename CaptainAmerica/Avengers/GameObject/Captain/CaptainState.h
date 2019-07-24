@@ -8,9 +8,9 @@ class CaptainState : public State
 {
 private:
 	Captain * captain;
-	int states;
+	int state;
 public:
-	CaptainState(Captain * ninja, int states);
+	CaptainState(Captain * ninja, eCaptainState state);
 	~CaptainState();
 
 	int GetState();

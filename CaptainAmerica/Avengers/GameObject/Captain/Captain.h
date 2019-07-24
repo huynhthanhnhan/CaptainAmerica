@@ -6,6 +6,36 @@
 #include "CaptainState.h"
 #include "Shield.h"
 
+namespace NS
+{
+	const int idle_start = 0;
+	const int walk_start = 1;
+	const int walk_end = 4;
+	const int jump_start = 7;
+	const int jump_end = 9;
+	const int crouch_start = 6;
+	const int throw_shiled_start = 11;
+	const int throw_shield_end = 12;
+	const int roll_start = 8;
+	const int roll_end = 9;
+	const int kick_start = 10;
+	const int stand_hit_start = 13;
+	const int stand_hit_end = 14;
+	const int crouch_hit_start = 15;
+	const int crouch_hit_end = 16;
+	const int sit_on_shiled_start = 19;
+	const int swing_start = 17 ;
+	const int swing_end = 29;
+	const int wade_start = 44;
+	const int wade_end = 45;
+	const int shield_up_start = 5;
+	const int hurt_start = 33;
+	const int dead_start = 34;
+	const int dead_end = 35;
+	const int dash_start = 17;
+	const int dash_end = 18;
+}
+
 class Captain : public GameObject
 {
 	Captain();
@@ -29,6 +59,7 @@ class Captain : public GameObject
 	State *dashState;
 
 	State * state;
+	eCaptainState eState;
 
 	Shield* shield;
 
@@ -49,16 +80,26 @@ class Captain : public GameObject
 	int support_item = 0;
 	int stamina;
 public:
+
+	static Captain * GetInstance();
+
 	void LoadResources();
 
 	void SetIsGrounded(bool isGrounded) { this->isGrounded = isGrounded; }
+
 	void SetIsCrouching(bool isCrouching) { this->isCrouching = isCrouching; }
+
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
+
 	void SetState(State * state);
+
 	int GetStateNum() { return this->StateNum; }
 	void SetStateNum(int num) { this->StateNum = num; }
+
 	State * GetState() { return this->state; }
-	static Captain * GetInstance();
+
+	eCaptainState GetEnumState() { return this->eState; }
+	void SetEnumState(eCaptainState state) { this->eState = state; }
 	
 	bool isThrowing = false;
 	bool isFalling = false;
