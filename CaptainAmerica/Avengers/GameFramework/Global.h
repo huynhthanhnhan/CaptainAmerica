@@ -51,6 +51,18 @@ enum eCaptainState
 	DASH,
 };
 
+enum eController
+{
+	NoneControl,
+	LeftControl,
+	RightControl,
+	UpControl,
+	DownControl,
+	JumpControl,
+	DashControl,
+	ThrowControl
+};
+
 //TiledMap
 // TILE
 #define CHARLESTON_MAP L"Resources\\TiledMap\\Map-Charleston-Matrix.txt"

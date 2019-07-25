@@ -138,7 +138,6 @@
     <ClInclude Include="GameObject\Captain\Captain.h" />
     <ClInclude Include="GameObject\Captain\CaptainState.h" />
     <ClInclude Include="GameObject\Captain\Shield.h" />
-    <ClInclude Include="GameObject\GameComponents\Brick.h" />
     <ClInclude Include="GameObject\GameComponents\Game.h" />
     <ClInclude Include="GameObject\GameComponents\GameItem.h" />
     <ClInclude Include="GameObject\GameComponents\GameObject.h" />
@@ -159,7 +158,6 @@
     <ClCompile Include="GameObject\Captain\Captain.cpp" />
     <ClCompile Include="GameObject\Captain\CaptainState.cpp" />
     <ClCompile Include="GameObject\Captain\Shield.cpp" />
-    <ClCompile Include="GameObject\GameComponents\Brick.cpp" />
     <ClCompile Include="GameObject\GameComponents\Game.cpp" />
     <ClCompile Include="GameObject\GameComponents\GameItem.cpp" />
     <ClCompile Include="GameObject\GameComponents\GameObject.cpp" />

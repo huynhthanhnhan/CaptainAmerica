@@ -91,7 +91,7 @@ public:
 
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
 
-	void SetState(State * state);
+	void SetState(eCaptainState state);
 
 	int GetStateNum() { return this->StateNum; }
 	void SetStateNum(int num) { this->StateNum = num; }
@@ -122,7 +122,7 @@ public:
 	State *GetSwingState();
 	State *GetWadeState();
 	State *GetShieldUpState();
-	State *GetGetHurtState();
+	State *GetHurtState();
 	State *GetDeadState();
 	State *GetDashState();
 

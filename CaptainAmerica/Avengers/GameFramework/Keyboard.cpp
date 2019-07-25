@@ -2,6 +2,12 @@
 #include "../GameFramework/Debug.h"
 Keyboard * Keyboard::__instance = NULL;
 
+Keyboard *Keyboard::GetInstance()
+{
+	if (__instance == NULL) __instance = new Keyboard();
+	return __instance;
+}
+
 int Keyboard::IsKeyDown(int KeyCode)
 {
 	return (keyStates[KeyCode] & 0x80) > 0;
@@ -102,171 +108,209 @@ void Keyboard::AuthorizeKeyboard()
 void Keyboard::ProcessKeyboard()
 {
 	Captain * captain = Captain::GetInstance();
+	captainState = new CaptainState(captain, IDLE);
+	eController control = NoneControl;
 
-	if (IsKeyDown(DIK_RIGHT))
+	// Dash
+	if (IsKeyDown(DIK_RIGHT) && !IsKeyDown(DIK_LEFT) && captain->IsGrounded() && !IsKeyDown(DIK_DOWN))
 	{
-		if (!IsKeyDown(DIK_LEFT) && captain->IsGrounded())
+		captain->TurnRight();
+		if (deltaDashRight < 10 && deltaDashRight > 0)
 		{
-			captain->TurnRight();
-			if (IsKeyDown(DIK_DOWN))
+			isCheckDashRight = false;
+			deltaTimeDash++;
+			if (deltaTimeDash < MaxTimeDash)
 			{
-				captain->Crouch();
+				captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * 2 * (captain->IsLeft() ? -1 : 1));
+				captain->SetState(DASH);
+				return;
 			}
 			else
-				if (deltaDashRight < 10 && deltaDashRight > 0)
-				{
-					isCheckDashRight = false;
-					deltaTimeDash ++;
-					if (deltaTimeDash < MaxTimeDash) 
-					{
-						captain->Dash();
-					}
-					else
-					{
-						captain->Walk();
-					}
-				}
-				else
-				{
-					deltaTimeDash = 0;
-					captain->Walk();
-				}
-		}
-		else if (!IsKeyDown(DIK_LEFT) && captain->isWading)
-		{
-			captain->TurnRight();
-			if (!IsKeyDown(DIK_DOWN))
-				captain->SetSpeedX(CAPTAIN_AMERICA_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
-		}
-		else if (!IsKeyDown(DIK_DOWN))
-			captain->Idle();
-	}
-	else if (IsKeyDown(DIK_LEFT))
-	{
-		if (!IsKeyDown(DIK_RIGHT) && captain->IsGrounded())
-		{
-			captain->TurnLeft();
-			if (IsKeyDown(DIK_DOWN))
 			{
-				captain->Crouch();
-
+				captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
+				captain->SetState(WALK);
+				return;
 			}
-			else
-				if (deltaDashLeft < 10 && deltaDashLeft > 0) 
-				{
-					isCheckDashLeft = false;
-					deltaTimeDash ++;
-					if (deltaTimeDash < MaxTimeDash)
-					{
-						captain->Dash();
-					}
-					else
-					{
-						captain->Walk();
-					}
-				}
-				else
-				{
-					deltaTimeDash = 0;
-					captain->Walk();
-				}
 		}
-		else if (!IsKeyDown(DIK_RIGHT) && captain->isWading)
-		{
-			captain->TurnLeft();
-			if (!IsKeyDown(DIK_DOWN))
-				captain->SetSpeedX(CAPTAIN_AMERICA_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
-		}
-		else if (!IsKeyDown(DIK_DOWN))
-			captain->Idle();
-	}
-	else if (IsKeyDown(DIK_DOWN))
-	{
-		if (!IsKeyDown(DIK_F))
-			if (IsKeyDown(DIK_SPACE) && count == 0)
-			{
-				captain->SetPositionY(captain->GetPositionY() - 0.5);
-				count = 1;
-			}
-			else
-			captain->Crouch();
-		else  
-			//if (count == 0) 
-			{
-				captain->CrouchHit();
-				//count = 1;
-			}
-			
-	}
-	else if (IsKeyDown(DIK_UP))
-	{
-		captain->ShieldUp();
-	}
-	else
-	{
-		/*if(captain->GetStateNum()!=CAPTAIN_AMERICA_ANIMATION_THROW_SHIELD)
-			captain->Idle();
 		else
 		{
-			if (captain->GetAnimationsList()[CAPTAIN_AMERICA_ANIMATION_THROW_SHIELD]->GetCurFrame() == 5)
-				captain->Idle();
-		}*/
-		count = 0;
-		if(!captain->isThrowing /*|| (captain->isThrowing && captain->GetAnimationsList()[CAPTAIN_AMERICA_ANIMATION_THROW_SHIELD]->GetCurFrame() == 1)*/ )
-			captain->Idle();
+			deltaTimeDash = 0;
+			captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
+			captain->SetState(WALK);
+			return;
+		}
 	}
-	if(IsKeyDown(DIK_F)&&!captain->isWading)
+		
+	if (IsKeyDown(DIK_LEFT) && !IsKeyDown(DIK_RIGHT) && captain->IsGrounded() && !IsKeyDown(DIK_DOWN))
 	{
-		if (!captain->isThrowing)
+		captain->TurnLeft();
+		if (deltaDashLeft < 10 && deltaDashLeft > 0)
 		{
-			if (captain->IsGrounded())
+			isCheckDashLeft = false;
+			deltaTimeDash++;
+			if (deltaTimeDash < MaxTimeDash)
 			{
-				captain->ThrowShield();
+				captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * 2 * (captain->IsLeft() ? -1 : 1));
+				captain->SetState(DASH);
+				return;
 			}
 			else
 			{
-				captain->Kick();
+				captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
+				captain->SetState(WALK);
+				return;
 			}
-			
 		}
-	}
-	if (IsKeyDown(DIK_SPACE) && !captain->isFalling)
-	{
-		if (captain->GetSpeedY() <= 0.4)
+		else
 		{
-			captain->SetSpeedY(captain->GetSpeedY() + 0.05);
-			DebugOut(L"speedY: %f\n", captain->GetSpeedY());
-			captain->Jump();
+			deltaTimeDash = 0;
+			captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
+			captain->SetState(WALK);
+			return;
 		}
 	}
+	//if (IsKeyDown(DIK_RIGHT))
+	//{
+	//	if (!IsKeyDown(DIK_LEFT) && captain->IsGrounded())
+	//	{
+	//		
+	//		if (IsKeyDown(DIK_DOWN))
+	//		{
+	//			captain->Crouch();
+	//		}
+	//		else
+				
+	//	}
+	//	else if (!IsKeyDown(DIK_LEFT) && captain->isWading)
+	//	{
+	//		captain->TurnRight();
+	//		if (!IsKeyDown(DIK_DOWN))
+	//			captain->SetSpeedX(CAPTAIN_AMERICA_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
+	//	}
+	//	else if (!IsKeyDown(DIK_DOWN))
+	//		captain->Idle();
+	//}
+	//else if (IsKeyDown(DIK_LEFT))
+	//{
+	//	if (!IsKeyDown(DIK_RIGHT) && captain->IsGrounded())
+	//	{
+	//		captain->TurnLeft();
+	//		if (IsKeyDown(DIK_DOWN))
+	//		{
+	//			captain->Crouch();
+
+	//		}
+	//		else
+	//			if (deltaDashLeft < 10 && deltaDashLeft > 0) 
+	//			{
+	//				isCheckDashLeft = false;
+	//				deltaTimeDash ++;
+	//				if (deltaTimeDash < MaxTimeDash)
+	//				{
+	//					captain->Dash();
+	//				}
+	//				else
+	//				{
+	//					captain->Walk();
+	//				}
+	//			}
+	//			else
+	//			{
+	//				deltaTimeDash = 0;
+	//				captain->Walk();
+	//			}
+	//	}
+	//	else if (!IsKeyDown(DIK_RIGHT) && captain->isWading)
+	//	{
+	//		captain->TurnLeft();
+	//		if (!IsKeyDown(DIK_DOWN))
+	//			captain->SetSpeedX(CAPTAIN_AMERICA_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
+	//	}
+	//	else if (!IsKeyDown(DIK_DOWN))
+	//		captain->Idle();
+	//}
+	//else if (IsKeyDown(DIK_DOWN))
+	//{
+	//	if (!IsKeyDown(DIK_F))
+	//		if (IsKeyDown(DIK_SPACE) && count == 0)
+	//		{
+	//			captain->SetPositionY(captain->GetPositionY() - 0.5);
+	//			count = 1;
+	//		}
+	//		else
+	//		captain->Crouch();
+	//	else  
+	//		//if (count == 0) 
+	//		{
+	//			captain->CrouchHit();
+	//			//count = 1;
+	//		}
+	//		
+	//}
+	//else if (IsKeyDown(DIK_UP))
+	//{
+	//	captain->ShieldUp();
+	//}
+	//else
+	//{
+	//	if(!captain->isThrowing )
+	//		captain->Idle();
+	//}
+	//if(IsKeyDown(DIK_F)&&!captain->isWading)
+	//{
+	//	if (!captain->isThrowing)
+	//	{
+	//		if (captain->IsGrounded())
+	//		{
+	//			captain->ThrowShield();
+	//		}
+	//		else
+	//		{
+	//			captain->Kick();
+	//		}
+	//		
+	//	}
+	//}
+	
+
+	if (IsKeyDown(DIK_RIGHT) && !IsKeyDown(DIK_LEFT))
+	{
+		captain->TurnRight();
+		control = RightControl;
+	}
+
+	if (IsKeyDown(DIK_LEFT) && !IsKeyDown(DIK_RIGHT))
+	{
+		captain->TurnLeft();
+		control = LeftControl;
+	}
+
+	if (IsKeyDown(DIK_UP))
+	{
+		control = UpControl;
+	}
+
+	if (IsKeyDown(DIK_DOWN))
+	{
+		control = DownControl;
+	}
+
+	if (IsKeyDown(DIK_F))
+	{
+		control = ThrowControl;
+	}
+
+	if (IsKeyDown(DIK_SPACE))
+	{
+		control = JumpControl;
+	}
+
+	captainState->SetNewState(captain->GetEnumState(), control);
+
 	
 }
 void Keyboard::OnKeyDown(int KeyCode)
 {
-	Captain* captain = Game::GetInstance()->GetCaptain();
-	DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-	switch (KeyCode)
-	{
-
-	case DIK_S:
-		break;
-	case DIK_W:
-		break;
-	case DIK_D:
-		break;
-	case DIK_UP:
-		break;
-	case DIK_A:
-		if (true == captain->IsGrounded())
-		{
-			captain->ThrowShield();
-		}
-		else
-		{
-			captain->Kick();
-		}
-		break;
-	}
 }
 void Keyboard::OnKeyUp(int KeyCode)
 {
@@ -346,9 +390,3 @@ Keyboard::~Keyboard()
 	if (di != NULL) di->Release();
 }
 
-//Hàm lấy đối tượng
-Keyboard *Keyboard::GetInstance()
-{
-	if (__instance == NULL) __instance = new Keyboard();
-	return __instance;
-}

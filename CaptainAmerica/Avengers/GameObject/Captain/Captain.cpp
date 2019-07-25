@@ -33,7 +33,7 @@ Captain::Captain()
 
 	state = idleState;
 
-	this->x = 50;
+	this->x = 500;
 	this->y = 200;
 	this->width = 25;
 	this->height = 45;
@@ -48,12 +48,6 @@ Captain::Captain()
 	stamina = 100;
 
 	shield = new Shield();
-
-	/*  // Throw a lot of suriken
-		Shurikens.push_back(new Shuriken());
-		Shurikens.push_back(new Shuriken());
-		Shurikens.push_back(new Shuriken());
-		Shurikens.push_back(new Shuriken());*/
 }
 
 void Captain::LoadResources()
@@ -193,9 +187,43 @@ void Captain::LoadResources()
 	}
 	animations.push_back(anim);
 }
-void Captain::SetState(State * state)
+void Captain::SetState(eCaptainState state)
 {
-	this->state = state;
+	switch (state)
+	{
+	case IDLE: this->state = this->GetIdleState();
+		break;
+	case WALK: this->state = this->GetWalkState();
+		break;
+	case JUMP: this->state = this -> GetJumpState();
+		break;
+	case CROUCH:this->state = this->GetCrouchState();
+		break;
+	case THROW_SHIELD:this->state = this->GetThrowShieldState();
+		break;
+	case ROLL:this->state = this->GetRollState();
+		break;
+	case KICK:this->state = this->GetKickState();
+		break;
+	case STAND_HIT:this->state = this->GetStandHitState();
+		break;
+	case CROUCH_HIT:this->state = this->GetCrouchHitState();
+		break;
+	case SIT_ON_SHIELD:this->state = this->GetSitOnShieldState();
+		break;
+	case SWING:this->state = this->GetSwingState();
+		break;
+	case WADE:this->state = this->GetWadeState();
+		break;
+	case SHIELD_TOP:this->state = this->GetShieldUpState();
+		break;
+	case HURT:this->state = this->GetHurtState();
+		break;
+	case DEAD:this->state = this->GetDeadState();
+		break;
+	case DASH:this->state = this->GetDashState();
+		break;
+	}
 }
 
 State * Captain::GetIdleState()
@@ -276,7 +304,7 @@ State * Captain::GetShieldUpState()
 	return shieldUpState;
 }
 
-State * Captain::GetGetHurtState()
+State * Captain::GetHurtState()
 {
 	this->SetEnumState(eCaptainState::HURT);
 	return getHurtState;
