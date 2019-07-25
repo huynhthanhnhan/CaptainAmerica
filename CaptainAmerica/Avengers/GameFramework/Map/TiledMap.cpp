@@ -69,14 +69,14 @@ Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
 		token = line.substr(0, pos); // lấy kí tự đầu tiên trong hàng ( id của tile)
 
 		Tile curTile;
-		curTile.x = rowNum * TILES_WIDTH_PER_TILE; // số thứ tự của tile trên hàng x kích thước tile (16)
-		curTile.y = this->mapHeight - lineNum * TILES_HEIGHT_PER_TILE; // vẽ map từ trên xuống, line = 0 => y = height là dòng đầu tiên 
+		curTile.x = rowNum * TILE_WIDTH; // số thứ tự của tile trên hàng x kích thước tile (16)
+		curTile.y = this->mapHeight - lineNum * TILE_HEIGHT; // vẽ map từ trên xuống, line = 0 => y = height là dòng đầu tiên 
 
 		curTile.colider = new Collider();
-		curTile.colider->x = rowNum * TILES_WIDTH_PER_TILE; // colider có vị trí như hình
-		curTile.colider->y = this->mapHeight - lineNum * TILES_HEIGHT_PER_TILE;
-		curTile.colider->width = TILES_WIDTH_PER_TILE;
-		curTile.colider->height = TILES_HEIGHT_PER_TILE;
+		curTile.colider->x = rowNum * TILE_WIDTH; // colider có vị trí như hình
+		curTile.colider->y = this->mapHeight - lineNum * TILE_HEIGHT;
+		curTile.colider->width = TILE_WIDTH;
+		curTile.colider->height = TILE_HEIGHT;
 
 		curTile.tileId = stoi(token); // convert id của tile từ string sang int
 		if (stage == Stage::STAGE_1)
@@ -134,8 +134,8 @@ void TiledMap::LoadTileSet(LPCWSTR tilesFilePath)
 	{
 		return;
 	}
-	this->tileSetWidth = info.Width / TILES_WIDTH_PER_TILE; // lấy số lượng tile trên dòng
-	this->tileSetHeight = info.Height / TILES_HEIGHT_PER_TILE; // lấy số lượng tile trên cột
+	this->tileSetWidth = info.Width / TILE_WIDTH; // lấy số lượng tile trên dòng
+	this->tileSetHeight = info.Height / TILE_HEIGHT; // lấy số lượng tile trên cột
 
 	if (Game::GetInstance()->GetStage() == STAGE_1)
 	{
@@ -163,10 +163,10 @@ void TiledMap::LoadTileSet(LPCWSTR tilesFilePath)
 	{
 		// lấy vị trí của tile
 		RECT rect;
-		rect.left = (i % this->tileSetWidth) * TILES_WIDTH_PER_TILE;
-		rect.right = rect.left + TILES_WIDTH_PER_TILE;
-		rect.top = (i / this->tileSetWidth) * TILES_HEIGHT_PER_TILE;
-		rect.bottom = rect.top + TILES_HEIGHT_PER_TILE;
+		rect.left = (i % this->tileSetWidth) * TILE_WIDTH;
+		rect.right = rect.left + TILE_WIDTH;
+		rect.top = (i / this->tileSetWidth) * TILE_HEIGHT;
+		rect.bottom = rect.top + TILE_HEIGHT;
 
 		Sprite *tile = new Sprite(tilesFilePath, rect, TILES_TRANSCOLOR); // lấy hình của tile
 
@@ -184,10 +184,10 @@ void TiledMap::Render() // vẽ cả map bằng tile
 			if (curRow[j].tileId != 0)
 			{
 				SpriteData spriteData;
-				spriteData.width = TILES_WIDTH_PER_TILE;
-				spriteData.height = TILES_HEIGHT_PER_TILE;
-				spriteData.x = j * TILES_WIDTH_PER_TILE;
-				spriteData.y = (matrix.size() - i) * TILES_HEIGHT_PER_TILE;
+				spriteData.width = TILE_WIDTH;
+				spriteData.height = TILE_HEIGHT;
+				spriteData.x = j * TILE_WIDTH;
+				spriteData.y = (matrix.size() - i) * TILE_HEIGHT;
 				spriteData.scale = 1;
 				spriteData.angle = 0;
 
@@ -200,8 +200,8 @@ void TiledMap::Render() // vẽ cả map bằng tile
 void TiledMap::RenderTile(Tile *curTile) // vẽ tile dùng ở Grid
 {
 	SpriteData spriteData;
-	spriteData.width = TILES_WIDTH_PER_TILE;
-	spriteData.height = TILES_HEIGHT_PER_TILE;
+	spriteData.width = TILE_WIDTH;
+	spriteData.height = TILE_HEIGHT;
 	spriteData.x = curTile->x;
 	spriteData.y = curTile->y;
 	spriteData.scale = 1;
