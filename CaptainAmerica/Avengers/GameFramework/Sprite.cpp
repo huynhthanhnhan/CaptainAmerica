@@ -1,7 +1,5 @@
 ﻿#include "Sprite.h"
 
-
-
 Sprite::Sprite(LPCWSTR filePath, RECT rect, D3DCOLOR transColor)
 {
 	width = 0;

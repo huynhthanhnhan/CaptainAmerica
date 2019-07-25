@@ -2,8 +2,8 @@
 #include <Windows.h>
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "../GameFramework/Map/Camera.h"
-#include "../GameObject/GameComponents/Sprite.h"
+#include "Camera.h"
+#include "Sprite.h"
 
 class Sprite;
 

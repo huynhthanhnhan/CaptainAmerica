@@ -1,10 +1,10 @@
 ﻿#pragma once
-#include "../../GameFramework/Global.h"
-#include "../../GameFramework/Graphics.h"
-#include "../../GameFramework/Keyboard.h"
-#include "../../GameFramework/Map/Map.h"
-#include "../../GameFramework/Map/Grid.h"
-#include "../Captain/Captain.h"
+#include "Global.h"
+#include "Graphics.h"
+#include "Keyboard.h"
+#include "Map.h"
+#include "Grid.h"
+#include "../GameObject/Captain/Captain.h"
 
 #include <chrono>
 

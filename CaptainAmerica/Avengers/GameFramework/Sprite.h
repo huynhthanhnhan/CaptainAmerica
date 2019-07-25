@@ -2,7 +2,7 @@
 
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "../../GameFramework/Graphics.h"
+#include "Graphics.h"
 
 struct SpriteData {
 	int width;

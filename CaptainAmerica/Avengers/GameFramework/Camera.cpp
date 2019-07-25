@@ -1,6 +1,6 @@
 #include "Camera.h"
-#include "../../GameObject/GameComponents/Game.h"
-#include "../Debug.h"
+#include "Game.h"
+#include "Debug.h"
 
 Camera * Camera::__instance = NULL;
 

@@ -1,5 +1,5 @@
 ﻿#include "Game.h"
-#include "../../GameFramework/Debug.h"
+#include "Debug.h"
 
 Game * Game::__instance = NULL;
 HINSTANCE Game::hInstance = NULL;

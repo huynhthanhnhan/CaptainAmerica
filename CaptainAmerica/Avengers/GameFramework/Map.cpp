@@ -1,5 +1,6 @@
 ﻿#include "Map.h"
-#include "../../GameObject/GameComponents/Game.h"
+#include "Game.h"
+
 CMap *CMap::__instance = NULL;
 CMap *CMap::GetInstance(LPCWSTR filePath)
 {

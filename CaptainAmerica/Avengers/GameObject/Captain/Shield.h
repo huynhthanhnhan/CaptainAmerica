@@ -1,5 +1,5 @@
 #pragma once
-#include "../GameComponents/GameItem.h"
+#include "../../GameFramework/GameItem.h"
 #include "../../GameFramework/State.h"
 
 class Shield : public GameItem

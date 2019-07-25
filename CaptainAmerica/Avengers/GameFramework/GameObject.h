@@ -6,8 +6,8 @@
 
 #include <algorithm>
 #include "Sprite.h"
-#include "../../GameFramework/Animation.h"
-#include "../../GameFramework/LoadTXT.h"
+#include "Animation.h"
+#include "LoadTXT.h"
 
 struct Collider
 {

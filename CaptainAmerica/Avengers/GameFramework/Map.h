@@ -8,10 +8,10 @@
 #include <fstream>
 #include <string>
 
-#include "../../GameObject/GameComponents/Sprite.h"
-#include "../Debug.h"
-#include "../Global.h"
-#include "../../GameObject/GameComponents/GameObject.h"
+#include "Sprite.h"
+#include "Debug.h"
+#include "Global.h"
+#include "GameObject.h"
 
 using namespace std;
 

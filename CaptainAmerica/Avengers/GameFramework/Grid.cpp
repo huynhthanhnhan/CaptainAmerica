@@ -1,5 +1,5 @@
 ﻿#include"Grid.h"
-#include "../../GameObject/GameComponents/Game.h"
+#include "Game.h"
 
 Grid *Grid::__instance = NULL;
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "../../GameObject/GameComponents/GameObject.h"
+#include "GameObject.h"
 #include "Map.h"
 
 class GridCell

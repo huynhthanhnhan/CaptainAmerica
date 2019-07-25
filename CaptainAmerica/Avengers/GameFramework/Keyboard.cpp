@@ -1,5 +1,5 @@
 ﻿#include "Keyboard.h"
-#include "../GameFramework/Debug.h"
+#include "Debug.h"
 Keyboard * Keyboard::__instance = NULL;
 
 int Keyboard::IsKeyDown(int KeyCode)

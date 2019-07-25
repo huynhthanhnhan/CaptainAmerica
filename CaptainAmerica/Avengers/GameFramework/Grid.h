@@ -1,8 +1,8 @@
 #pragma once
-#include "../../GameObject/GameComponents/GameObject.h"
-#include "../Global.h" 
+#include "GameObject.h"
+#include "Global.h" 
 #include "GridCell.h"
-#include "../../GameObject/Captain/Captain.h"
+#include "../GameObject/Captain/Captain.h"
 
 #include <vector>
 
