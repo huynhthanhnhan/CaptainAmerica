@@ -1,5 +1,5 @@
 ﻿#include "Graphics.h"
-#include "../GameFramework/Debug.h"
+#include "Debug.h"
 
 Graphics * Graphics::__instance = NULL;
 Camera * Graphics::Camera = NULL;

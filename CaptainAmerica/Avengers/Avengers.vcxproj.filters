@@ -42,58 +42,6 @@
     <ClInclude Include="GameFramework\Global.h">
       <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
-    <ClInclude Include="GameFramework\Map\Camera.h">
-      <Filter>Header Files\GameFramework\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="GameFramework\Map\Grid.h">
-      <Filter>Header Files\GameFramework\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="GameFramework\Map\GridCell.h">
-      <Filter>Header Files\GameFramework\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="GameFramework\Map\TiledMap.h">
-      <Filter>Header Files\GameFramework\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="GameFramework\Animation.h">
-      <Filter>Header Files\GameFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="GameFramework\Debug.h">
-      <Filter>Header Files\GameFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="GameFramework\Graphics.h">
-      <Filter>Header Files\GameFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="GameFramework\Keyboard.h">
-      <Filter>Header Files\GameFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\Captain\Captain.h">
-      <Filter>Header Files\GameObject\Captain</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\Captain\CaptainState.h">
-      <Filter>Header Files\GameObject\Captain</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\Captain\Shield.h">
-      <Filter>Header Files\GameObject\Captain</Filter>
-    </ClInclude>
-    <ClInclude Include="GameFramework\LoadTXT.h">
-      <Filter>Header Files\GameFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="GameFramework\State.h">
-      <Filter>Header Files\GameFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\GameComponents\Game.h">
-      <Filter>Header Files\GameObject\GameComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\GameComponents\GameItem.h">
-      <Filter>Header Files\GameObject\GameComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\GameComponents\GameObject.h">
-      <Filter>Header Files\GameObject\GameComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\GameComponents\resource.h">
-      <Filter>Header Files\GameObject\GameComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\GameComponents\Sprite.h">
     <ClInclude Include="GameFramework\Camera.h">
       <Filter>Header Files\GameFramework</Filter>
     </ClInclude>
@@ -153,22 +101,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameFramework\Map\Camera.cpp">
-      <Filter>Source Files\GameFramework\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFramework\Map\Grid.cpp">
-      <Filter>Source Files\GameFramework\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFramework\Map\GridCell.cpp">
-      <Filter>Source Files\GameFramework\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFramework\Map\TiledMap.cpp">
-      <Filter>Source Files\GameFramework\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFramework\Animation.cpp">
-      <Filter>Source Files\GameFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFramework\Debug.cpp">
     <ClCompile Include="GameFramework\Camera.cpp">
       <Filter>Source Files\GameFramework</Filter>
     </ClCompile>
@@ -186,39 +118,6 @@
     </ClCompile>
     <ClCompile Include="GameFramework\LoadTXT.cpp">
       <Filter>Source Files\GameFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFramework\State.cpp">
-      <Filter>Source Files\GameFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFramework\Keyboard.cpp">
-      <Filter>Source Files\GameFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFramework\Graphics.cpp">
-      <Filter>Source Files\GameFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\Captain\Captain.cpp">
-      <Filter>Source Files\GameObject\Captain</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\Captain\Shield.cpp">
-      <Filter>Source Files\GameObject\Captain</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\Captain\CaptainState.cpp">
-      <Filter>Source Files\GameObject\Captain</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\GameComponents\Game.cpp">
-      <Filter>Source Files\GameObject\GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\GameComponents\GameItem.cpp">
-      <Filter>Source Files\GameObject\GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\GameComponents\GameObject.cpp">
-      <Filter>Source Files\GameObject\GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\GameComponents\Main.cpp">
-      <Filter>Source Files\GameObject\GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\GameComponents\Sprite.cpp">
-      <Filter>Source Files\GameObject\GameComponents</Filter>
     </ClCompile>
     <ClCompile Include="GameFramework\Grid.cpp">
       <Filter>Source Files\GameFramework</Filter>

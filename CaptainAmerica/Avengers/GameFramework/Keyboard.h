@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "../GameObject/GameComponents/Game.h"
+#include "Game.h"
 
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
@@ -14,13 +14,13 @@ class CaptainState;
 class Keyboard
 {
 	static Keyboard * __instance;
-	HWND hWnd;		
+	HWND hWnd;
 
-	LPDIRECTINPUT8       di;	    
-	LPDIRECTINPUTDEVICE8 didv;		
+	LPDIRECTINPUT8       di;
+	LPDIRECTINPUTDEVICE8 didv;
 
-	BYTE  keyStates[256];			
-	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		
+	BYTE  keyStates[256];
+	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];
 
 public:
 

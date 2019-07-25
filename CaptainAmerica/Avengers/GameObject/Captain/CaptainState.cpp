@@ -11,7 +11,7 @@ CaptainState::~CaptainState()
 {
 }
 
-int CaptainState::GetState() 
+int CaptainState::GetState()
 {
 	return this->state;
 }
@@ -24,7 +24,7 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 	case IDLE:
 		switch (control)
 		{
-		case NoneControl: 
+		case NoneControl:
 			break;
 		case LeftControl:
 		case RightControl:
@@ -462,7 +462,7 @@ void CaptainState::Jump()
 		break;
 	case eCaptainState::JUMP:
 	case eCaptainState::KICK:
-		
+
 		break;
 	case eCaptainState::IDLE:
 	case eCaptainState::WALK:
@@ -631,11 +631,11 @@ void CaptainState::Dash()
 	int state = this->state;
 	switch (state)
 	{
-		case eCaptainState::WALK:
-		case eCaptainState::IDLE:
-			captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * 2 * (captain->IsLeft() ? -1 : 1));
-			captain->SetState(DASH);
-			break;
+	case eCaptainState::WALK:
+	case eCaptainState::IDLE:
+		captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * 2 * (captain->IsLeft() ? -1 : 1));
+		captain->SetState(DASH);
+		break;
 
 	}
 }
@@ -702,9 +702,9 @@ void CaptainState::Update(DWORD dt)
 			}
 		}
 	}
-		for (UINT i = 0; i < coEvents.size(); i++)
-			delete coEvents[i];
-	#pragma endregion
+	for (UINT i = 0; i < coEvents.size(); i++)
+		delete coEvents[i];
+#pragma endregion
 
 }
 

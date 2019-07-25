@@ -79,7 +79,7 @@ void Captain::LoadResources()
 		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
-	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::jump_end-1], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::jump_end - 1], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::jump_end], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
@@ -195,7 +195,7 @@ void Captain::SetState(eCaptainState state)
 		break;
 	case WALK: this->state = this->GetWalkState();
 		break;
-	case JUMP: this->state = this -> GetJumpState();
+	case JUMP: this->state = this->GetJumpState();
 		break;
 	case CROUCH:this->state = this->GetCrouchState();
 		break;

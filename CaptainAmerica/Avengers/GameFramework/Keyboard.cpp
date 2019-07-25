@@ -1,5 +1,5 @@
 ﻿#include "Keyboard.h"
-#include "../GameFramework/Debug.h"
+#include "Debug.h"
 Keyboard * Keyboard::__instance = NULL;
 
 Keyboard *Keyboard::GetInstance()
@@ -140,7 +140,7 @@ void Keyboard::ProcessKeyboard()
 			return;
 		}
 	}
-		
+
 	if (IsKeyDown(DIK_LEFT) && !IsKeyDown(DIK_RIGHT) && captain->IsGrounded() && !IsKeyDown(DIK_DOWN))
 	{
 		captain->TurnLeft();
@@ -179,7 +179,7 @@ void Keyboard::ProcessKeyboard()
 	//			captain->Crouch();
 	//		}
 	//		else
-				
+
 	//	}
 	//	else if (!IsKeyDown(DIK_LEFT) && captain->isWading)
 	//	{
@@ -271,7 +271,7 @@ void Keyboard::ProcessKeyboard()
 	//		
 	//	}
 	//}
-	
+
 
 	if (IsKeyDown(DIK_RIGHT) && !IsKeyDown(DIK_LEFT))
 	{
@@ -307,7 +307,7 @@ void Keyboard::ProcessKeyboard()
 
 	captainState->SetNewState(captain->GetEnumState(), control);
 
-	
+
 }
 void Keyboard::OnKeyDown(int KeyCode)
 {
@@ -318,24 +318,24 @@ void Keyboard::OnKeyUp(int KeyCode)
 	DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
 	switch (KeyCode)
 	{
-		case DIK_DOWN:
-			captain->SetIsCrouching(false);
-		case DIK_LEFT:
-			//if (!isCheckDashLeft)
-			{
-				deltaDashLeft = 0;
-				isCheckDashLeft = true;
-			}
-			
-			break;
-		case DIK_RIGHT:
-			//if (!isCheckDashRight)
-			{
-				deltaDashRight = 0;
-				isCheckDashRight = true;
-			}
+	case DIK_DOWN:
+		captain->SetIsCrouching(false);
+	case DIK_LEFT:
+		//if (!isCheckDashLeft)
+	{
+		deltaDashLeft = 0;
+		isCheckDashLeft = true;
+	}
 
-			break;
+	break;
+	case DIK_RIGHT:
+		//if (!isCheckDashRight)
+	{
+		deltaDashRight = 0;
+		isCheckDashRight = true;
+	}
+
+	break;
 	}
 }
 

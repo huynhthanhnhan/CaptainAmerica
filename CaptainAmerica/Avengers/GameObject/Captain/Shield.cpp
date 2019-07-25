@@ -1,5 +1,5 @@
 #include "Shield.h"
-#include "../../GameFramework/Map/Grid.h"
+#include "../../GameFramework/Grid.h"
 
 Shield * Shield::__instance = NULL;
 
@@ -103,7 +103,7 @@ void Shield::Update(DWORD dt)
 		if (captain->GetEnumState() == eCaptainState::JUMP)
 		{
 			this->SetSpeedX(0);
-				this->state = SHIELD_CENTER;
+			this->state = SHIELD_CENTER;
 			if (captain->IsLeft())
 				this->SetPositionX(captain->GetPositionX());
 			else
@@ -145,9 +145,9 @@ void Shield::Update(DWORD dt)
 			this->state = SHIELD_CENTER;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX() +15);
+				this->SetPositionX(captain->GetPositionX() + 15);
 			else
-				this->SetPositionX(captain->GetPositionX()-3);
+				this->SetPositionX(captain->GetPositionX() - 3);
 			this->SetPositionY(captain->GetPositionY() - 25);
 		}
 		if (captain->GetEnumState() == eCaptainState::WADE || (captain->GetEnumState() == eCaptainState::JUMP && captain->GetSpeedY() >= 0.25))
@@ -167,7 +167,7 @@ void Shield::Update(DWORD dt)
 	this->SetPositionY((float)(this->GetPositionY() + this->GetSpeedY()* dt));
 }
 
-void Shield::SheildAttacking() 
+void Shield::SheildAttacking()
 {
 	Captain* captain = Captain::GetInstance();
 	if (isStart)
@@ -222,14 +222,14 @@ void Shield::Render()
 	{
 		SpriteData spriteEnemyData;
 
-		spriteEnemyData.width = 16 ;
-		spriteEnemyData.height = 16 ;
+		spriteEnemyData.width = 16;
+		spriteEnemyData.height = 16;
 		spriteEnemyData.x = this->GetPositionX();
 		spriteEnemyData.y = this->GetPositionY();
 
 		spriteEnemyData.scale = 1;
 		spriteEnemyData.angle = 0;
-		if (captain->GetEnumState() != eCaptainState::KICK) 
+		if (captain->GetEnumState() != eCaptainState::KICK)
 		{
 			spriteEnemyData.isLeft = captain->IsLeft();
 			spriteEnemyData.isFlipped = captain->IsFlipped();
@@ -240,15 +240,15 @@ void Shield::Render()
 			spriteEnemyData.isFlipped = !captain->IsFlipped();
 		}
 
-		if (this->state==SHIELD_LEFT)
+		if (this->state == SHIELD_LEFT)
 		{
 			this->animations[SHIELD_LEFT]->Render(spriteEnemyData);
 		}
-		if(this->state==SHIELD_DOWN)
+		if (this->state == SHIELD_DOWN)
 			this->animations[SHIELD_DOWN]->Render(spriteEnemyData);
 		if (this->state == SHIELD_CENTER)
 			this->animations[SHIELD_CENTER]->Render(spriteEnemyData);
-		if(this->state==SHIELD_DOWN)
+		if (this->state == SHIELD_DOWN)
 			this->animations[SHIELD_DOWN]->Render(spriteEnemyData);
 		if (this->state == SHIELD_UP)
 			this->animations[SHIELD_UP]->Render(spriteEnemyData);

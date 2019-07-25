@@ -143,11 +143,7 @@
     <ClInclude Include="GameObject\Captain\Captain.h" />
     <ClInclude Include="GameObject\Captain\CaptainState.h" />
     <ClInclude Include="GameObject\Captain\Shield.h" />
-    <ClInclude Include="GameObject\GameComponents\Game.h" />
-    <ClInclude Include="GameObject\GameComponents\GameItem.h" />
-    <ClInclude Include="GameObject\GameComponents\GameObject.h" />
-    <ClInclude Include="GameObject\GameComponents\resource.h" />
-    <ClInclude Include="GameObject\GameComponents\Sprite.h" />
+    <ClInclude Include="GameObject\GameComponents\Brick.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameFramework\Animation.cpp" />
@@ -167,11 +163,8 @@
     <ClCompile Include="GameObject\Captain\Captain.cpp" />
     <ClCompile Include="GameObject\Captain\CaptainState.cpp" />
     <ClCompile Include="GameObject\Captain\Shield.cpp" />
-    <ClCompile Include="GameObject\GameComponents\Game.cpp" />
-    <ClCompile Include="GameObject\GameComponents\GameItem.cpp" />
-    <ClCompile Include="GameObject\GameComponents\GameObject.cpp" />
-    <ClCompile Include="GameObject\GameComponents\Main.cpp" />
-    <ClCompile Include="GameObject\GameComponents\Sprite.cpp" />
+    <ClCompile Include="GameObject\GameComponents\Brick.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

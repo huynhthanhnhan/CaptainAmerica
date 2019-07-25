@@ -1,8 +1,8 @@
 #pragma once
-#include "../GameComponents/GameObject.h"
+#include "../../GameFramework/GameObject.h"
 #include "../../GameFramework/State.h"
 #include "../../GameFramework/Global.h"
-#include "../../GameObject/GameComponents/Game.h"
+#include "../../GameFramework/Game.h"
 #include "CaptainState.h"
 #include "Shield.h"
 
@@ -24,7 +24,7 @@ namespace NS
 	const int crouch_hit_start = 15;
 	const int crouch_hit_end = 16;
 	const int sit_on_shiled_start = 19;
-	const int swing_start = 17 ;
+	const int swing_start = 17;
 	const int swing_end = 29;
 	const int wade_start = 44;
 	const int wade_end = 45;
@@ -69,8 +69,8 @@ class Captain : public GameObject
 	bool isCrouching = false;
 	bool isShieldUp = false;
 	bool isDash = false;
-	
-	
+
+
 
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
@@ -100,7 +100,7 @@ public:
 
 	eCaptainState GetEnumState() { return this->eState; }
 	void SetEnumState(eCaptainState state) { this->eState = state; }
-	
+
 	bool isThrowing = false;
 	bool isFalling = false;
 	bool isWading = false;
