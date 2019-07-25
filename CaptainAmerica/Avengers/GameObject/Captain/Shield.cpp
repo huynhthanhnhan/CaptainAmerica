@@ -1,5 +1,5 @@
 #include "Shield.h"
-#include "../../GameFramework/Grid.h"
+#include "../../GameFramework/Map/Grid.h"
 
 Shield * Shield::__instance = NULL;
 

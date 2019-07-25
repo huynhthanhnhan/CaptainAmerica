@@ -1,8 +1,8 @@
 #pragma once
-#include "../../GameFramework/GameObject.h"
+#include "../GameComponents/GameObject.h"
 #include "../../GameFramework/State.h"
 #include "../../GameFramework/Global.h"
-#include "../../GameFramework/Game.h"
+#include "../../GameObject/GameComponents/Game.h"
 #include "CaptainState.h"
 #include "Shield.h"
 

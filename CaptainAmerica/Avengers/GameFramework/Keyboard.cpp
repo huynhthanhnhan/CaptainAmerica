@@ -1,5 +1,5 @@
 ﻿#include "Keyboard.h"
-#include "Debug.h"
+#include "../GameFramework/Debug.h"
 Keyboard * Keyboard::__instance = NULL;
 
 Keyboard *Keyboard::GetInstance()

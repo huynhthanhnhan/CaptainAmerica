@@ -6,8 +6,8 @@
 #define MAIN_WINDOW_TITLE L"Captain America"
 //Màu background, kích cỡ màn hình
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0)
-#define SCREEN_WIDTH 256
-#define SCREEN_HEIGHT 228
+#define SCREEN_WIDTH 450
+#define SCREEN_HEIGHT 250
 #define MAP_HEIGHT 176
 
 //Framerate tối đa
@@ -70,8 +70,8 @@ enum eController
 #define WIZARD_BOSS_MAP L"Resources\\TiledMap\\Map-Boss1-Matrix.txt"
 
 #define TILES_MATRIX_DELIMITER ","
-#define TILE_WIDTH	16
-#define TILE_HEIGHT	16
+#define TILES_WIDTH_PER_TILE	16
+#define TILES_HEIGHT_PER_TILE	16
 #define TILES_TRANSCOLOR D3DCOLOR_XRGB(255, 0, 255)
 
 #define GRID_SIZE 16

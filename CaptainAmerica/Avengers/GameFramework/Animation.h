@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <d3dx9.h>
 #include <unordered_map>
-#include "Sprite.h"
+#include "../GameObject/GameComponents/Sprite.h"
 #include "Graphics.h"
 using namespace std;
 
