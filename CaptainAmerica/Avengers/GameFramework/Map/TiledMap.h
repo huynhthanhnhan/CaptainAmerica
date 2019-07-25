@@ -40,7 +40,7 @@ private:
 	void LoadTileSet(LPCWSTR tilesLocation);
 	Matrix matrix;
 
-	void AddObjects(Stage stage);
+	void AddObjects(Stage stage) { };
 	int mapWidth, mapHeight;
 	int tileSetWidth, tileSetHeight;
 
@@ -53,10 +53,10 @@ public:
 	static TiledMap *GetInstance(LPCWSTR filePath = NULL);
 	TiledMap(LPCWSTR filePath);
 
-	int GetWidth();
-	int GetHeight();
-	int GetTileWidth();
-	int GetTileHeight();
+	int GetWidth() { return this->mapWidth; }
+	int GetHeight() { return this->mapHeight; }
+	int GetTileWidth() { return this->tileSetWidth; }
+	int GetTileHeight() { return this->tileSetHeight; }
 
 	Matrix& GetMatrix() { return this->matrix; }
 
@@ -67,5 +67,5 @@ public:
 	void RenderTile(Tile *curTile);
 	void Render();
 
-	~TiledMap();
+	~TiledMap() { };
 };

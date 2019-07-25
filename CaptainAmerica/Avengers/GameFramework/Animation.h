@@ -14,7 +14,6 @@ class Animation
 
 	vector< pair<Sprite *, DWORD> > frames;
 	int curFrame;
-	bool done = false;
 public:
 	Animation(DWORD defaultDelayTime) { this->defaultDelayTime = defaultDelayTime; };
 
@@ -22,7 +21,6 @@ public:
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }	
 	int GetCurFrame() { return curFrame; }
 	void SetCurFrame(int f) { curFrame = f; }
-	bool IsDone() { return done; }
 
 	void Reset() { curFrame = -1; }
 	void AddFrame(Sprite * sprite, DWORD time = 0);

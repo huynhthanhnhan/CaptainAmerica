@@ -139,26 +139,24 @@ void TiledMap::LoadTileSet(LPCWSTR tilesFilePath)
 
 	if (Game::GetInstance()->GetStage() == STAGE_1)
 	{
-		info.Width = 2048; // kích thước gốc của hình stage 1
-		info.Height = 476;
+		this->mapWidth = 2048; // kích thước gốc của hình stage 1
+		this->mapHeight = 476;
 	}
 	else if (Game::GetInstance()->GetStage() == STAGE_2)
 	{
-		info.Width = 1280; // kích thước gốc của hình stage 2
-		info.Height = 957;
+		this->mapWidth = 1280; // kích thước gốc của hình stage 2
+		this->mapHeight = 957;
 	}
 	else if (Game::GetInstance()->GetStage() == STAGE_BOSS_1)
 	{
-		info.Width = 256; // kích thước gốc của hình stage boss 1
-		info.Height = 235;
+		this->mapWidth = 256; // kích thước gốc của hình stage boss 1
+		this->mapHeight = 235;
 	}
 	else if (Game::GetInstance()->GetStage() == STAGE_BOSS_2) // chưa có hình cần sửa sau "edit"
 	{
-		info.Width = 256; // kích thước gốc của hình stage boss 2
-		info.Height = 235;
+		this->mapWidth = 256; // kích thước gốc của hình stage boss 2
+		this->mapHeight = 235;
 	}
-	this->mapWidth = info.Width;
-	this->mapHeight = info.Height;
 
 	tiles[0] = NULL; //tile id bắt đầu từ 1
 	for (int i = 0; i < this->tileSetWidth; i++)
@@ -176,32 +174,6 @@ void TiledMap::LoadTileSet(LPCWSTR tilesFilePath)
 	}
 }
 
-void TiledMap::AddObjects(Stage stage)
-{
-
-}
-
-TiledMap::~TiledMap()
-{
-
-}
-
-int TiledMap::GetWidth()
-{
-	return mapWidth;
-}
-int TiledMap::GetHeight()
-{
-	return mapHeight;
-}
-int TiledMap::GetTileWidth()
-{
-	return this->tileSetWidth;
-}
-int TiledMap::GetTileHeight()
-{
-	return this->tileSetHeight;
-}
 void TiledMap::Render() // vẽ cả map bằng tile
 {
 	for (int i = 0; i < matrix.size(); i++) // duyệt từng dòng của ma trận

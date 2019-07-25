@@ -63,132 +63,132 @@ void Captain::LoadResources()
 	Animation * anim;
 	Sprite * sprite;
 
-	// CAPTAIN_ANI_IDLE
+	// CAPTAIN_AMERICA_ANIMATION_IDLE
 	anim = new Animation(100);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[NS::idle_start], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::idle_start], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_WALK
+	// CAPTAIN_AMERICA_ANIMATION_WALK
 	anim = new Animation(100);
 	for (int i = NS::walk_start; i <= NS::walk_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_JUMP
+	// CAPTAIN_AMERICA_ANIMATION_JUMP
 	anim = new Animation(100);
 	for (int i = NS::jump_start; i <= NS::jump_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[NS::jump_end-1], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::jump_end-1], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[NS::jump_end], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::jump_end], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_CROUCH
+	// CAPTAIN_AMERICA_ANIMATION_CROUCH
 	anim = new Animation(100);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[NS::crouch_start], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::crouch_start], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_THROW_SHIELD
+	// CAPTAIN_AMERICA_ANIMATION_THROW_SHIELD
 	anim = new Animation(300);
 	for (int i = NS::throw_shiled_start; i <= NS::throw_shield_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_ROLL
+	// CAPTAIN_AMERICA_ANIMATION_ROLL
 	anim = new Animation(300);
 	for (int i = NS::roll_start; i <= NS::roll_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_KICK
+	// CAPTAIN_AMERICA_ANIMATION_KICK
 	anim = new Animation(300);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[NS::kick_start], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::kick_start], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_STAND_HIT
+	// CAPTAIN_AMERICA_ANIMATION_STAND_HIT
 	anim = new Animation(300);
 	for (int i = NS::stand_hit_start; i <= NS::stand_hit_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_CROUCH_HIT
+	// CAPTAIN_AMERICA_ANIMATION_CROUCH_HIT
 	anim = new Animation(300);
 	for (int i = NS::crouch_hit_start; i <= NS::crouch_hit_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_SIT_ON_SHIELD
+	// CAPTAIN_AMERICA_ANIMATION_SIT_ON_SHIELD
 	anim = new Animation(300);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[NS::sit_on_shiled_start], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::sit_on_shiled_start], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_SWING
+	// CAPTAIN_AMERICA_ANIMATION_SWING
 	anim = new Animation(300);
 	for (int i = NS::swing_start; i <= NS::swing_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_WADE
+	// CAPTAIN_AMERICA_ANIMATION_WADE
 	anim = new Animation(300);
 	for (int i = NS::wade_start; i <= NS::wade_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_SHIELD_UP
+	// CAPTAIN_AMERICA_ANIMATION_SHIELD_UP
 	anim = new Animation(300);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[NS::shield_up_start], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::shield_up_start], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_HURT
+	// CAPTAIN_AMERICA_ANIMATION_HURT
 	anim = new Animation(300);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[NS::hurt_start], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::hurt_start], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_DEAD
+	// CAPTAIN_AMERICA_ANIMATION_DEAD
 	anim = new Animation(300);
 	for (int i = NS::dead_start; i <= NS::dead_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_DASH
+	// CAPTAIN_AMERICA_ANIMATION_DASH
 	anim = new Animation(300);
 	for (int i = NS::dash_start; i <= NS::dash_end; i++)
 	{
-		sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);

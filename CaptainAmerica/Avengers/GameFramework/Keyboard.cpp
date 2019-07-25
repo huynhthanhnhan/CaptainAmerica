@@ -136,7 +136,7 @@ void Keyboard::ProcessKeyboard()
 		{
 			captain->TurnRight();
 			if (!IsKeyDown(DIK_DOWN))
-				captain->SetSpeedX(CAPTAIN_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
+				captain->SetSpeedX(CAPTAIN_AMERICA_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
 		}
 		else if (!IsKeyDown(DIK_DOWN))
 			captain->Idle();
@@ -175,7 +175,7 @@ void Keyboard::ProcessKeyboard()
 		{
 			captain->TurnLeft();
 			if (!IsKeyDown(DIK_DOWN))
-				captain->SetSpeedX(CAPTAIN_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
+				captain->SetSpeedX(CAPTAIN_AMERICA_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
 		}
 		else if (!IsKeyDown(DIK_DOWN))
 			captain->Idle();
@@ -204,15 +204,15 @@ void Keyboard::ProcessKeyboard()
 	}
 	else
 	{
-		/*if(captain->GetStateNum()!=CAPTAIN_ANI_THROW_SHIELD)
+		/*if(captain->GetStateNum()!=CAPTAIN_AMERICA_ANIMATION_THROW_SHIELD)
 			captain->Idle();
 		else
 		{
-			if (captain->GetAnimationsList()[CAPTAIN_ANI_THROW_SHIELD]->GetCurFrame() == 5)
+			if (captain->GetAnimationsList()[CAPTAIN_AMERICA_ANIMATION_THROW_SHIELD]->GetCurFrame() == 5)
 				captain->Idle();
 		}*/
 		count = 0;
-		if(!captain->isThrowing /*|| (captain->isThrowing && captain->GetAnimationsList()[CAPTAIN_ANI_THROW_SHIELD]->GetCurFrame() == 1)*/ )
+		if(!captain->isThrowing /*|| (captain->isThrowing && captain->GetAnimationsList()[CAPTAIN_AMERICA_ANIMATION_THROW_SHIELD]->GetCurFrame() == 1)*/ )
 			captain->Idle();
 	}
 	if(IsKeyDown(DIK_F)&&!captain->isWading)

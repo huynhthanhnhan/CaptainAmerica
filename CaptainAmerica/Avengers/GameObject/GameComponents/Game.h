@@ -48,13 +48,8 @@ public:
 	Captain* GetCaptain();
 
 	TiledMap * GetTiledMap() { return tiledMap; }
-	void SetTileMap(TiledMap * tiledMap) {
-		this->tiledMap = tiledMap;
-	}
-	void SetGrid(Grid* grid)
-	{
-		this->grid = grid;
-	}
+	void SetTileMap(TiledMap * tiledMap) {	this->tiledMap = tiledMap;	}
+	void SetGrid(Grid* grid)	{	this->grid = grid;	}
 	
 	static float SweptAABB(Collider c1, Collider c2, float &normalx, float &normaly);
 	static Game * GetInstance();

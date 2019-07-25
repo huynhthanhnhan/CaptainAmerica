@@ -53,9 +53,9 @@ enum eCaptainState
 
 //TiledMap
 // TILE
-#define TILES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Map-Charleston-Matrix.txt"
-#define TILES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
-#define TILES_MATRIX_STAGE_BOSS_1 L"Resources\\TiledMap\\Map-Boss1-Matrix.txt"
+#define CHARLESTON_MAP L"Resources\\TiledMap\\Map-Charleston-Matrix.txt"
+#define PITTSBURGH_MAP L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
+#define WIZARD_BOSS_MAP L"Resources\\TiledMap\\Map-Boss1-Matrix.txt"
 
 #define TILES_MATRIX_DELIMITER ","
 #define TILES_WIDTH_PER_TILE	16
@@ -67,16 +67,16 @@ enum eCaptainState
 #define GRID_MAX_Y 5
 
 //Giá trị tốc độ đi, tốc độ nhảy, trọng lực
-#define CAPTAIN_WALKING_SPEED		0.125f
-#define CAPTAIN_JUMP_SPEED_Y		0.2f
-#define CAPTAIN_GRAVITY			0.02f
-#define CAPTAIN_WADING_SPEED 0.08F
+#define CAPTAIN_AMERICA_WALKING_SPEED_X		0.125f
+#define CAPTAIN_AMERICA_JUMP_SPEED_Y		0.2f
+#define CAPTAIN_AMERICA_GRAVITY			0.02f
+#define CAPTAIN_AMERICA_WADING_SPEED 0.08F
 
 
-#define CAPTAIN_TEXTURE_LOCATION L"Resources\\CAPTAIN\\Character.png"
-#define CAPTAIN_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(0, 168, 80, 1)
-#define CAPTAIN_SPRITE_WIDTH 26
-#define CAPTAIN_SPRITE_HEIGHT 36
+#define CAPTAIN_AMERICA_TEXTURE_LOCATION L"Resources\\Captain\\Character.png"
+#define CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(0, 168, 80, 1)
+#define CAPTAIN_AMERICA_SPRITE_WIDTH 26
+#define CAPTAIN_AMERICA_SPRITE_HEIGHT 36
 
 
 //Các số để chạy animation của Shield

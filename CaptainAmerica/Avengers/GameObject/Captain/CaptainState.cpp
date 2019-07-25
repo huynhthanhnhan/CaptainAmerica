@@ -61,13 +61,13 @@ void CaptainState::Walk()
 	case eCaptainState::IDLE:
 	case eCaptainState::DASH:
 	{
-		captain->SetSpeedX(CAPTAIN_WALKING_SPEED * (captain->IsLeft() ? -1 : 1));
+		captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
 		captain->SetState(captain->GetWalkState());
 	}
 	break;
 	case eCaptainState::WALK:
 	{
-		captain->SetSpeedX(CAPTAIN_WALKING_SPEED * (captain->IsLeft() ? -1 : 1));
+		captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
 	}
 	break;
 	case eCaptainState::THROW_SHIELD:
@@ -99,7 +99,7 @@ void CaptainState::Jump()
 		if (captain->IsGrounded())
 		{
 			captain->SetIsGrounded(false);
-			captain->SetSpeedY(CAPTAIN_JUMP_SPEED_Y);
+			captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
 			captain->SetState(captain->GetJumpState());
 		}
 	}
@@ -109,7 +109,7 @@ void CaptainState::Jump()
 		if (captain->isWading)
 		{
 			captain->isWading = false;
-			captain->SetSpeedY(CAPTAIN_JUMP_SPEED_Y);
+			captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
 			captain->SetState(captain->GetJumpState());
 		}
 	}
@@ -262,7 +262,7 @@ void CaptainState::Dash()
 	{
 		case eCaptainState::WALK:
 		case eCaptainState::IDLE:
-			captain->SetSpeedX(CAPTAIN_WALKING_SPEED * 2 * (captain->IsLeft() ? -1 : 1));
+			captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * 2 * (captain->IsLeft() ? -1 : 1));
 			captain->SetState(captain->GetDashState());
 			break;
 
@@ -284,7 +284,7 @@ void CaptainState::Update(DWORD dt)
 		}
 		if (captain->GetPositionY() >= TiledMap::GetInstance()->GetHeight() + 20)
 		{
-			captain->SetSpeedY(captain->GetSpeedY() - CAPTAIN_GRAVITY);
+			captain->SetSpeedY(captain->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
 		}
 	}
 	break;
@@ -297,9 +297,9 @@ void CaptainState::Update(DWORD dt)
 
 #pragma region	Collide with brick
 	vector<Tile *> tiles = Grid::GetInstance()->GetCurTiles();
-	//if (state != NINJA_ANI_CLIMBING)
+	//if (state != NINJA_ANIMATION_CLIMBING)
 	{
-		captain->SetSpeedY(captain->GetSpeedY() - CAPTAIN_GRAVITY);
+		captain->SetSpeedY(captain->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
 	}
 	coEvents.clear();
 	captain->SetDt(dt);

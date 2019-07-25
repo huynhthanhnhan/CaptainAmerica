@@ -19,7 +19,6 @@ void Animation::Render(SpriteData spriteData)
 	{
 		curFrame = 0;
 		lastFrameTime = now;
-		done = false;
 	}
 
 	frames[curFrame].first->SetData(spriteData);
@@ -41,10 +40,6 @@ void Animation::Render(SpriteData spriteData)
 		if (curFrame == frames.size())
 		{
 			curFrame = 0;
-			done = true;
 		}
-		else
-			done = false;
-		//DebugOut(L"now: %d, lastFrameTime: %d, t: %d\n", now, lastFrameTime, t);
 	}
 }
