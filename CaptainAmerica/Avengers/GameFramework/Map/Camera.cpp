@@ -45,9 +45,9 @@ void Camera::Reset()
 void Camera::Update(DWORD dt)
 {
 	Captain* captain = Game::GetInstance()->GetCaptain();
-	int right = (int)(Game::GetInstance()->GetTiledMap()->GetWidth() - SCREEN_WIDTH / 2);
+	int right = (int)(Game::GetInstance()->GetMap()->GetWidth() - SCREEN_WIDTH / 2);
 	int left = (int)SCREEN_WIDTH / 2;
-	int bottom = (int)(Game::GetInstance()->GetTiledMap()->GetHeight() - SCREEN_HEIGHT / 2 - 1);
+	int bottom = (int)(Game::GetInstance()->GetMap()->GetHeight() - SCREEN_HEIGHT / 2 - 1);
 	int top = (int)SCREEN_HEIGHT / 2;
 	if (captain->GetPositionX() > left && captain->GetPositionX() < right)
 	{

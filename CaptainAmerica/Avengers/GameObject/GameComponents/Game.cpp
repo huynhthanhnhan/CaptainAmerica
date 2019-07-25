@@ -80,8 +80,8 @@ void Game::LoadResources()
 {
 	if (captain == NULL)
 		captain = Captain::GetInstance();
-	if (tiledMap == NULL)
-		tiledMap = TiledMap::GetInstance(CHARLESTON_MAP);
+	if (cmap == NULL)
+		cmap = CMap::GetInstance(CHARLESTON_MAP);
 	if (Camera == NULL)
 		Camera = Camera::GetInstance();
 	if (grid == NULL)

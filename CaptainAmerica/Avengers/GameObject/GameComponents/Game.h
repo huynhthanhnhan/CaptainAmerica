@@ -2,7 +2,7 @@
 #include "../../GameFramework/Global.h"
 #include "../../GameFramework/Graphics.h"
 #include "../../GameFramework/Keyboard.h"
-#include "../../GameFramework/Map/TiledMap.h"
+#include "../../GameFramework/Map/Map.h"
 #include "../../GameFramework/Map/Grid.h"
 #include "../Captain/Captain.h"
 
@@ -25,7 +25,7 @@ class Game
 
 	Captain* captain;
 
-	TiledMap * tiledMap;
+	CMap * cmap;
 	Camera * Camera;
 
 	Grid * grid;
@@ -47,8 +47,8 @@ public:
 
 	Captain* GetCaptain();
 
-	TiledMap * GetTiledMap() { return tiledMap; }
-	void SetTileMap(TiledMap * tiledMap) {	this->tiledMap = tiledMap;	}
+	CMap * GetMap() { return cmap; }
+	void SetMap(CMap * cmap) {	this->cmap = cmap;	}
 	void SetGrid(Grid* grid)	{	this->grid = grid;	}
 	
 	static float SweptAABB(Collider c1, Collider c2, float &normalx, float &normaly);

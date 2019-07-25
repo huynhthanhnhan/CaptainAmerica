@@ -282,7 +282,7 @@ void CaptainState::Update(DWORD dt)
 			captain->isFalling = false;
 			captain->SetState(captain->GetIdleState());
 		}
-		if (captain->GetPositionY() >= TiledMap::GetInstance()->GetHeight() + 20)
+		if (captain->GetPositionY() >= CMap::GetInstance()->GetHeight() + 20)
 		{
 			captain->SetSpeedY(captain->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
 		}

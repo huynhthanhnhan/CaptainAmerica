@@ -8,8 +8,8 @@ Grid::Grid()
 	curTiles.clear();
 
 	//khoi tao danh sach cac o trong
-	this->width = (int)(Game::GetInstance()->GetTiledMap()->GetWidth() / 16) + 2;
-	this->height = (int)(Game::GetInstance()->GetTiledMap()->GetHeight() / 16) + 2;
+	this->width = (int)(Game::GetInstance()->GetMap()->GetWidth() / 16) + 2;
+	this->height = (int)(Game::GetInstance()->GetMap()->GetHeight() / 16) + 2;
 
 	for (int i = 0; i < height; i++)
 	{
@@ -33,16 +33,16 @@ Grid::Grid()
 
 void Grid::LoadCells()
 {
-	Matrix &tiledMapMatrix = Game::GetInstance()->GetTiledMap()->GetMatrix();
-	for (int i = 0; i < tiledMapMatrix.size(); i++)
+	Matrix &mapMatrix = Game::GetInstance()->GetMap()->GetMatrix();
+	for (int i = 0; i < mapMatrix.size(); i++)
 	{
-		for (int j = 0; j < tiledMapMatrix[i].size(); j++)
+		for (int j = 0; j < mapMatrix[i].size(); j++)
 		{
 			//Tim vi tri o chua tile
-			int cellX = (int) tiledMapMatrix[i][j].x / GRID_SIZE;
-			int cellY = (int) (tiledMapMatrix[i][j].y % GRID_SIZE ? tiledMapMatrix[i][j].y / GRID_SIZE : tiledMapMatrix[i][j].y / GRID_SIZE - 1 );
+			int cellX = (int)mapMatrix[i][j].x / GRID_SIZE;
+			int cellY = (int) (mapMatrix[i][j].y % GRID_SIZE ? mapMatrix[i][j].y / GRID_SIZE : mapMatrix[i][j].y / GRID_SIZE - 1 );
 
-			Tile *dummyPtr = &tiledMapMatrix[i][j];
+			Tile *dummyPtr = &mapMatrix[i][j];
 			cells[cellY][cellX]->AddTile(dummyPtr); // do cells có kiểu là mảng các GridCell (GridCell là mảng các cellRow trên dòng) nên truyền i của mảng GridCel trước
 		}
 	}

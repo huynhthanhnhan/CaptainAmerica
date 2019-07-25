@@ -132,7 +132,7 @@
     <ClInclude Include="GameFramework\LoadTXT.h" />
     <ClInclude Include="GameFramework\Map\Grid.h" />
     <ClInclude Include="GameFramework\Map\GridCell.h" />
-    <ClInclude Include="GameFramework\Map\TiledMap.h" />
+    <ClInclude Include="GameFramework\Map\Map.h" />
     <ClInclude Include="GameFramework\Map\Camera.h" />
     <ClInclude Include="GameFramework\State.h" />
     <ClInclude Include="GameObject\Captain\Captain.h" />
@@ -153,7 +153,7 @@
     <ClCompile Include="GameFramework\LoadTXT.cpp" />
     <ClCompile Include="GameFramework\Map\Grid.cpp" />
     <ClCompile Include="GameFramework\Map\GridCell.cpp" />
-    <ClCompile Include="GameFramework\Map\TiledMap.cpp" />
+    <ClCompile Include="GameFramework\Map\Map.cpp" />
     <ClCompile Include="GameFramework\Map\Camera.cpp" />
     <ClCompile Include="GameFramework\State.cpp" />
     <ClCompile Include="GameObject\Captain\Captain.cpp" />

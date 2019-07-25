@@ -1,7 +1,7 @@
-﻿#include "TiledMap.h"
+﻿#include "Map.h"
 #include "../../GameObject/GameComponents/Game.h"
-TiledMap *TiledMap::__instance = NULL;
-TiledMap *TiledMap::GetInstance(LPCWSTR filePath)
+CMap *CMap::__instance = NULL;
+CMap *CMap::GetInstance(LPCWSTR filePath)
 {
 	if (__instance == NULL || filePath != NULL)
 	{
@@ -9,21 +9,21 @@ TiledMap *TiledMap::GetInstance(LPCWSTR filePath)
 		{
 			delete __instance;
 		}
-		__instance = new TiledMap(filePath);
+		__instance = new CMap(filePath);
 	}
 	return __instance;
 }
 
-TiledMap::TiledMap(LPCWSTR filePath)
+CMap::CMap(LPCWSTR filePath)
 {
 	string tilesFilePath = LoadMatrix(filePath); // lấy được đường dẫn đến file tiles
 
 	std::wstring stemp = std::wstring(tilesFilePath.begin(), tilesFilePath.end());// convert string sang wstring xử lí ở hàm sau
 	LPCWSTR tilesFilePath_wstr = stemp.c_str();
 
-	LoadTileSet(tilesFilePath_wstr);
+	LoadTileset(tilesFilePath_wstr);
 }
-string TiledMap::LoadMatrix(LPCWSTR filePath) // lấy ma trận vị trí các tile từ file matrix đồng thời trả về vị trí file tiles
+string CMap::LoadMatrix(LPCWSTR filePath) // lấy ma trận vị trí các tile từ file matrix đồng thời trả về vị trí file tiles
 {
 	string tilesLocation;
 
@@ -57,7 +57,7 @@ string TiledMap::LoadMatrix(LPCWSTR filePath) // lấy ma trận vị trí các 
 	return tilesLocation; // trả về đường dẫn đến file hình tiles
 
 }
-Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
+Row CMap::GetMatrixRow(int lineNum, string line, string delimiter)
 {
 	size_t pos = 0; // size_t là kiểu dữ liệu không dấu có thể tự mở rộng (mặc định sẽ là unsigned int)
 	string token;
@@ -124,7 +124,7 @@ Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
 	return result; // trả về mảng các tile trong hàng
 }
 
-void TiledMap::LoadTileSet(LPCWSTR tilesFilePath)
+void CMap::LoadTileset(LPCWSTR tilesFilePath)
 {
 	HRESULT result;
 	D3DXIMAGE_INFO info; //Thông tin tileset
@@ -134,8 +134,8 @@ void TiledMap::LoadTileSet(LPCWSTR tilesFilePath)
 	{
 		return;
 	}
-	this->tileSetWidth = info.Width / TILE_WIDTH; // lấy số lượng tile trên dòng
-	this->tileSetHeight = info.Height / TILE_HEIGHT; // lấy số lượng tile trên cột
+	this->tilesetWidth = info.Width / TILE_WIDTH; // lấy số lượng tile trên dòng
+	this->tilesetHeight = info.Height / TILE_HEIGHT; // lấy số lượng tile trên cột
 
 	if (Game::GetInstance()->GetStage() == STAGE_1)
 	{
@@ -159,13 +159,13 @@ void TiledMap::LoadTileSet(LPCWSTR tilesFilePath)
 	}
 
 	tiles[0] = NULL; //tile id bắt đầu từ 1
-	for (int i = 0; i < this->tileSetWidth; i++)
+	for (int i = 0; i < this->tilesetWidth; i++)
 	{
 		// lấy vị trí của tile
 		RECT rect;
-		rect.left = (i % this->tileSetWidth) * TILE_WIDTH;
+		rect.left = (i % this->tilesetWidth) * TILE_WIDTH;
 		rect.right = rect.left + TILE_WIDTH;
-		rect.top = (i / this->tileSetWidth) * TILE_HEIGHT;
+		rect.top = (i / this->tilesetWidth) * TILE_HEIGHT;
 		rect.bottom = rect.top + TILE_HEIGHT;
 
 		Sprite *tile = new Sprite(tilesFilePath, rect, TILES_TRANSCOLOR); // lấy hình của tile
@@ -174,7 +174,7 @@ void TiledMap::LoadTileSet(LPCWSTR tilesFilePath)
 	}
 }
 
-void TiledMap::Render() // vẽ cả map bằng tile
+void CMap::Render() // vẽ cả map bằng tile
 {
 	for (int i = 0; i < matrix.size(); i++) // duyệt từng dòng của ma trận
 	{
@@ -197,7 +197,7 @@ void TiledMap::Render() // vẽ cả map bằng tile
 		}
 	}
 }
-void TiledMap::RenderTile(Tile *curTile) // vẽ tile dùng ở Grid
+void CMap::RenderTile(Tile *curTile) // vẽ tile dùng ở Grid
 {
 	SpriteData spriteData;
 	spriteData.width = TILE_WIDTH;

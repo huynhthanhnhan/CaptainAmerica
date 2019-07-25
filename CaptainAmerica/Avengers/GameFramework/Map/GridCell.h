@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "../../GameObject/GameComponents/GameObject.h"
-#include "TiledMap.h"
+#include "Map.h"
 
 class GridCell
 {

@@ -31,18 +31,18 @@ const vector<int> _BrickStage_2{ 5, 11, 12, 13, 14, 15, 21, 22, 54, 55, 56, 57, 
 const vector<int> _BrickStage_BOSS_1{ 1, 2, 7, 8, 9, 11 };
 const vector<int> _BrickStage_BOSS_2{  };
 
-class TiledMap
+class CMap
 {
 private:
-	static TiledMap *__instance;
+	static CMap *__instance;
 
 	string LoadMatrix(LPCWSTR filePath);
-	void LoadTileSet(LPCWSTR tilesLocation);
+	void LoadTileset(LPCWSTR tilesLocation);
 	Matrix matrix;
 
 	void AddObjects(Stage stage) { };
 	int mapWidth, mapHeight;
-	int tileSetWidth, tileSetHeight;
+	int tilesetWidth, tilesetHeight;
 
 	Row GetMatrixRow(int lineNum, string line, string delimiter);
 
@@ -50,22 +50,19 @@ private:
 	unordered_map<int, Sprite*> tiles;
 
 public:
-	static TiledMap *GetInstance(LPCWSTR filePath = NULL);
-	TiledMap(LPCWSTR filePath);
+	static CMap *GetInstance(LPCWSTR filePath = NULL);
+	CMap(LPCWSTR filePath);
 
 	int GetWidth() { return this->mapWidth; }
 	int GetHeight() { return this->mapHeight; }
-	int GetTileWidth() { return this->tileSetWidth; }
-	int GetTileHeight() { return this->tileSetHeight; }
+	int GetTilesetWidth() { return this->tilesetWidth; }
+	int GetTilesetHeight() { return this->tilesetHeight; }
 
 	Matrix& GetMatrix() { return this->matrix; }
 
-	static void ResetTiledMap()
-	{
-		__instance = NULL;
-	}
+	static void ReleaseMap()	{	__instance = NULL;	}
 	void RenderTile(Tile *curTile);
 	void Render();
 
-	~TiledMap() { };
+	~CMap() { };
 };
