@@ -70,12 +70,12 @@ enum eController
 #define PITTSBURGH_MAP L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
 #define WIZARD_BOSS_MAP L"Resources\\TiledMap\\Map-Boss1-Matrix.txt"
 
-#define TILES_MATRIX_DELIMITER ","
+#define MAP_MATRIX_DELIMITER " "
 #define TILE_WIDTH	16
 #define TILE_HEIGHT	16
 #define TILES_TRANSCOLOR D3DCOLOR_XRGB(255, 0, 255)
 
-#define GRID_SIZE 16
+#define GRID_SIZE 32
 #define GRID_MAX_X 48
 #define GRID_MAX_Y 5
 

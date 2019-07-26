@@ -41,7 +41,7 @@ private:
 	unordered_map<int, Sprite*> tiles;
 
 	vector<Tile> GetMapRow(int lineNum, string line, string delimiter);
-	string LoadMatrix(LPCWSTR filePath);
+	string LoadMap(LPCWSTR filePath);
 	void LoadTileset(LPCWSTR tilesLocation);
 
 public:

@@ -7,9 +7,8 @@ Grid::Grid()
 {
 	curTiles.clear();
 
-	//khoi tao danh sach cac o trong
-	this->width = (int)(Game::GetInstance()->GetMap()->GetWidth() / 16) + 2;
-	this->height = (int)(Game::GetInstance()->GetMap()->GetHeight() / 16) + 2;
+	this->width = (int)(Game::GetInstance()->GetMap()->GetWidth() / GRID_SIZE) + 2;
+	this->height = (int)(Game::GetInstance()->GetMap()->GetHeight() / GRID_SIZE) + 2;
 
 	for (int i = 0; i < height; i++)
 	{
@@ -23,10 +22,7 @@ Grid::Grid()
 	}
 	LoadCells();
 
-	//Luu Camera
-	this->Camera = Camera::GetInstance();
-
-	//Lưu captain
+	this->camera = Camera::GetInstance();
 	this->captain = Captain::GetInstance();
 
 }
@@ -42,8 +38,8 @@ void Grid::LoadCells()
 			int cellX = (int)mapMatrix[i][j].x / GRID_SIZE;
 			int cellY = (int) (mapMatrix[i][j].y % GRID_SIZE == 0 ? mapMatrix[i][j].y / GRID_SIZE - 1 : mapMatrix[i][j].y / GRID_SIZE);
 
-			Tile *dummyPtr = &mapMatrix[i][j];
-			cells[cellY][cellX]->AddTile(dummyPtr); // do cells có kiểu là mảng các GridCell (GridCell là mảng các cellRow trên dòng) nên truyền i của mảng GridCel trước
+			Tile *tmp = &mapMatrix[i][j];
+			cells[cellY][cellX]->AddTile(tmp); // do cells có kiểu là mảng các GridCell (GridCell là mảng các cellRow trên dòng) nên truyền i của mảng GridCel trước
 		}
 	}
 }
@@ -58,7 +54,7 @@ void Grid::GetCaptainPosOnGrid(int &l, int &r, int &t, int &b) // lấy vị tr�
 }
 
 void Grid::GetCameraPosOnGrid(int &l, int &r, int &t, int &b) {
-	RECT rect = Camera->GetRect();
+	RECT rect = camera->GetRect();
 	l = (int)(rect.left / GRID_SIZE);
 	t = (int)(rect.top % GRID_SIZE == 0 ? rect.top / GRID_SIZE - 1 : rect.top / GRID_SIZE);
 	r = (int)(rect.right / GRID_SIZE);
@@ -89,7 +85,7 @@ void Grid::Update(DWORD dt)
 	{
 		for (int j = captainLCell; j <= captainRCell; j++)
 		{
-			cells[i][j]->InsertTiles(curTiles);
+			cells[i][j]->JoinToVectorOfTiles(curTiles);
 		}
 	}
 
@@ -117,4 +113,19 @@ Grid *Grid::GetInstance()
 	if (__instance == NULL)
 		__instance = new Grid();
 	return __instance;
+}
+
+void Grid::SetNewGrid()
+{
+	__instance = NULL;
+	__instance = new Grid();
+}
+
+Grid::~Grid() {
+	for (int i = 0; i < width; i++)
+		for (int j = 0; j < height; j++)
+		{
+			if (cells[i][j] != NULL)
+				delete cells[i][j];
+		}
 }
