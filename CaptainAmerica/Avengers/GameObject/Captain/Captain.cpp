@@ -30,11 +30,12 @@ Captain::Captain()
 	getHurtState = new CaptainState(this, eCaptainState::HURT);
 	deadState = new CaptainState(this, eCaptainState::DEAD);
 	dashState = new CaptainState(this, eCaptainState::DASH);
+	diveState = new CaptainState(this, eCaptainState::DIVE);
 
 	state = idleState;
 
 	this->x = 500;
-	this->y = 200;
+	this->y = 150;
 	this->width = 25;
 	this->height = 45;
 
@@ -93,7 +94,7 @@ void Captain::LoadResources()
 
 	// CAPTAIN_AMERICA_ANIMATION_THROW_SHIELD
 	anim = new Animation(300);
-	for (int i = NS::throw_shiled_start; i <= NS::throw_shield_end; i++)
+	for (int i = 11; i <= 14; i++)
 	{
 		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
@@ -186,6 +187,15 @@ void Captain::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	// CAPTAIN_AMERICA_ANIMATION_DIVE
+	anim = new Animation(300);
+	for (int i = NS::dive_start; i <= NS::dive_end; i++)
+	{
+		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
 }
 void Captain::SetState(eCaptainState state)
 {
@@ -222,6 +232,8 @@ void Captain::SetState(eCaptainState state)
 	case DEAD:this->state = this->GetDeadState();
 		break;
 	case DASH:this->state = this->GetDashState();
+		break;
+	case DIVE:this->state = this->GetDiveState();
 		break;
 	}
 }
@@ -322,81 +334,10 @@ State * Captain::GetDashState()
 	return dashState;
 }
 
-void Captain::Idle()
+State * Captain::GetDiveState()
 {
-	state->Idle();
-}
-void Captain::Walk()
-{
-	state->Walk();
-}
-void Captain::Jump()
-{
-	state->Jump();
-}
-void Captain::Crouch()
-{
-	state->Crouch();
-}
-
-void Captain::ThrowShield()
-{
-	state->ThrowShield();
-}
-
-void Captain::Roll()
-{
-	state->Roll();
-}
-
-void Captain::Kick()
-{
-	state->Kick();
-}
-
-void Captain::StandHit()
-{
-	state->StandHit();
-}
-
-void Captain::CrouchHit()
-{
-	state->CrouchHit();
-}
-
-void Captain::SitOnShield()
-{
-	state->SitOnShield();
-}
-
-void Captain::Swing()
-{
-	state->Swing();
-}
-
-void Captain::Wade()
-{
-	state->Wade();
-}
-
-void Captain::ShieldUp()
-{
-	state->ShieldUp();
-}
-
-void Captain::GetHurt()
-{
-	state->GetHurt();
-}
-
-void Captain::Dead()
-{
-	state->Dead();
-}
-
-void Captain::Dash()
-{
-	state->Dash();
+	this->SetEnumState(eCaptainState::DIVE);
+	return diveState;
 }
 
 

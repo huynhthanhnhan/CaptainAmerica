@@ -8,7 +8,7 @@ class CaptainState : public State
 {
 private:
 	Captain * captain;
-	int state;
+	eCaptainState state;
 public:
 	CaptainState(Captain * captain, eCaptainState state);
 	~CaptainState();
@@ -16,23 +16,6 @@ public:
 	int GetState();
 
 	void SetNewState(eCaptainState state, eController control);
-
-	void Jump() override;
-	void Idle() override;
-	void Walk() override;
-	void Crouch() override;
-	void ThrowShield() override;
-	void Roll() override;
-	void Kick() override;
-	void StandHit() override;
-	void CrouchHit() override;
-	void SitOnShield() override;
-	void Swing() override;
-	void Wade() override;
-	void ShieldUp() override;
-	void GetHurt() override;
-	void Dead() override;
-	void Dash() override;
 
 	void Update(DWORD dt) override;
 	void Render() override;

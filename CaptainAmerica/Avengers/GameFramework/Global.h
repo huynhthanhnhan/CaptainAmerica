@@ -49,6 +49,7 @@ enum eCaptainState
 	HURT,
 	DEAD,
 	DASH,
+	DIVE,
 };
 
 enum eController
