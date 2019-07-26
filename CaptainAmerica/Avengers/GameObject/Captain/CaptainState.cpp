@@ -419,6 +419,29 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 	case DEAD:
 		break;
 	case DASH:
+		switch (control)
+		{
+		case NoneControl:
+			captain->SetSpeedX(0);
+			newState = IDLE;
+			break;
+		case LeftControl:
+			break;
+		case RightControl:
+			break;
+		case UpControl:
+			break;
+		case DownControl:
+			break;
+		case JumpControl:
+			break;
+		case DashControl:
+			break;
+		case ThrowControl:
+			break;
+		default:
+			break;
+		}
 		break;
 	case DIVE:
 		switch (control)
@@ -453,6 +476,8 @@ void CaptainState::Update(DWORD dt)
 	}
 	if (captain->isWading && captain->GetEnumState() != DIVE)
 		captain->SetState(WADE);
+	if (!captain->IsGrounded() && (!captain->GetEnumState() == JUMP))
+		captain->SetState(JUMP);
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
