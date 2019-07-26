@@ -24,7 +24,7 @@ namespace NS
 	const int crouch_hit_start = 15;
 	const int crouch_hit_end = 16;
 	const int sit_on_shiled_start = 19;
-	const int swing_start = 17 ;
+	const int swing_start = 17;
 	const int swing_end = 29;
 	const int wade_start = 44;
 	const int wade_end = 45;
@@ -69,8 +69,8 @@ class Captain : public GameObject
 	bool isCrouching = false;
 	bool isShieldUp = false;
 	bool isDash = false;
-	
-	
+
+
 
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
@@ -91,7 +91,7 @@ public:
 
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
 
-	void SetState(State * state);
+	void SetState(eCaptainState state);
 
 	int GetStateNum() { return this->StateNum; }
 	void SetStateNum(int num) { this->StateNum = num; }
@@ -100,7 +100,7 @@ public:
 
 	eCaptainState GetEnumState() { return this->eState; }
 	void SetEnumState(eCaptainState state) { this->eState = state; }
-	
+
 	bool isThrowing = false;
 	bool isFalling = false;
 	bool isWading = false;
@@ -122,7 +122,7 @@ public:
 	State *GetSwingState();
 	State *GetWadeState();
 	State *GetShieldUpState();
-	State *GetGetHurtState();
+	State *GetHurtState();
 	State *GetDeadState();
 	State *GetDashState();
 
@@ -170,4 +170,3 @@ public:
 
 	void Render() override;
 };
-

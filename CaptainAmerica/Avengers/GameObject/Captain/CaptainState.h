@@ -10,10 +10,12 @@ private:
 	Captain * captain;
 	int state;
 public:
-	CaptainState(Captain * ninja, eCaptainState state);
+	CaptainState(Captain * captain, eCaptainState state);
 	~CaptainState();
 
 	int GetState();
+
+	void SetNewState(eCaptainState state, eController control);
 
 	void Jump() override;
 	void Idle() override;
@@ -35,4 +37,3 @@ public:
 	void Update(DWORD dt) override;
 	void Render() override;
 };
-
