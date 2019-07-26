@@ -24,10 +24,10 @@ class Shield : public GameItem
 	float distance;
 public:
 	Shield();
-	//void Init(float posx, float posy, float dt, bool isLeft);
+
 	int GetDamage() { return this->damage; }
-	bool IsActive() { return this->Active; }
-	bool SetActive(bool value) { this->Active = value; }
+
+	bool GetIsStart() { return this->isStart; }
 
 	void SetState(int state) { this->state = state; }
 

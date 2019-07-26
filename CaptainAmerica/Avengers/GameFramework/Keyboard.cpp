@@ -112,7 +112,7 @@ void Keyboard::ProcessKeyboard()
 	eController control = NoneControl;
 
 	// Dash
-	if (IsKeyDown(DIK_RIGHT) && !IsKeyDown(DIK_LEFT) && captain->IsGrounded() && !IsKeyDown(DIK_DOWN))
+	if (IsKeyDown(DIK_RIGHT) && !IsKeyDown(DIK_LEFT) && captain->IsGrounded() && !IsKeyDown(DIK_DOWN) && !IsKeyDown(DIK_SPACE) && !IsKeyDown(DIK_F))
 	{
 		captain->TurnRight();
 		if (deltaDashRight < 10 && deltaDashRight > 0)
@@ -141,7 +141,7 @@ void Keyboard::ProcessKeyboard()
 		}
 	}
 
-	if (IsKeyDown(DIK_LEFT) && !IsKeyDown(DIK_RIGHT) && captain->IsGrounded() && !IsKeyDown(DIK_DOWN))
+	if (IsKeyDown(DIK_LEFT) && !IsKeyDown(DIK_RIGHT) && captain->IsGrounded() && !IsKeyDown(DIK_DOWN) && !IsKeyDown(DIK_SPACE) && !IsKeyDown(DIK_F))
 	{
 		captain->TurnLeft();
 		if (deltaDashLeft < 10 && deltaDashLeft > 0)
@@ -169,110 +169,7 @@ void Keyboard::ProcessKeyboard()
 			return;
 		}
 	}
-	//if (IsKeyDown(DIK_RIGHT))
-	//{
-	//	if (!IsKeyDown(DIK_LEFT) && captain->IsGrounded())
-	//	{
-	//		
-	//		if (IsKeyDown(DIK_DOWN))
-	//		{
-	//			captain->Crouch();
-	//		}
-	//		else
-
-	//	}
-	//	else if (!IsKeyDown(DIK_LEFT) && captain->isWading)
-	//	{
-	//		captain->TurnRight();
-	//		if (!IsKeyDown(DIK_DOWN))
-	//			captain->SetSpeedX(CAPTAIN_AMERICA_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
-	//	}
-	//	else if (!IsKeyDown(DIK_DOWN))
-	//		captain->Idle();
-	//}
-	//else if (IsKeyDown(DIK_LEFT))
-	//{
-	//	if (!IsKeyDown(DIK_RIGHT) && captain->IsGrounded())
-	//	{
-	//		captain->TurnLeft();
-	//		if (IsKeyDown(DIK_DOWN))
-	//		{
-	//			captain->Crouch();
-
-	//		}
-	//		else
-	//			if (deltaDashLeft < 10 && deltaDashLeft > 0) 
-	//			{
-	//				isCheckDashLeft = false;
-	//				deltaTimeDash ++;
-	//				if (deltaTimeDash < MaxTimeDash)
-	//				{
-	//					captain->Dash();
-	//				}
-	//				else
-	//				{
-	//					captain->Walk();
-	//				}
-	//			}
-	//			else
-	//			{
-	//				deltaTimeDash = 0;
-	//				captain->Walk();
-	//			}
-	//	}
-	//	else if (!IsKeyDown(DIK_RIGHT) && captain->isWading)
-	//	{
-	//		captain->TurnLeft();
-	//		if (!IsKeyDown(DIK_DOWN))
-	//			captain->SetSpeedX(CAPTAIN_AMERICA_WADING_SPEED * (captain->IsLeft() ? -1 : 1));
-	//	}
-	//	else if (!IsKeyDown(DIK_DOWN))
-	//		captain->Idle();
-	//}
-	//else if (IsKeyDown(DIK_DOWN))
-	//{
-	//	if (!IsKeyDown(DIK_F))
-	//		if (IsKeyDown(DIK_SPACE) && count == 0)
-	//		{
-	//			captain->SetPositionY(captain->GetPositionY() - 0.5);
-	//			count = 1;
-	//		}
-	//		else
-	//		captain->Crouch();
-	//	else  
-	//		//if (count == 0) 
-	//		{
-	//			captain->CrouchHit();
-	//			//count = 1;
-	//		}
-	//		
-	//}
-	//else if (IsKeyDown(DIK_UP))
-	//{
-	//	captain->ShieldUp();
-	//}
-	//else
-	//{
-	//	if(!captain->isThrowing )
-	//		captain->Idle();
-	//}
-	//if(IsKeyDown(DIK_F)&&!captain->isWading)
-	//{
-	//	if (!captain->isThrowing)
-	//	{
-	//		if (captain->IsGrounded())
-	//		{
-	//			captain->ThrowShield();
-	//		}
-	//		else
-	//		{
-	//			captain->Kick();
-	//		}
-	//		
-	//	}
-	//}
-
-
+	
 	if (IsKeyDown(DIK_RIGHT) && !IsKeyDown(DIK_LEFT))
 	{
 		captain->TurnRight();
@@ -297,12 +194,19 @@ void Keyboard::ProcessKeyboard()
 
 	if (IsKeyDown(DIK_F))
 	{
-		control = ThrowControl;
+		if (captain->isThrowing == false)
+		{
+			control = ThrowControl;
+			captain->isThrowing = true;
+		}
+			
 	}
 
 	if (IsKeyDown(DIK_SPACE))
 	{
-		control = JumpControl;
+		if(captain->isCanJump)
+			control = JumpControl;
+		//captain->isCanJump = false;
 	}
 
 	captainState->SetNewState(captain->GetEnumState(), control);
@@ -311,6 +215,18 @@ void Keyboard::ProcessKeyboard()
 }
 void Keyboard::OnKeyDown(int KeyCode)
 {
+	Captain* captain = Game::GetInstance()->GetCaptain();
+	switch (KeyCode)
+	{
+	case DIK_SPACE:
+		if (captain->IsGrounded())
+		{
+			captain->currentPositionBeforeJump = captain->GetPositionY();
+			captain->isCanJump = true;
+		}
+			
+		break;
+	}
 }
 void Keyboard::OnKeyUp(int KeyCode)
 {

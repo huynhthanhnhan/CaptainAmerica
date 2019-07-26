@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../../GameFramework/GameObject.h"
 #include "../../GameFramework/State.h"
 #include "../../GameFramework/Global.h"
@@ -15,7 +15,7 @@ namespace NS
 	const int jump_end = 9;
 	const int crouch_start = 6;
 	const int throw_shiled_start = 11;
-	const int throw_shield_end = 12;
+	const int throw_shield_end = 14;
 	const int roll_start = 8;
 	const int roll_end = 9;
 	const int kick_start = 10;
@@ -34,6 +34,8 @@ namespace NS
 	const int dead_end = 35;
 	const int dash_start = 17;
 	const int dash_end = 18;
+	const int dive_start = 41;
+	const int dive_end = 43;
 }
 
 class Captain : public GameObject
@@ -57,6 +59,7 @@ class Captain : public GameObject
 	State *getHurtState;
 	State *deadState;
 	State *dashState;
+	State *diveState;
 
 	State * state;
 	eCaptainState eState;
@@ -104,6 +107,11 @@ public:
 	bool isThrowing = false;
 	bool isFalling = false;
 	bool isWading = false;
+	bool isCanJump = true;
+	float currentPositionBeforeJump = 0;
+	float heightToRoll = 150;
+	float maxJumpSpeed = 0.4;
+	float maxHeightCanJump = 100; // chưa sử dụng do đang xét theo vận tốc
 
 	void SetIsShieldUp(bool isShieldUp) { this->isShieldUp = isShieldUp; }
 
@@ -125,40 +133,19 @@ public:
 	State *GetHurtState();
 	State *GetDeadState();
 	State *GetDashState();
+	State *GetDiveState();
 
 	bool IsGrounded() { return isGrounded; }
 	bool IsCrouching() { return isCrouching; }
 	bool IsLeft() { return isLeft; }
 	bool IsFlipped() { isFlipped = isLeft ? false : true; return isFlipped; }
 
-	void Idle();
-	void Walk();
-	void Jump();
-	void Crouch();
-	void ThrowShield();
-	void Roll();
-	void Kick();
-	void StandHit();
-	void CrouchHit();
-	void SitOnShield();
-	void Swing();
-	void Wade();
-	void ShieldUp();
-	void GetHurt();
-	void Dead();
-	void Dash();
-
 	void SetColliderDemension(float width, float height)
 	{
 		this->collider.width = width;
 		this->collider.height = height;
 	}
-	void SetScore(int value) { this->score = value; }
-	int GetScore() { return this->score; }
 
-
-	int GetStamina() { return this->stamina; }
-	int GetSupportItem() { return this->support_item; }
 	void TakeDamage(int value) { this->stamina -= value; }
 	void Reset();
 	void TurnLeft();

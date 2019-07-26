@@ -40,25 +40,16 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 			newState = CROUCH;
 			break;
 		case JumpControl:
-			if (captain->GetSpeedY() > 0.4)
+			if (captain->IsGrounded())
 			{
-				captain->isFalling = true;
-			}
-			if (!captain->isFalling && captain->GetSpeedY() <= 0.4)
-			{
-				captain->SetSpeedY(captain->GetSpeedY() + 0.05);
-				if (captain->IsGrounded())
-				{
-					captain->SetIsGrounded(false);
-					captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
-					newState = JUMP;
-				}
+				captain->SetIsGrounded(false);
+				captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
+				newState = JUMP;
 			}
 			break;
 		case DashControl:
 			break;
 		case ThrowControl:
-			captain->isThrowing = true;
 			newState = THROW_SHIELD;
 			break;
 		default:
@@ -97,6 +88,7 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 			break;
 		case ThrowControl:
 			captain->isThrowing = true;
+			captain->SetSpeedX(0);
 			newState = THROW_SHIELD;
 			break;
 		}
@@ -110,6 +102,11 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 				captain->SetSpeedX(0);
 				newState = IDLE;
 			}
+			if (captain->isWading)
+			{
+				captain->SetSpeedX(0);
+				newState = WADE;
+			}
 			break;
 		case LeftControl:
 		case RightControl:
@@ -119,26 +116,26 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 			break;
 		case UpControl:
 		case DownControl:
-			if (captain->GetSpeedY() > 0.4)
+			if (captain->GetPositionY() > captain->currentPositionBeforeJump + captain->heightToRoll)
 			{
 				captain->SetSpeedY(0);
+				captain->SetSpeedX(0);
 				newState = SIT_ON_SHIELD;
+			}
+			if (captain->IsGrounded())
+			{
+				captain->SetSpeedX(0);
+				newState = IDLE;
 			}
 			break;
 		case JumpControl:
-			if (captain->GetSpeedY() > 0.4)
+			if (captain->GetSpeedY() > captain->maxJumpSpeed)
 			{
 				captain->isFalling = true;
 			}
-			if (!captain->isFalling && captain->GetSpeedY() <= 0.4)
+			if (!captain->isFalling)
 			{
 				captain->SetSpeedY(captain->GetSpeedY() + 0.05);
-				if (captain->IsGrounded())
-				{
-					captain->SetIsGrounded(false);
-					captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
-					newState = JUMP;
-				}
 			}
 			break;
 		case DashControl:
@@ -182,8 +179,12 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		switch (control)
 		{
 		case NoneControl:
-			captain->SetSpeedX(0);
-			newState = IDLE;
+			if (captain->isThrowing == false)
+			{
+				captain->SetSpeedX(0);
+				newState = IDLE;
+			}
+			
 			break;
 		case LeftControl:
 		case RightControl:
@@ -215,7 +216,7 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		case DashControl:
 			break;
 		case ThrowControl:
-			newState = STAND_HIT;
+			
 			break;
 		}
 		break;
@@ -225,11 +226,18 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		switch (control)
 		{
 		case NoneControl:
+			if (captain->IsGrounded())
+			{
+				captain->SetSpeedX(0);
+				newState = IDLE;
+			}
+			break;
+		case ThrowControl:
+			break;
 		case UpControl:
 		case DownControl:
 		case JumpControl:
 		case DashControl:
-		case ThrowControl:
 			newState = JUMP;
 			break;
 		case LeftControl:
@@ -299,6 +307,29 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		}
 		break;
 	case SIT_ON_SHIELD:
+		switch (control)
+		{
+		case NoneControl:
+			newState = IDLE;
+			break;
+		case LeftControl:
+		case RightControl:
+			captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
+			newState = WALK;
+			break;
+		case UpControl:
+			break;
+		case DownControl:
+			break;
+		case JumpControl:
+			break;
+		case DashControl:
+			break;
+		case ThrowControl:
+			break;
+		default:
+			break;
+		}
 		break;
 	case SWING:
 		break;
@@ -306,6 +337,7 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		switch (control)
 		{
 		case NoneControl:
+			captain->SetSpeedX(0);
 			break;
 		case LeftControl:
 		case RightControl:
@@ -314,6 +346,7 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		case UpControl:
 			break;
 		case DownControl:
+			newState = DIVE;
 			break;
 		case JumpControl:
 			if (captain->GetSpeedY() > 0.4)
@@ -323,9 +356,10 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 			if (!captain->isFalling && captain->GetSpeedY() <= 0.4)
 			{
 				captain->SetSpeedY(captain->GetSpeedY() + 0.05);
-				if (captain->IsGrounded())
+				if (captain->IsGrounded() || captain->isWading)
 				{
 					captain->SetIsGrounded(false);
+					captain->isWading = false;
 					captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
 					newState = JUMP;
 				}
@@ -336,6 +370,8 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		case ThrowControl:
 			break;
 		}
+		if (captain->IsGrounded())
+			newState = IDLE;
 		break;
 	case SHIELD_TOP:
 		switch (control)
@@ -384,260 +420,29 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		break;
 	case DASH:
 		break;
-	default:
+	case DIVE:
+		switch (control)
+		{
+		case NoneControl:
+		case LeftControl:
+		case RightControl:
+		case UpControl:
+			newState = WADE;
+			break;
+		case DownControl:
+			break;
+		case JumpControl:
+			break;
+		case DashControl:
+			break;
+		case ThrowControl:
+			break;
+		default:
+			break;
+		}
 		break;
 	}
 	captain->SetState(newState);
-}
-
-void CaptainState::Idle()
-{
-	int state = this->state;
-	captain->SetColliderDemension(24, 45);
-	switch (state)
-	{
-	case eCaptainState::IDLE:
-		captain->SetSpeedX(0);
-		break;
-	case eCaptainState::CROUCH:
-	{
-		captain->SetIsCrouching(false);
-		captain->SetState(IDLE);
-	}
-	break;
-	case eCaptainState::WALK:
-	{
-		captain->SetSpeedX(0);
-		captain->SetState(IDLE);
-	}
-	break;
-	case eCaptainState::DASH:
-	{
-		captain->SetSpeedX(0);
-		captain->SetState(IDLE);
-	}
-	case eCaptainState::THROW_SHIELD:
-	case eCaptainState::SHIELD_TOP:
-		captain->SetState(IDLE);
-		break;
-	}
-}
-
-void CaptainState::Walk()
-{
-	int state = this->state;
-	captain->SetColliderDemension(22, 45);
-	switch (state)
-	{
-	case eCaptainState::CROUCH:
-	case eCaptainState::JUMP:
-		break;
-	case eCaptainState::IDLE:
-	case eCaptainState::DASH:
-	{
-		captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
-		captain->SetState(WALK);
-	}
-	break;
-	case eCaptainState::WALK:
-	{
-		captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
-	}
-	break;
-	case eCaptainState::THROW_SHIELD:
-		captain->SetState(IDLE);
-		break;
-	}
-}
-
-void CaptainState::Jump()
-{
-	int state = this->state;
-
-	switch (state)
-	{
-	case eCaptainState::CROUCH:
-	case eCaptainState::CROUCH_HIT:
-		captain->SetSpeedY(0);
-		break;
-	case eCaptainState::JUMP:
-	case eCaptainState::KICK:
-
-		break;
-	case eCaptainState::IDLE:
-	case eCaptainState::WALK:
-	{
-		if (captain->IsGrounded())
-		{
-			captain->SetIsGrounded(false);
-			captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
-			captain->SetState(JUMP);
-		}
-	}
-	break;
-	case eCaptainState::WADE:
-	{
-		if (captain->isWading)
-		{
-			captain->isWading = false;
-			captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
-			captain->SetState(JUMP);
-		}
-	}
-	break;
-	}
-}
-
-
-void CaptainState::Crouch()
-{
-	{
-		int state = this->state;
-
-		switch (state)
-		{
-		case eCaptainState::CROUCH:
-		case eCaptainState::JUMP:
-			break;
-		case eCaptainState::IDLE:
-		{
-			captain->SetIsCrouching(true);
-			captain->SetState(CROUCH);
-		}
-		break;
-		case eCaptainState::WALK:
-		case eCaptainState::CROUCH_HIT:
-		{
-			captain->SetSpeedX(0);
-			captain->SetIsCrouching(true);
-			captain->SetState(CROUCH);
-		}
-		break;
-		}
-	}
-}
-
-void CaptainState::ThrowShield()
-{
-
-	int state = this->state;
-	switch (state)
-	{
-	case eCaptainState::CROUCH:
-	case eCaptainState::CROUCH_HIT:
-		break;
-	case eCaptainState::IDLE:
-	case eCaptainState::WALK:
-	{
-		captain->isThrowing = true;
-		captain->SetState(THROW_SHIELD);
-	}
-	break;
-	case eCaptainState::JUMP:
-		captain->SetState(JUMP);
-		break;
-	}
-}
-
-void CaptainState::Roll()
-{
-	int state = this->state;
-}
-
-void CaptainState::Kick()
-{
-	int state = this->state;
-	switch (state)
-	{
-	case eCaptainState::JUMP:
-	{
-		captain->SetIsGrounded(false);
-		captain->SetState(KICK);
-		break;
-	}
-	case eCaptainState::KICK:
-		if (captain->GetSpeedY() > 0.4)
-		{
-			captain->isFalling = true;
-		}
-		break;
-	}
-}
-
-void CaptainState::StandHit()
-{
-	int state = this->state;
-}
-
-void CaptainState::CrouchHit()
-{
-	int state = this->state;
-	captain->SetState(CROUCH_HIT);
-}
-
-void CaptainState::SitOnShield()
-{
-	int state = this->state;
-}
-
-void CaptainState::Swing()
-{
-	int state = this->state;
-}
-
-void CaptainState::Wade()
-{
-	int state = this->state;
-	captain->SetSpeedX(0);
-	captain->SetState(WADE);
-}
-
-void CaptainState::ShieldUp()
-{
-	int state = this->state;
-
-	switch (state)
-	{
-	case eCaptainState::SHIELD_TOP:
-	case eCaptainState::JUMP:
-		break;
-	case eCaptainState::IDLE:
-	{
-		captain->SetIsShieldUp(true);
-		captain->SetState(SHIELD_TOP);
-	}
-	break;
-	case eCaptainState::WALK:
-	{
-		captain->SetSpeedX(0);
-		captain->SetIsShieldUp(true);
-		captain->SetState(SHIELD_TOP);
-	}
-	break;
-	}
-}
-
-void CaptainState::GetHurt()
-{
-	int state = this->state;
-}
-
-void CaptainState::Dead()
-{
-	int state = this->state;
-}
-void CaptainState::Dash()
-{
-	int state = this->state;
-	switch (state)
-	{
-	case eCaptainState::WALK:
-	case eCaptainState::IDLE:
-		captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * 2 * (captain->IsLeft() ? -1 : 1));
-		captain->SetState(DASH);
-		break;
-
-	}
 }
 
 void CaptainState::Update(DWORD dt)
@@ -646,7 +451,7 @@ void CaptainState::Update(DWORD dt)
 	{
 		captain->isFalling = false;
 	}
-	if (captain->isWading)
+	if (captain->isWading && captain->GetEnumState() != DIVE)
 		captain->SetState(WADE);
 
 	vector<LPCOLLISIONEVENT> coEvents;
@@ -697,8 +502,7 @@ void CaptainState::Update(DWORD dt)
 			{
 				captain->SetIsGrounded(false);
 				captain->isWading = true;
-				captain->Wade();
-				captain->SetPositionX(captain->GetPositionX() + 0.75);
+				captain->SetPositionX(captain->GetPositionX() - 0.75);
 			}
 		}
 	}
@@ -708,9 +512,10 @@ void CaptainState::Update(DWORD dt)
 
 }
 
+
 void CaptainState::Render()
 {
-	int state = this->state;
+	eCaptainState state = this->state;
 
 	SpriteData spriteData;
 	if (this->captain != NULL)
@@ -724,6 +529,7 @@ void CaptainState::Render()
 		spriteData.isLeft = captain->IsLeft();
 		spriteData.isFlipped = captain->IsFlipped();
 	}
+	int count = 0;
 
 	switch (state)
 	{
@@ -739,11 +545,13 @@ void CaptainState::Render()
 	break;
 	case eCaptainState::JUMP:
 	{
-		if (captain->GetSpeedY() >= 0.25)
+		DebugOut(L"current pos: %f\n", captain->currentPositionBeforeJump);
+		//if (captain->GetSpeedY() >= 0.25 || captain->isFalling)
+		if (captain->GetPositionY() > captain->currentPositionBeforeJump + captain->heightToRoll)
 		{
 			Shield::GetInstance()->SetState(NO_SHIELD);
 			if (captain->GetAnimationsList()[eCaptainState::JUMP]->GetCurFrame() == 4)
-				captain->GetAnimationsList()[eCaptainState::JUMP]->SetCurFrame(0);
+				captain->GetAnimationsList()[eCaptainState::JUMP]->SetCurFrame(2);
 		}
 		else
 		{
@@ -756,15 +564,25 @@ void CaptainState::Render()
 	break;
 	case eCaptainState::WALK:
 	{
-		captain->GetAnimationsList()[eCaptainState::WALK]->Render(spriteData);
+		if(captain->IsGrounded())
+			captain->GetAnimationsList()[eCaptainState::WALK]->Render(spriteData);
+		else
+		{
+			captain->GetAnimationsList()[eCaptainState::JUMP]->SetCurFrame(0);
+			captain->GetAnimationsList()[eCaptainState::JUMP]->Render(spriteData);
+		}
 	}
 	break;
 
 	case eCaptainState::THROW_SHIELD:
 	{
-		/*if (captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->GetCurFrame() == 1)
-			captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->SetCurFrame(0);*/
+		if (count == 1)
+		{
+			if (captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->GetCurFrame() == 0)
+				captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->SetCurFrame(2);
+		}
 		captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->Render(spriteData);
+		count = 1;
 	}
 	break;
 	case eCaptainState::ROLL:
@@ -822,6 +640,11 @@ void CaptainState::Render()
 		if (captain->GetAnimationsList()[eCaptainState::DASH]->GetCurFrame() == 0)
 			captain->GetAnimationsList()[eCaptainState::DASH]->SetCurFrame(1);
 		captain->GetAnimationsList()[eCaptainState::DASH]->Render(spriteData);
+	}
+	break;
+	case eCaptainState::DIVE:
+	{
+		captain->GetAnimationsList()[eCaptainState::DIVE]->Render(spriteData);
 	}
 	break;
 	}
