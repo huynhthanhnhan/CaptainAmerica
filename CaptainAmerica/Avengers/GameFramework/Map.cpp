@@ -2,6 +2,7 @@
 #include "Game.h"
 
 CMap *CMap::__instance = NULL;
+
 CMap *CMap::GetInstance(LPCWSTR filePath)
 {
 	if (__instance == NULL || filePath != NULL)
@@ -24,6 +25,7 @@ CMap::CMap(LPCWSTR filePath)
 
 	LoadTileset(tilesFilePath_wstr);
 }
+
 string CMap::LoadMatrix(LPCWSTR filePath) // lấy ma trận vị trí các tile từ file matrix đồng thời trả về vị trí file tiles
 {
 	string tilesLocation;
@@ -43,14 +45,14 @@ string CMap::LoadMatrix(LPCWSTR filePath) // lấy ma trận vị trí các tile
 		this->mapHeight = stoi(tmp);
 
 		string line;
-		Row matrixRow;
-		this->matrix.clear();
+		vector<Tile> matrixRow;
+		this->mapMatrix.clear();
 
 		int lineNum = 0;
 		while (getline(tilesInfo, line)) // chạy từng dòng trong matrix của map
 		{
-			matrixRow = GetMatrixRow(lineNum, line, " ");
-			this->matrix.push_back(matrixRow); // thêm hàng tile lấy dc vào matrix
+			matrixRow = GetMapRow(lineNum, line, " ");
+			this->mapMatrix.push_back(matrixRow); // thêm hàng tile lấy dc vào matrix
 			lineNum++;
 		}
 		tilesInfo.close();
@@ -58,11 +60,11 @@ string CMap::LoadMatrix(LPCWSTR filePath) // lấy ma trận vị trí các tile
 	return tilesLocation; // trả về đường dẫn đến file hình tiles
 
 }
-Row CMap::GetMatrixRow(int lineNum, string line, string delimiter)
+vector<Tile> CMap::GetMapRow(int lineNum, string line, string delimiter)
 {
 	size_t pos = 0; // size_t là kiểu dữ liệu không dấu có thể tự mở rộng (mặc định sẽ là unsigned int)
 	string token;
-	Row result = Row();
+	vector<Tile> result = vector<Tile>();
 	int rowNum = 0;
 	Stage stage = Game::GetInstance()->GetStage();
 	while ((pos = line.find(delimiter)) != string::npos)  // npos dùng trong xử lí chuỗi với ý nghĩa "until the end of the string"
@@ -177,9 +179,9 @@ void CMap::LoadTileset(LPCWSTR tilesFilePath)
 
 void CMap::Render() // vẽ cả map bằng tile
 {
-	for (int i = 0; i < matrix.size(); i++) // duyệt từng dòng của ma trận
+	for (int i = 0; i < mapMatrix.size(); i++) // duyệt từng dòng của ma trận
 	{
-		Row curRow = matrix[i];
+		vector<Tile> curRow = mapMatrix[i];
 		for (int j = 0; j < curRow.size(); j++) // duyệt từng phần tử trên dòng
 		{
 			if (curRow[j].tileId != 0)
@@ -188,7 +190,7 @@ void CMap::Render() // vẽ cả map bằng tile
 				spriteData.width = TILE_WIDTH;
 				spriteData.height = TILE_HEIGHT;
 				spriteData.x = j * TILE_WIDTH;
-				spriteData.y = (matrix.size() - i) * TILE_HEIGHT;
+				spriteData.y = (mapMatrix.size() - i) * TILE_HEIGHT;
 				spriteData.scale = 1;
 				spriteData.angle = 0;
 

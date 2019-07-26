@@ -9,10 +9,6 @@
 #include <fstream>
 #include <string>
 
-#define POSTOCELL(K) (int)(K/GRID_SIZE);
-#define POSXTOCELL(K) (int)(K/GRID_SIZE);
-#define POSYTOCELL(K) (int)(K % GRID_SIZE == 0 ? K/GRID_SIZE - 1 : K/GRID_SIZE);
-
 using namespace std;
 
 class Cell;

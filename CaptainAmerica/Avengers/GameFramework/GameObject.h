@@ -37,9 +37,6 @@ struct CollisionEvent
 };
 struct Tile;
 
-typedef vector<Tile> Row;
-typedef vector<Row> Matrix;
-
 class GameObject
 {
 

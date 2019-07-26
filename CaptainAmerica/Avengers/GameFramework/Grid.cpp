@@ -33,14 +33,14 @@ Grid::Grid()
 
 void Grid::LoadCells()
 {
-	Matrix &mapMatrix = Game::GetInstance()->GetMap()->GetMatrix();
+	vector< vector<Tile>> &mapMatrix = Game::GetInstance()->GetMap()->GetMapMatrix();
 	for (int i = 0; i < mapMatrix.size(); i++)
 	{
 		for (int j = 0; j < mapMatrix[i].size(); j++)
 		{
 			//Tim vi tri o chua tile
 			int cellX = (int)mapMatrix[i][j].x / GRID_SIZE;
-			int cellY = (int) (mapMatrix[i][j].y % GRID_SIZE ? mapMatrix[i][j].y / GRID_SIZE : mapMatrix[i][j].y / GRID_SIZE - 1 );
+			int cellY = (int) (mapMatrix[i][j].y % GRID_SIZE == 0 ? mapMatrix[i][j].y / GRID_SIZE - 1 : mapMatrix[i][j].y / GRID_SIZE);
 
 			Tile *dummyPtr = &mapMatrix[i][j];
 			cells[cellY][cellX]->AddTile(dummyPtr); // do cells có kiểu là mảng các GridCell (GridCell là mảng các cellRow trên dòng) nên truyền i của mảng GridCel trước
