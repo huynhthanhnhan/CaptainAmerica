@@ -36,6 +36,8 @@ Captain::Captain()
 
 	this->x = 500;
 	this->y = 150;
+	//this->x = 300;
+	//this->y = 100;
 	this->width = 25;
 	this->height = 45;
 
@@ -94,11 +96,13 @@ void Captain::LoadResources()
 
 	// CAPTAIN_AMERICA_ANIMATION_THROW_SHIELD
 	anim = new Animation(300);
-	for (int i = 11; i <= 14; i++)
+	for (int i = NS::throw_shiled_start; i <= NS::throw_shield_end; i++)
 	{
 		sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
+	sprite = new Sprite(CAPTAIN_AMERICA_TEXTURE_LOCATION, listSprite[NS::throw_shield_end], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
 	// CAPTAIN_AMERICA_ANIMATION_ROLL

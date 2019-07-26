@@ -24,7 +24,7 @@ struct Tile {
 };
 
 const vector<int> _BrickStage_1{ 11, 12, 13, 34, 42, 65, 92, 93, 96, 97 };
-const vector<int> _BrickStage_2{ 5, 11, 12, 13, 14, 15, 21, 22, 54, 55, 56, 57, 58, 76, 77, 78, 79, 80, 94, 98, 119, 126, 127, 128, 239, 240, 241, 242, 243, 253, 254 };
+const vector<int> _BrickStage_2{ 5, 11, 12, 13, 14, 15, 21, 22, 54, 55, 56, 57, 58, 76, 77, 78, 79, 80, 94, 98, 119, 126, 127, 128, 239, 240, 241, 242, 243, 253, 254, 100 };
 const vector<int> _BrickStage_BOSS_1{ 1, 2, 7, 8, 9, 11 };
 const vector<int> _BrickStage_BOSS_2{  };
 

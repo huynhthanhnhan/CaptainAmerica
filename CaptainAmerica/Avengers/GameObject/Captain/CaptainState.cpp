@@ -182,6 +182,7 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 			if (captain->isThrowing == false)
 			{
 				captain->SetSpeedX(0);
+				captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->SetCurFrame(0);
 				newState = IDLE;
 			}
 			
@@ -189,6 +190,7 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		case LeftControl:
 		case RightControl:
 			captain->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * (captain->IsLeft() ? -1 : 1));
+			captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->SetCurFrame(0);
 			newState = WALK;
 			break;
 		case UpControl:
@@ -209,6 +211,7 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 				{
 					captain->SetIsGrounded(false);
 					captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
+					captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->SetCurFrame(0);
 					newState = JUMP;
 				}
 			}
@@ -216,7 +219,11 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 		case DashControl:
 			break;
 		case ThrowControl:
-			
+			if (captain->isThrowing == false)
+			{
+				captain->SetSpeedX(0);
+				newState = IDLE;
+			}
 			break;
 		}
 		break;
@@ -601,13 +608,20 @@ void CaptainState::Render()
 
 	case eCaptainState::THROW_SHIELD:
 	{
-		if (count == 1)
+		if (captain->isThrowing)
 		{
-			if (captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->GetCurFrame() == 0)
+			if (captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->GetCurFrame() == 4)
 				captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->SetCurFrame(2);
+			DebugOut(L"Rendering: %d \n", captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->GetCurFrame());
 		}
+		else
+		{
+			/*
+			DebugOut(L"Rendering: %d \n", captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->GetCurFrame());*/
+		}
+			
+		
 		captain->GetAnimationsList()[eCaptainState::THROW_SHIELD]->Render(spriteData);
-		count = 1;
 	}
 	break;
 	case eCaptainState::ROLL:

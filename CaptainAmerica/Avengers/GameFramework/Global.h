@@ -99,4 +99,4 @@ enum eController
 #define SHIELD_DOWN 3
 #define NO_SHIELD 4
 
-#define SHIELD_SPEED 0.6f
+#define SHIELD_SPEED 0.4f
