@@ -2,6 +2,7 @@
 #include "Game.h"
 
 CMap *CMap::__instance = NULL;
+
 CMap *CMap::GetInstance(LPCWSTR filePath)
 {
 	if (__instance == NULL || filePath != NULL)
@@ -17,64 +18,65 @@ CMap *CMap::GetInstance(LPCWSTR filePath)
 
 CMap::CMap(LPCWSTR filePath)
 {
-	string tilesFilePath = LoadMatrix(filePath); // lấy được đường dẫn đến file tiles
+	string tilesFilePath = LoadMap(filePath); // lấy được đường dẫn đến file tiles
 
-	std::wstring stemp = std::wstring(tilesFilePath.begin(), tilesFilePath.end());// convert string sang wstring xử lí ở hàm sau
-	LPCWSTR tilesFilePath_wstr = stemp.c_str();
+	std::wstring tmp = std::wstring(tilesFilePath.begin(), tilesFilePath.end());// convert string sang wstring xử lí ở hàm sau
+	LPCWSTR tilesFilePath_wstr = tmp.c_str();
 
 	LoadTileset(tilesFilePath_wstr);
 }
-string CMap::LoadMatrix(LPCWSTR filePath) // lấy ma trận vị trí các tile từ file matrix đồng thời trả về vị trí file tiles
-{
-	string tilesLocation;
 
-	ifstream tilesInfo;
+string CMap::LoadMap(LPCWSTR filePath) // lấy ma trận vị trí các tile từ file matrix đồng thời trả về vị trí file tiles
+{
+	string tilesetPath;
+
+	ifstream mapInfo;
 	DebugOut(L"filepath: %s\n", filePath);
-	tilesInfo.open(filePath);
-	if (tilesInfo.is_open())
+	mapInfo.open(filePath);
+	if (mapInfo.is_open())
 	{
-		getline(tilesInfo, tilesLocation); // truyền tilesInfo vào tilesLocation (lấy dòng đầu tiên trong file Maxtrix
-											// là đường dẫn đến file tiles)
+		getline(mapInfo, tilesetPath);
 
 		string tmp;
-		getline(tilesInfo, tmp); // tilesInfo => tmp (dòng thứ 2 là width, thứ 3 là height
+		getline(mapInfo, tmp); // mapInfo => tmp (dòng thứ 2 là width, thứ 3 là height
 		this->mapWidth = stoi(tmp); // convert string sang int
-		getline(tilesInfo, tmp);
+
+		getline(mapInfo, tmp);
 		this->mapHeight = stoi(tmp);
 
 		string line;
-		Row matrixRow;
-		this->matrix.clear();
+		vector<Tile> row_of_tile;
+		this->mapMatrix.clear();
 
 		int lineNum = 0;
-		while (getline(tilesInfo, line)) // chạy từng dòng trong matrix của map
+		while (getline(mapInfo, line)) // chạy từng dòng trong matrix của map
 		{
-			matrixRow = GetMatrixRow(lineNum, line, " ");
-			this->matrix.push_back(matrixRow); // thêm hàng tile lấy dc vào matrix
+			row_of_tile = GetMapRow(lineNum, line, MAP_MATRIX_DELIMITER);
+			this->mapMatrix.push_back(row_of_tile); // thêm hàng tile lấy dc vào matrix
 			lineNum++;
 		}
-		tilesInfo.close();
+		mapInfo.close();
 	}
-	return tilesLocation; // trả về đường dẫn đến file hình tiles
+	return tilesetPath; // trả về đường dẫn đến file hình tiles
 
 }
-Row CMap::GetMatrixRow(int lineNum, string line, string delimiter)
+vector<Tile> CMap::GetMapRow(int lineNum, string line, string delimiter)
 {
 	size_t pos = 0; // size_t là kiểu dữ liệu không dấu có thể tự mở rộng (mặc định sẽ là unsigned int)
 	string token;
-	Row result = Row();
-	int rowNum = 0;
+	vector<Tile> result = vector<Tile>();
+	int colNum = 0;
 	Stage stage = Game::GetInstance()->GetStage();
 	while ((pos = line.find(delimiter)) != string::npos)  // npos dùng trong xử lí chuỗi với ý nghĩa "until the end of the string"
 	{
-		token = line.substr(0, pos); // lấy kí tự đầu tiên trong hàng ( id của tile)
+		token = line.substr(0, pos); // lấy id của tile)
 
 		Tile curTile;
-		curTile.x = rowNum * TILE_WIDTH; // số thứ tự của tile trên hàng x kích thước tile (16)
+		curTile.x = colNum * TILE_WIDTH; // số thứ tự của tile trên hàng x kích thước tile (16)
 		curTile.y = this->mapHeight - lineNum * TILE_HEIGHT; // vẽ map từ trên xuống, line = 0 => y = height là dòng đầu tiên 
 
 		curTile.colider = new Collider();
-		curTile.colider->x = rowNum * TILE_WIDTH; // colider có vị trí như hình
+		curTile.colider->x = colNum * TILE_WIDTH; // colider có vị trí như hình
 		curTile.colider->y = this->mapHeight - lineNum * TILE_HEIGHT;
 		curTile.colider->width = TILE_WIDTH;
 		curTile.colider->height = TILE_HEIGHT;
@@ -118,8 +120,8 @@ Row CMap::GetMatrixRow(int lineNum, string line, string delimiter)
 				curTile.type = ObjectType::DEFAULT;
 		}
 		result.push_back(curTile); // đưa curTile vào list kiểu Row
-		line.erase(0, pos + delimiter.length()); //xóa phần tử đầu khỏi hàng
-		rowNum++; // qua phần tử tiếp theo trong hàng
+		line.erase(0, pos + delimiter.length()); //xóa phần tử đã xét khỏi chuỗi
+		colNum++; // qua phần tử tiếp theo trong hàng
 	}
 
 	return result; // trả về mảng các tile trong hàng
@@ -130,6 +132,7 @@ void CMap::LoadTileset(LPCWSTR tilesFilePath)
 	HRESULT result;
 	D3DXIMAGE_INFO info; //Thông tin tileset
 	result = D3DXGetImageInfoFromFile(tilesFilePath, &info); //Lấy thông tin texture từ đường dẫn file
+
 	//Kiểm tra lỗi khi lấy thông tin
 	if (result != D3D_OK)
 	{
@@ -177,9 +180,9 @@ void CMap::LoadTileset(LPCWSTR tilesFilePath)
 
 void CMap::Render() // vẽ cả map bằng tile
 {
-	for (int i = 0; i < matrix.size(); i++) // duyệt từng dòng của ma trận
+	for (int i = 0; i < mapMatrix.size(); i++) // duyệt từng dòng của ma trận
 	{
-		Row curRow = matrix[i];
+		vector<Tile> curRow = mapMatrix[i];
 		for (int j = 0; j < curRow.size(); j++) // duyệt từng phần tử trên dòng
 		{
 			if (curRow[j].tileId != 0)
@@ -188,7 +191,7 @@ void CMap::Render() // vẽ cả map bằng tile
 				spriteData.width = TILE_WIDTH;
 				spriteData.height = TILE_HEIGHT;
 				spriteData.x = j * TILE_WIDTH;
-				spriteData.y = (matrix.size() - i) * TILE_HEIGHT;
+				spriteData.y = (mapMatrix.size() - i) * TILE_HEIGHT;
 				spriteData.scale = 1;
 				spriteData.angle = 0;
 

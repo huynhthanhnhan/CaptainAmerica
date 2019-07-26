@@ -3,6 +3,13 @@
 
 Graphics * Graphics::__instance = NULL;
 Camera * Graphics::Camera = NULL;
+
+Graphics *Graphics::GetInstance()
+{
+	if (__instance == NULL) __instance = new Graphics();
+	return __instance;
+}
+
 //Khởi tạo Graphics chính
 void Graphics::Init(HWND hWnd)
 {
@@ -71,10 +78,10 @@ HRESULT Graphics::LoadTexture(LPCWSTR filePath, D3DCOLOR transColor, LPDIRECT3DT
 	}
 	//Tạo texture từ đường dẫn file
 	result = D3DXCreateTextureFromFileEx(
-		d3ddv,								// Pointer to Direct3D device object
-		filePath,							// Path to the image to load
-		info.Width,							// Texture width
-		info.Height,						// Texture height
+		d3ddv,
+		filePath,
+		info.Width,
+		info.Height,
 		1,
 		0,
 		D3DFMT_UNKNOWN,
@@ -84,8 +91,8 @@ HRESULT Graphics::LoadTexture(LPCWSTR filePath, D3DCOLOR transColor, LPDIRECT3DT
 		transColor,
 		&info,
 		NULL,
-		&texture);								// Created texture pointer
-	//Kiểm tra lỗi khi tạo
+		&texture);
+
 	if (result != D3D_OK)
 	{
 		OutputDebugString(L"[ERROR] CreateTextureFromFile failed\n");
@@ -95,7 +102,7 @@ HRESULT Graphics::LoadTexture(LPCWSTR filePath, D3DCOLOR transColor, LPDIRECT3DT
 	DebugOut(L"[INFO] Texture loaded Ok: %s \n", filePath);
 	return result;
 }
-//Hàm vẽ
+
 void Graphics::Draw(Sprite * sprite, D3DCOLOR color)
 {
 	if (sprite->GetTexture() == NULL)
@@ -104,6 +111,7 @@ void Graphics::Draw(Sprite * sprite, D3DCOLOR color)
 	D3DXVECTOR2 center = sprite->GetCenter();
 	D3DXVECTOR2 translate = sprite->GetTranslate();
 	D3DXVECTOR2 scaling = sprite->GetScaling();
+
 	Camera->SetRenderData(center, translate, scaling);
 
 	D3DXMATRIX matrix;
@@ -120,7 +128,7 @@ void Graphics::Draw(Sprite * sprite, D3DCOLOR color)
 	spriteHandler->SetTransform(&matrix);
 	spriteHandler->Draw(sprite->GetTexture(), &(sprite->GetRect()), NULL, NULL, color);
 }
-//Hàm hủy Graphics chính
+
 Graphics::~Graphics()
 {
 	if (spriteHandler != NULL) spriteHandler->Release();
@@ -128,9 +136,4 @@ Graphics::~Graphics()
 	if (d3ddv != NULL) d3ddv->Release();
 	if (d3d != NULL) d3d->Release();
 }
-//Hàm lấy đối tượng
-Graphics *Graphics::GetInstance()
-{
-	if (__instance == NULL) __instance = new Graphics();
-	return __instance;
-}
+

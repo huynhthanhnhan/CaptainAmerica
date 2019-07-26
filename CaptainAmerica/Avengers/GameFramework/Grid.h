@@ -9,10 +9,6 @@
 #include <fstream>
 #include <string>
 
-#define POSTOCELL(K) (int)(K/GRID_SIZE);
-#define POSXTOCELL(K) (int)(K/GRID_SIZE);
-#define POSYTOCELL(K) (int)(K % GRID_SIZE == 0 ? K/GRID_SIZE - 1 : K/GRID_SIZE);
-
 using namespace std;
 
 class Cell;
@@ -30,7 +26,7 @@ private:
 
 	vector<Tile *> CollisionTiles;
 
-	Camera *Camera;
+	Camera *camera;
 
 	Captain * captain;
 
@@ -51,17 +47,6 @@ public:
 
 	CellMatrix GetTile() { return this->cells; }
 
-	static void SetNewGrid()
-	{
-		__instance = NULL;
-		__instance = new Grid();
-	}
-	~Grid() {
-		for (int i = 0; i < width; i++)
-			for (int j = 0; j < height; j++)
-			{
-				if (cells[i][j] != NULL)
-					delete cells[i][j];
-			}
-	}
+	static void SetNewGrid();
+	~Grid();
 };
