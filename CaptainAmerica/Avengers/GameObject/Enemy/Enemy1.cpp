@@ -115,6 +115,9 @@ void Enemy1::Update(DWORD dt)
 			this->isLeft = false;
 		}
 		timeToAction++;
+		countTimeToFire++;
+		if (countTimeToFire > timeToFire)
+			countTimeToFire = timeToFire;
 		if (timeToAction < 50)
 			this->eState = EnemyIDLE;
 		else if (timeToAction >= 50 && timeToAction < 100)
@@ -133,7 +136,15 @@ void Enemy1::Update(DWORD dt)
 		{
 			this->SetSpeedX(0);
 			this->isFlipped = !this->isFlipped;
+			bullet = new Enemy1Bullet(this->GetPositionX(), this->GetPositionY(), (this->GetPositionX() > Captain::GetInstance()->GetPositionX()) ? true : false);
 			timeToAction = 0;
+		}
+		//if(countTimeToFire == 100 && this->eState!= EnemyWALK)
+		//	//if(bullet == nullptr)
+		//		bullet = new Enemy1Bullet(this->GetPositionX(), this->GetPositionY(), (this->GetPositionX()>Captain::GetInstance()->GetPositionX())?true:false);
+		if (bullet != NULL)
+		{
+			bullet->Update(dt);
 		}
 	}
 }
@@ -177,4 +188,6 @@ void Enemy1::Render()
 	}
 	break;
 	}
+	if (bullet != NULL)
+		bullet->Render();
 }
