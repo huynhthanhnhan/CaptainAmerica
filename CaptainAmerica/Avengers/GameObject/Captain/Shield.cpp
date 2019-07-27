@@ -71,7 +71,8 @@ void Shield::Update(DWORD dt)
 {
 	this->SetSpeedY(0);
 	Captain* captain = Captain::GetInstance();
-	if (captain->isThrowing) {
+	if (captain->isThrowing && captain->GetEnumState() != KICK) 
+	{
 		this->state = SHIELD_UP;
 		SheildAttacking();
 	}

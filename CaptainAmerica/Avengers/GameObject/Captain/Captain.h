@@ -5,7 +5,9 @@
 #include "../../GameFramework/Game.h"
 #include "CaptainState.h"
 #include "Shield.h"
+#include "../Enemy/Enemy1.h"
 
+class Enemy1;
 namespace NS
 {
 	const int idle_start = 0;
@@ -66,7 +68,7 @@ class Captain : public GameObject
 
 	Shield* shield;
 
-	int StateNum;
+	Enemy1 * enemy;
 
 	bool isGrounded = false;
 	bool isCrouching = false;
@@ -76,12 +78,7 @@ class Captain : public GameObject
 
 
 	static vector<Animation *> animations;
-	DWORD lastFrameTime;
 
-	int score = 0;
-	int captain_item = 0;
-	int support_item = 0;
-	int stamina;
 public:
 
 	static Captain * GetInstance();
@@ -92,12 +89,7 @@ public:
 
 	void SetIsCrouching(bool isCrouching) { this->isCrouching = isCrouching; }
 
-	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
-
 	void SetState(eCaptainState state);
-
-	int GetStateNum() { return this->StateNum; }
-	void SetStateNum(int num) { this->StateNum = num; }
 
 	State * GetState() { return this->state; }
 
@@ -114,8 +106,6 @@ public:
 	float maxHeightCanJump = 100; // chưa sử dụng do đang xét theo vận tốc
 
 	void SetIsShieldUp(bool isShieldUp) { this->isShieldUp = isShieldUp; }
-
-	DWORD GetLastFrameTime() { return this->lastFrameTime; }
 
 	State *GetIdleState();
 	State *GetWalkState();
@@ -146,7 +136,6 @@ public:
 		this->collider.height = height;
 	}
 
-	void TakeDamage(int value) { this->stamina -= value; }
 	void Reset();
 	void TurnLeft();
 	void TurnRight();

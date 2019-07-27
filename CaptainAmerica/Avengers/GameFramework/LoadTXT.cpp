@@ -22,6 +22,7 @@ RECT* LoadTXT::LoadRect(char * path)
 
 	int number_of_rect;
 	string data;
+	string comment = "";
 
 	getline(f, data);
 	stringstream stream_data;
@@ -43,6 +44,7 @@ RECT* LoadTXT::LoadRect(char * path)
 		stream_data >> r->top;
 		stream_data >> r->right;
 		stream_data >> r->bottom;
+		stream_data >> comment;
 
 		r->right += r->left;
 		r->bottom += r->top;

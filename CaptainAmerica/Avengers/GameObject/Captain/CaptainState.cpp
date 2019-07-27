@@ -102,11 +102,6 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 				captain->SetSpeedX(0);
 				newState = IDLE;
 			}
-			if (captain->isWading)
-			{
-				captain->SetSpeedX(0);
-				newState = WADE;
-			}
 			break;
 		case LeftControl:
 		case RightControl:
@@ -365,12 +360,12 @@ void CaptainState::SetNewState(eCaptainState state, eController control)
 				captain->SetSpeedY(captain->GetSpeedY() + 0.05);
 				if (captain->IsGrounded() || captain->isWading)
 				{
-					captain->SetIsGrounded(false);
 					captain->isWading = false;
 					captain->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
 					newState = JUMP;
 				}
 			}
+			
 			break;
 		case DashControl:
 			break;
@@ -483,8 +478,6 @@ void CaptainState::Update(DWORD dt)
 	}
 	if (captain->isWading && captain->GetEnumState() != DIVE)
 		captain->SetState(WADE);
-	if (!captain->IsGrounded() && (!captain->GetEnumState() == JUMP))
-		captain->SetState(JUMP);
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -532,7 +525,6 @@ void CaptainState::Update(DWORD dt)
 		{
 			if (ny == 1)
 			{
-				captain->SetIsGrounded(false);
 				captain->isWading = true;
 				captain->SetPositionX(captain->GetPositionX() - 0.75);
 			}

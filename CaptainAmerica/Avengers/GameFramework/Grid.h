@@ -10,7 +10,7 @@
 #include <string>
 
 using namespace std;
-
+class Enemy;
 class Cell;
 
 typedef vector<GridCell *> CellRow;

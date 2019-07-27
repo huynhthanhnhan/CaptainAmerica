@@ -1,4 +1,4 @@
-﻿#pragma once
+﻿	#pragma once
 
 #include <Windows.h>
 #include <d3dx9.h>
@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "Animation.h"
 #include "LoadTXT.h"
+
 
 struct Collider
 {
@@ -37,6 +38,7 @@ struct CollisionEvent
 };
 struct Tile;
 
+class Enemy;
 class GameObject
 {
 

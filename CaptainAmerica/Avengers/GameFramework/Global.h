@@ -31,6 +31,13 @@ enum ObjectType
 	WATER,
 };
 
+enum EnemyType
+{
+	ENEMY1,
+	ENEMY2,
+	ENEMY3,
+};
+
 enum eCaptainState
 {
 	IDLE,
@@ -50,6 +57,15 @@ enum eCaptainState
 	DEAD,
 	DASH,
 	DIVE,
+};
+
+enum eEnemyState
+{
+	EnemyIDLE,
+	EnemyWALK,
+	EnemyCROUCH,
+	EnemyHURT,
+	EnemyJUMP,
 };
 
 enum eController
@@ -90,6 +106,8 @@ enum eController
 #define CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(0, 168, 80, 1)
 #define CAPTAIN_AMERICA_SPRITE_WIDTH 26
 #define CAPTAIN_AMERICA_SPRITE_HEIGHT 36
+
+#define ENEMIES_TEXTURE_LOCATION L"Resources\\Enemy\\Enemies.png"
 
 
 //Các số để chạy animation của Shield

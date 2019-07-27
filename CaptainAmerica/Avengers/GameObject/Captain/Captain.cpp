@@ -48,9 +48,8 @@ Captain::Captain()
 	collider.width = 25;
 	collider.height = 45;
 
-	stamina = 100;
-
 	shield = new Shield();
+	enemy = new Enemy1();
 }
 
 void Captain::LoadResources()
@@ -355,7 +354,6 @@ void Captain::TurnRight()
 }
 void Captain::Reset()
 {
-	this->stamina = 300;
 	this->SetPositionX(300);
 	this->SetPositionY(100);
 	Camera::GetInstance()->Reset();
@@ -368,9 +366,11 @@ void Captain::Update(DWORD dt)
 	}
 	state->Update(dt);
 	shield->Update(dt);
+	enemy->Update(dt);
 }
 void Captain::Render()
 {
 	state->Render();
 	shield->Render();
+	enemy->Render();
 }

@@ -40,6 +40,11 @@ void Grid::LoadCells()
 
 			Tile *tmp = &mapMatrix[i][j];
 			cells[cellY][cellX]->AddTile(tmp); // do cells có kiểu là mảng các GridCell (GridCell là mảng các cellRow trên dòng) nên truyền i của mảng GridCel trước
+
+			if (mapMatrix[i][j].type == ObjectType::BRICK)
+			{
+				CollisionTiles.push_back(tmp);
+			}
 		}
 	}
 }
