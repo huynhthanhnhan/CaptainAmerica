@@ -1,7 +1,7 @@
 #pragma once
 #include "../../GameFramework/GameObject.h"
 
-class Enemy1Bullet : public GameObject
+class Enemy2Bullet : public GameObject
 {
 	float timeLife = 100;
 
@@ -16,7 +16,7 @@ class Enemy1Bullet : public GameObject
 	vector<Animation *> animation;
 
 public:
-	Enemy1Bullet(float posX, float posY, bool isRightToLeft);
+	Enemy2Bullet(float posX, float posY, bool isRightToLeft);
 
 	vector<Animation*> GetAnimationList() { return this->animation; }
 
@@ -28,6 +28,6 @@ public:
 	void Update(DWORD dt);
 	void Render();
 
-	~Enemy1Bullet();
+	~Enemy2Bullet();
 };
 

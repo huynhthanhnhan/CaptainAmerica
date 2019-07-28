@@ -1,6 +1,6 @@
-#include "Enemy1Bullet.h"
+#include "Enemy2Bullet.h"
 
-Enemy1Bullet::Enemy1Bullet(float posX, float posY, bool isRightToLeft)
+Enemy2Bullet::Enemy2Bullet(float posX, float posY, bool isRightToLeft)
 {
 	LoadResource();
 
@@ -17,10 +17,9 @@ Enemy1Bullet::Enemy1Bullet(float posX, float posY, bool isRightToLeft)
 	collider.height = 7;
 
 	this->countTimeLife = 0;
-	this->isDestroyed = false;
 }
 
-void Enemy1Bullet::LoadResource()
+void Enemy2Bullet::LoadResource()
 {
 	LoadTXT loadTXT;
 	RECT* listSprite = loadTXT.LoadRect((char*)"Resources\\Enemy\\Enemies.txt");
@@ -29,25 +28,33 @@ void Enemy1Bullet::LoadResource()
 
 	// IDLE
 	anim = new Animation(100);
-	sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[6], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[15], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite);
+	sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[17], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animation.push_back(anim);
 }
-void Enemy1Bullet::Update(DWORD dt)
+void Enemy2Bullet::Update(DWORD dt)
 {
-	this->countTimeLife++;
+	this->timeLife++;
 	if (countTimeLife >= timeLife)
 	{
-		this->isDestroyed = true;
 		delete this;
 	}
 	this->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X);
-	if(isRightToLeft)
+	if (isRightToLeft)
+	{
 		this->SetPositionX(this->GetPositionX() - this->GetSpeedX() * dt);
-	else 
+		this->isFlipped = false;
+	}
+	else
+	{
 		this->SetPositionX(this->GetPositionX() + this->GetSpeedX() * dt);
+		this->isFlipped = true;
+
+	}
 }
-void Enemy1Bullet::Render()
+void Enemy2Bullet::Render()
 {
 	SpriteData spriteEnemyData;
 	if (this != NULL)
@@ -57,13 +64,13 @@ void Enemy1Bullet::Render()
 		spriteEnemyData.x = this->GetPositionX();
 		spriteEnemyData.y = this->GetPositionY();
 
-
+		spriteEnemyData.isFlipped = isFlipped;
 		spriteEnemyData.scale = 1;
 		spriteEnemyData.angle = 0;
 	}
 	this->GetAnimationList()[0]->Render(spriteEnemyData);
 }
 
-Enemy1Bullet::~Enemy1Bullet()
+Enemy2Bullet::~Enemy2Bullet()
 {
 }

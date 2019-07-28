@@ -1,6 +1,6 @@
-#include "Enemy1.h"
+#include "Enemy2.h"
 
-Enemy1::Enemy1()
+Enemy2::Enemy2()
 {
 	LoadResource();
 
@@ -8,7 +8,7 @@ Enemy1::Enemy1()
 
 	this->isLeft = false;
 	this->vx = 0;
-	this->SetPositionX(600);
+	this->SetPositionX(700);
 	this->SetPositionY(80);
 
 	collider.x = x;
@@ -16,12 +16,12 @@ Enemy1::Enemy1()
 	collider.vx = vx;
 	collider.vy = vy;
 	collider.width = 24;
-	collider.height = 43;
+	collider.height = 46;
 
-	Type = EnemyType::ENEMY1;
+	Type = EnemyType::ENEMY2;
 }
 
-void Enemy1::LoadResource()
+void Enemy2::LoadResource()
 {
 	LoadTXT loadTXT;
 	RECT* listSprite = loadTXT.LoadRect((char*)"Resources\\Enemy\\Enemies.txt");
@@ -30,13 +30,13 @@ void Enemy1::LoadResource()
 
 	// IDLE
 	anim = new Animation(100);
-	sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[3], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[10], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animation.push_back(anim);
 
 	// WALK
 	anim = new Animation(100);
-	for (int i = 0; i <= 2; i++)
+	for (int i = 10; i <= 12; i++)
 	{
 		sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
@@ -45,18 +45,18 @@ void Enemy1::LoadResource()
 
 	// CROUCH
 	anim = new Animation(100);
-	sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[4], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[13], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animation.push_back(anim);
 
 	// HURT
 	anim = new Animation(100);
-	sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[5], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[14], CAPTAIN_AMERICA_TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animation.push_back(anim);
 }
 
-void Enemy1::Update(DWORD dt)
+void Enemy2::Update(DWORD dt)
 {
 	if (Camera::GetInstance()->IsObjectInCamera(this) == true)
 	{
@@ -130,7 +130,7 @@ void Enemy1::Update(DWORD dt)
 			this->eState = EnemyCROUCH;
 		else if (timeToAction >= 100 && timeToAction < 200)
 		{
-			if(this->isFlipped == false)
+			if (this->isFlipped == false)
 				this->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * -1);
 			else
 			{
@@ -142,15 +142,15 @@ void Enemy1::Update(DWORD dt)
 		{
 			this->SetSpeedX(0);
 			this->isFlipped = !this->isFlipped;
-			bullet = new Enemy1Bullet(this->GetPositionX(), this->GetPositionY(), (this->GetPositionX() > Captain::GetInstance()->GetPositionX()) ? true : false);
+			bullet = new Enemy2Bullet(this->GetPositionX(), this->GetPositionY(), !isFlipped);
 			timeToAction = 0;
 		}
 		//if(countTimeToFire == 100 && this->eState!= EnemyWALK)
 		//	//if(bullet == nullptr)
-		//		bullet = new Enemy1Bullet(this->GetPositionX(), this->GetPositionY(), (this->GetPositionX()>Captain::GetInstance()->GetPositionX())?true:false);
+		//		bullet = new Enemy2Bullet(this->GetPositionX(), this->GetPositionY(), (this->GetPositionX()>Captain::GetInstance()->GetPositionX())?true:false);
 		if (bullet != nullptr)
 		{
-			if(!bullet->GetIsDestroyed())
+			if (!bullet->GetIsDestroyed())
 				bullet->Update(dt);
 		}
 	}
@@ -161,7 +161,7 @@ void Enemy1::Update(DWORD dt)
 	}
 }
 
-void Enemy1::Render()
+void Enemy2::Render()
 {
 	SpriteData spriteEnemyData;
 	if (this != NULL)
@@ -205,5 +205,4 @@ void Enemy1::Render()
 		if (!bullet->GetIsDestroyed())
 			bullet->Render();
 	}
-		
 }

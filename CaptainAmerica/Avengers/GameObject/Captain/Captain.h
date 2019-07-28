@@ -6,8 +6,10 @@
 #include "CaptainState.h"
 #include "Shield.h"
 #include "../Enemy/Enemy1.h"
+#include "../Enemy/Enemy2.h"
 
 class Enemy1;
+class Enemy2;
 namespace NS
 {
 	const int idle_start = 0;
@@ -68,7 +70,8 @@ class Captain : public GameObject
 
 	Shield* shield;
 
-	Enemy1 * enemy;
+	Enemy1 * enemy1;
+	Enemy2 * enemy2;
 
 	bool isGrounded = false;
 	bool isCrouching = false;

@@ -37,6 +37,12 @@
     <Filter Include="Header Files\GameObject\Captain">
       <UniqueIdentifier>{4fa460df-b02b-4b7b-ac49-b9d6e11946df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Enemy">
+      <UniqueIdentifier>{363cb083-af3e-43ff-8d0d-63282f0c7fd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Enemy">
+      <UniqueIdentifier>{56a33911-36e8-4782-bea9-1d115008d0be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameFramework\Global.h">
@@ -96,6 +102,24 @@
     <ClInclude Include="GameObject\Captain\Shield.h">
       <Filter>Header Files\GameObject\Captain</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\EnemyState.h">
+      <Filter>Header Files\GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy.h">
+      <Filter>Header Files\GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy1.h">
+      <Filter>Header Files\GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Enemy\Enemy1Bullet.h">
+      <Filter>Header Files\GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2.h">
+      <Filter>Header Files\GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2Bullet.h">
+      <Filter>Header Files\GameObject\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameFramework\Camera.cpp">
@@ -151,6 +175,24 @@
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\EnemyState.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy1.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy1Bullet.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2Bullet.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
