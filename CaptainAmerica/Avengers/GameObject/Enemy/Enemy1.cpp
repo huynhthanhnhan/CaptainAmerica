@@ -58,7 +58,7 @@ void Enemy1::LoadResource()
 
 void Enemy1::Update(DWORD dt)
 {
-	if (Camera::GetInstance()->IsObjectInCamera(this) == true)
+	if (Camera::GetInstance()->IsEnemyInCamera(this) == true)
 	{
 		this->isActive = true;
 		vector<LPCOLLISIONEVENT> coEvents;
@@ -142,7 +142,7 @@ void Enemy1::Update(DWORD dt)
 		{
 			this->SetSpeedX(0);
 			this->isFlipped = !this->isFlipped;
-			bullet = new Enemy1Bullet(this->GetPositionX(), this->GetPositionY(), (this->GetPositionX() > Captain::GetInstance()->GetPositionX()) ? true : false);
+			bullet = new Enemy1Bullet(this->GetPositionX(), this->GetPositionY(), !isFlipped);
 			timeToAction = 0;
 		}
 		//if(countTimeToFire == 100 && this->eState!= EnemyWALK)

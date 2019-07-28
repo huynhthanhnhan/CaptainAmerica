@@ -21,5 +21,6 @@ public:
 	void Reset();
 	void Update(DWORD dt);
 	bool IsObjectInCamera(GameObject* gameobject);
+	bool IsEnemyInCamera(GameObject* enemy);
 	void SetRenderData(D3DXVECTOR2 &center, D3DXVECTOR2 &translate, D3DXVECTOR2 &scaling);
 };

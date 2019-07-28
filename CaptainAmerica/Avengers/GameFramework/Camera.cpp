@@ -70,6 +70,19 @@ bool Camera::IsObjectInCamera(GameObject * gameobject)
 	return false;
 }
 
+bool Camera::IsEnemyInCamera(GameObject * enemy) // do enemy can xet toa do sai lech X ben trai
+{
+	RECT rect = GetRect();
+	rect.left -= 30;
+	rect.right += 30;
+
+	float GameObjectPosX = enemy->GetPositionX();
+	float GameObjectPosY = enemy->GetPositionY();
+	if (GameObjectPosX >= rect.left && GameObjectPosX <= rect.right && GameObjectPosY >= rect.bottom && GameObjectPosY <= rect.top)
+		return true;
+	return false;
+}
+
 void Camera::SetRenderData(D3DXVECTOR2 &center, D3DXVECTOR2 &translate, D3DXVECTOR2 &scaling)
 {
 	D3DXMATRIX mt;

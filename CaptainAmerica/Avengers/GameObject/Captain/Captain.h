@@ -7,9 +7,11 @@
 #include "Shield.h"
 #include "../Enemy/Enemy1.h"
 #include "../Enemy/Enemy2.h"
+#include "../Enemy/Enemy3.h"
 
 class Enemy1;
 class Enemy2;
+class Enemy3;
 namespace NS
 {
 	const int idle_start = 0;
@@ -72,6 +74,7 @@ class Captain : public GameObject
 
 	Enemy1 * enemy1;
 	Enemy2 * enemy2;
+	Enemy3 * enemy3;
 
 	bool isGrounded = false;
 	bool isCrouching = false;

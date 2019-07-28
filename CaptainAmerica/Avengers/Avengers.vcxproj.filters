@@ -120,6 +120,12 @@
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2Bullet.h">
       <Filter>Header Files\GameObject\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy3.h">
+      <Filter>Header Files\GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy3Bullet.h">
+      <Filter>Header Files\GameObject\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameFramework\Camera.cpp">
@@ -192,6 +198,12 @@
       <Filter>Source Files\GameObject\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2Bullet.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy3.cpp">
+      <Filter>Source Files\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy3Bullet.cpp">
       <Filter>Source Files\GameObject\Enemy</Filter>
     </ClCompile>
   </ItemGroup>

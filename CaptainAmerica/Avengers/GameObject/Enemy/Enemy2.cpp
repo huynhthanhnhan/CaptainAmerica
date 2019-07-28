@@ -58,7 +58,7 @@ void Enemy2::LoadResource()
 
 void Enemy2::Update(DWORD dt)
 {
-	if (Camera::GetInstance()->IsObjectInCamera(this) == true)
+	if (Camera::GetInstance()->IsEnemyInCamera(this) == true)
 	{
 		this->isActive = true;
 		vector<LPCOLLISIONEVENT> coEvents;

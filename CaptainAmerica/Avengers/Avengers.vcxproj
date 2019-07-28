@@ -128,6 +128,8 @@
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy1.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2Bullet.h" />
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy3.h" />
+    <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy3Bullet.h" />
     <ClInclude Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\EnemyState.h" />
     <ClInclude Include="GameObject\Enemy\Enemy1Bullet.h" />
     <ClInclude Include="GameFramework\Animation.h" />
@@ -156,6 +158,8 @@
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy1Bullet.cpp" />
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2.cpp" />
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy2Bullet.cpp" />
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy3.cpp" />
+    <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\Enemy3Bullet.cpp" />
     <ClCompile Include="..\..\..\..\%40GitHub\CaptainAmericaAvenger\CaptainAmerica\Avengers\GameObject\Enemy\EnemyState.cpp" />
     <ClCompile Include="GameFramework\Animation.cpp" />
     <ClCompile Include="GameFramework\Debug.cpp" />
