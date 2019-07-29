@@ -60,7 +60,7 @@ void Enemy3::LoadResource()
 
 void Enemy3::Update(DWORD dt)
 {
-	if (Camera::GetInstance()->IsEnemyInCamera(this) == true)
+	if (Camera::GetInstance()->IsObjectInCamera(this) == true)
 	{
 		this->isActive = true;
 		vector<LPCOLLISIONEVENT> coEvents;
