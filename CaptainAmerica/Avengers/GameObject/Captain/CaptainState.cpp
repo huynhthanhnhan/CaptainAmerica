@@ -482,14 +482,16 @@ void CaptainState::Update(DWORD dt)
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
-#pragma region	Collide with brick
+	vector<Enemy* > enemies = Grid::GetInstance()->GetEnemies();
+
+#pragma region	Collide with Brick and River
 	vector<Tile *> tiles = Grid::GetInstance()->GetCurTiles();
-	{
-		captain->SetSpeedY(captain->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
-	}
+
+	captain->SetSpeedY(captain->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
+
 	coEvents.clear();
 	captain->SetDt(dt);
-	captain->CalcPotentialCollisions(tiles, coEvents);
+	captain->CheckMapCollision(tiles, coEvents);
 
 	if (coEvents.size() == 0)
 	{
@@ -534,6 +536,37 @@ void CaptainState::Update(DWORD dt)
 		delete coEvents[i];
 #pragma endregion
 
+#pragma region Colide with enemy
+	coEvents.clear();
+	captain->SetDt(dt);
+	captain->CheckEnemyCollision(enemies, coEvents);
+
+	if (coEvents.size() > 0)
+	{
+		float min_tx, min_ty, nx = 0, ny;
+
+		captain->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+
+		float moveX = min_tx * captain->GetSpeedX() * dt + nx * 3;
+		float moveY = min_ty * captain->GetSpeedY() * dt + ny * 0.4;
+
+		captain->SetPositionX(captain->GetPositionX() + moveX * 2);
+		captain->SetPositionY(captain->GetPositionY() + moveY);
+
+		//if (nx != 0) captain->SetSpeedX(captain->GetSpeedX() * -1);
+		//if (ny != 0) captain->SetSpeedY(captain->GetSpeedY() * -1);
+
+		if (coEventsResult[0]->collisionID == 0)
+		{
+			{
+				captain->SetState(HURT);
+			}
+		}
+
+	}
+	for (UINT i = 0; i < coEvents.size(); i++)
+		delete coEvents[i];
+#pragma endregion
 }
 
 

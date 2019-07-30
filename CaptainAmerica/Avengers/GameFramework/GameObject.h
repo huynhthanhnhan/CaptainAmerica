@@ -88,21 +88,11 @@ public:
 	Collider GetCollider() { return this->collider; }
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
 
-	void CalcPotentialGameObjectCollisions(
-		vector<LPGAMEOBJECT> &coObjects,
-		vector<LPCOLLISIONEVENT> &coEvents);
+	void CheckMapCollision( vector<Tile *> &tiles, vector<LPCOLLISIONEVENT> &coEvents);
 
-	void CalcPotentialMapCollisions(
-		vector<Tile *> &tiles,
-		vector<LPCOLLISIONEVENT> &coEvents);
+	void CheckEnemyCollision(vector<Enemy *> &enemies, vector<LPCOLLISIONEVENT> &coEvents);
 
-	void CalcPotentialCollisions(
-		vector<Tile *> &tiles,
-		vector<LPCOLLISIONEVENT> &coEvents);
-
-	void FilterCollision(
-		vector<LPCOLLISIONEVENT> &coEvents,
-		vector<LPCOLLISIONEVENT> &coEventsResult,
+	void FilterCollision( vector<LPCOLLISIONEVENT> &coEvents, vector<LPCOLLISIONEVENT> &coEventsResult,
 		float &min_tx,
 		float &min_ty,
 		float &nx,

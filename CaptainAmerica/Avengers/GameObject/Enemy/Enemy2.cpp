@@ -70,7 +70,7 @@ void Enemy2::Update(DWORD dt)
 
 		coEvents.clear();
 		this->SetDt(dt);
-		this->CalcPotentialCollisions(tiles, coEvents);
+		this->CheckMapCollision(tiles, coEvents);
 
 		if (coEvents.size() == 0)
 		{

@@ -58,16 +58,11 @@ LPCOLLISIONEVENT GameObject::SweptAABBEx(LPGAMEOBJECT coO)
 	LPCOLLISIONEVENT e = new CollisionEvent(t, nx, ny, coO);
 	return e;
 }
-void GameObject::CalcPotentialGameObjectCollisions(
-	vector<LPGAMEOBJECT> &coObjects,
-	vector<LPCOLLISIONEVENT> &coEvents)
+
+void GameObject::CheckMapCollision(vector<Tile *> &tiles, vector<LPCOLLISIONEVENT> &coEvents)
 {
-	return;
-}
-void GameObject::CalcPotentialMapCollisions(
-	vector<Tile *> &tiles,
-	vector<LPCOLLISIONEVENT> &coEvents)
-{
+	this->UpdateObjectCollider();
+
 	LPGAMEOBJECT solidTileDummy = new GameObject(0, 0, 16, 16);
 	for (int i = 0; i < tiles.size(); i++)
 	{
@@ -77,7 +72,7 @@ void GameObject::CalcPotentialMapCollisions(
 		solidTileDummy->UpdateTileCollider();
 
 		if (curTile->type == ObjectType::BRICK || curTile->type == ObjectType::BRICK_NOCOLLISION_BOTTOM)
-		{	
+		{
 			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
 			e->collisionID = 1;
 
@@ -105,16 +100,44 @@ void GameObject::CalcPotentialMapCollisions(
 			}
 		}
 	}
-}
-
-void GameObject::CalcPotentialCollisions(
-	vector<Tile *> &tiles,
-	vector<LPCOLLISIONEVENT> &coEvents)
-{
-	this->UpdateObjectCollider();
-	CalcPotentialMapCollisions(tiles, coEvents);
 
 	sort(coEvents.begin(), coEvents.end(), CollisionEvent::compare);
+}
+
+void GameObject::CheckEnemyCollision(vector<Enemy*>& enemies, vector<LPCOLLISIONEVENT>& coEvents)
+{
+	LPGAMEOBJECT CollisionEnemy = new GameObject(0, 0, 16, 16);
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		if (enemies[i]->isActive == true)
+		{
+			Enemy * enemy = enemies[i];
+
+			CollisionEnemy->SetPositionX(enemy->x);
+			CollisionEnemy->SetPositionY(enemy->y);
+			CollisionEnemy->SetSpeedX(enemy->vx);
+			CollisionEnemy->SetSpeedY(enemy->vy);
+			CollisionEnemy->height = enemy->height;
+			CollisionEnemy->width = enemy->width;
+			CollisionEnemy->UpdateObjectCollider();
+
+			CollisionEnemy->collider.width = enemy->width;
+			CollisionEnemy->collider.height = enemy->height;
+
+			LPCOLLISIONEVENT e = SweptAABBEx(CollisionEnemy);
+			e->collisionID = 0;
+
+			if (e->t >= 0 && e->t < 1.0f)
+			{
+				//Captain::GetInstance()->TakeDamage(enemy->GetDamage());
+				coEvents.push_back(e);
+			}
+			else
+			{
+				delete e;
+			}
+		}
+	}
 }
 
 void GameObject::FilterCollision(

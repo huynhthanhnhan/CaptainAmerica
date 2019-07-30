@@ -70,7 +70,7 @@ void Enemy1::Update(DWORD dt)
 
 		coEvents.clear();
 		this->SetDt(dt); // dùng để update bouding box
-		this->CalcPotentialCollisions(tiles, coEvents);
+		this->CheckMapCollision(tiles, coEvents);
 
 		if (coEvents.size() == 0)
 		{

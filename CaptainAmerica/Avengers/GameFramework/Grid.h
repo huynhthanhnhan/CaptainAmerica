@@ -48,6 +48,7 @@ public:
 
 	vector<Tile *> GetCurTiles() { return this->curTiles; }
 	vector<Tile *> GetCollisionTiles() { return this->CollisionTiles; }
+	vector<Enemy* > GetEnemies() { return this->enemies; }
  
 	void Update(DWORD dt);
 	void Render();

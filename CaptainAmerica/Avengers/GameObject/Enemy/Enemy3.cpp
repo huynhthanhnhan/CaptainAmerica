@@ -60,7 +60,7 @@ void Enemy3::LoadResource()
 
 void Enemy3::Update(DWORD dt)
 {
-	if (Camera::GetInstance()->IsObjectInCamera(this) == true)
+	if (Camera::GetInstance()->IsEnemyInCamera(this) == true)
 	{
 		this->isActive = true;
 		vector<LPCOLLISIONEVENT> coEvents;
@@ -71,7 +71,7 @@ void Enemy3::Update(DWORD dt)
 		//this->SetSpeedY(this->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
 
 		coEvents.clear();
-		this->CalcPotentialCollisions(tiles, coEvents);
+		this->CheckMapCollision(tiles, coEvents);
 
 		if (coEvents.size() == 0)
 		{
