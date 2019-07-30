@@ -5,6 +5,11 @@
 #include "Map.h"
 #include "Grid.h"
 #include "../GameObject/Captain/Captain.h"
+#include "../GameObject/Enemy/Enemy.h"
+#include "../GameObject/Enemy/Enemy1.h"
+#include "../GameObject/Enemy/Enemy2.h"
+#include "../GameObject/Enemy/Enemy3.h"
+
 
 #include <chrono>
 

@@ -10,6 +10,13 @@
 
 using namespace std;
 
+struct EnemyLocation
+{
+	int type;
+	int positionX;
+	int positionY;
+};
+
 class LoadTXT
 {
 public:
@@ -17,6 +24,7 @@ public:
 	LoadTXT();
 	static LoadTXT* Instance();
 	RECT* LoadRect(char* path);
+	EnemyLocation* LoadEnemiesLocation(char* path);
 	~LoadTXT();
 };
 

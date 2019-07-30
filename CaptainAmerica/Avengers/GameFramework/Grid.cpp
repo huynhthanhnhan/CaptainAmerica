@@ -25,6 +25,7 @@ Grid::Grid()
 	this->camera = Camera::GetInstance();
 	this->captain = Captain::GetInstance();
 
+	LoadEnemies();
 }
 
 void Grid::LoadCells()
@@ -46,6 +47,39 @@ void Grid::LoadCells()
 				CollisionTiles.push_back(tmp);
 			}
 		}
+	}
+}
+
+void Grid::LoadEnemies()
+{
+	enemies.clear();
+	EnemyLocation* enemiesLocation = LoadTXT::Instance()->LoadEnemiesLocation((char*)"Resources\\Enemy\\EnemiesLocation.txt");
+	for (int i = 0;i < 3;i++)
+	{
+		CreateEnemy((EnemyType)enemiesLocation[i].type, enemiesLocation[i].positionX, enemiesLocation[i].positionY);
+	}
+}
+
+void Grid::CreateEnemy(EnemyType type, int positionX, int positionY)
+{
+	Enemy* enemy = NULL;
+	switch (type)
+	{
+	case ENEMY1:
+		enemy = new Enemy1(positionX,positionY);
+		break;
+	case ENEMY2:
+		enemy = new Enemy2(positionX, positionY);
+		break;
+	case ENEMY3:
+		enemy = new Enemy3(positionX, positionY);
+		break;
+	default:
+		break;
+	}
+	if (enemy != NULL)
+	{
+		enemies.push_back(enemy);
 	}
 }
 
@@ -82,6 +116,11 @@ void Grid::Update(DWORD dt)
 	//	}
 	//}
 
+	for (size_t i = 0; i < enemies.size();i++)
+	{
+		enemies[i]->Update(dt);
+	}
+
 	int captainLCell, captainRCell, captainTCell, captainBCell;
 
 	this->GetCaptainPosOnGrid(captainLCell, captainRCell, captainTCell, captainBCell);
@@ -108,6 +147,11 @@ void Grid::Render()
 		{
 			cells[i][j]->Render();
 		}
+	}
+
+	for (size_t i = 0; i < enemies.size();i++)
+	{
+		enemies[i]->Render();
 	}
 
 	captain->Render();

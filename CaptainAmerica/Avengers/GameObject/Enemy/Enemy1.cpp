@@ -1,6 +1,6 @@
-#include "Enemy1.h"
+﻿#include "Enemy1.h"
 
-Enemy1::Enemy1()
+Enemy1::Enemy1(int positionX, int positionY)
 {
 	LoadResource();
 
@@ -8,8 +8,8 @@ Enemy1::Enemy1()
 
 	this->isLeft = false;
 	this->vx = 0;
-	this->SetPositionX(600);
-	this->SetPositionY(80);
+	this->SetPositionX(positionX);
+	this->SetPositionY(positionY);
 
 	collider.x = x;
 	collider.y = y;
@@ -66,9 +66,10 @@ void Enemy1::Update(DWORD dt)
 
 		vector<Tile *> tiles = Grid::GetInstance()->GetCollisionTiles();
 
-		//this->SetSpeedY(this->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
+		this->SetSpeedY(this->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
 
 		coEvents.clear();
+		this->SetDt(dt); // dùng để update bouding box
 		this->CalcPotentialCollisions(tiles, coEvents);
 
 		if (coEvents.size() == 0)
@@ -95,13 +96,13 @@ void Enemy1::Update(DWORD dt)
 			if (nx != 0) this->SetSpeedX(0);
 			if (ny != 0) this->SetSpeedY(0);
 
-			if (coEventsResult[0]->collisionID == 1)
+			/*if (coEventsResult[0]->collisionID == 1)
 			{
 				if (ny == 1)
 				{
 					this->SetSpeedY(0);
 				}
-			}
+			}*/
 		}
 		for (UINT i = 0; i < coEvents.size(); i++)
 			delete coEvents[i];

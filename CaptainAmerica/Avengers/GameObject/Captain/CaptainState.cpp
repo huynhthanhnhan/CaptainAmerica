@@ -504,8 +504,8 @@ void CaptainState::Update(DWORD dt)
 
 		captain->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
-		float moveX = min_tx * captain->GetSpeedX() * dt + nx * 0.4;
-		float moveY = min_ty * captain->GetSpeedY() * dt + ny * 0.4;
+		float moveX = min_tx * captain->GetSpeedX() * dt;
+		float moveY = min_ty * captain->GetSpeedY() * dt;
 
 		captain->SetPositionX(captain->GetPositionX() + moveX);
 		captain->SetPositionY(captain->GetPositionY() + moveY);

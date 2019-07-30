@@ -15,7 +15,7 @@ class Enemy1 : public Enemy
 
 	Enemy1Bullet * bullet;
 public:
-	Enemy1();
+	Enemy1(int positionX, int positionY);
 	void LoadResource();
 	void Update(DWORD dt) ;
 	void Render();

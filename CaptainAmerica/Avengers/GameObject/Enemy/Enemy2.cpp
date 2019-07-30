@@ -1,6 +1,6 @@
 #include "Enemy2.h"
 
-Enemy2::Enemy2()
+Enemy2::Enemy2(int positionX, int positionY)
 {
 	LoadResource();
 
@@ -8,8 +8,8 @@ Enemy2::Enemy2()
 
 	this->isLeft = false;
 	this->vx = 0;
-	this->SetPositionX(700);
-	this->SetPositionY(80);
+	this->SetPositionX(positionX);
+	this->SetPositionY(positionY);
 
 	collider.x = x;
 	collider.y = y;
@@ -66,9 +66,10 @@ void Enemy2::Update(DWORD dt)
 
 		vector<Tile *> tiles = Grid::GetInstance()->GetCollisionTiles();
 
-		//this->SetSpeedY(this->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
+		this->SetSpeedY(this->GetSpeedY() - CAPTAIN_AMERICA_GRAVITY);
 
 		coEvents.clear();
+		this->SetDt(dt);
 		this->CalcPotentialCollisions(tiles, coEvents);
 
 		if (coEvents.size() == 0)
@@ -127,8 +128,37 @@ void Enemy2::Update(DWORD dt)
 		if (timeToAction < 50)
 			this->eState = EnemyIDLE;
 		else if (timeToAction >= 50 && timeToAction < 100)
+		{
+			if (this->isFlipped == false)
+				this->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * -1);
+			else
+			{
+				this->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X);
+			}
+			this->eState = EnemyWALK;
+		}
+		else if (timeToAction >= 100 && timeToAction < 120)
+		{
+			if (this->isFlipped == false)
+				this->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * -1);
+			else
+			{
+				this->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X);
+			}
+			this->SetSpeedY(CAPTAIN_AMERICA_JUMP_SPEED_Y);
 			this->eState = EnemyCROUCH;
-		else if (timeToAction >= 100 && timeToAction < 200)
+		}
+		else if (timeToAction >= 120 && timeToAction < 140)
+		{
+			if (this->isFlipped == false)
+				this->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * -1);
+			else
+			{
+				this->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X);
+			}
+			this->eState = EnemyCROUCH;
+		}
+		else if (timeToAction >= 140 && timeToAction < 200)
 		{
 			if (this->isFlipped == false)
 				this->SetSpeedX(CAPTAIN_AMERICA_WALKING_SPEED_X * -1);

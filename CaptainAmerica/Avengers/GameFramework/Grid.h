@@ -30,7 +30,14 @@ private:
 
 	Captain * captain;
 
+
+	std::vector<Enemy *> enemies;
+
 	Grid();
+
+	void LoadEnemies();
+
+	void CreateEnemy(EnemyType type, int positionX, int positionY);
 
 public:
 	static Grid * GetInstance();

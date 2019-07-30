@@ -49,9 +49,6 @@ Captain::Captain()
 	collider.height = 45;
 
 	shield = new Shield();
-	enemy1 = new Enemy1();
-	enemy2 = new Enemy2();
-	enemy3 = new Enemy3();
 }
 
 void Captain::LoadResources()
@@ -368,15 +365,9 @@ void Captain::Update(DWORD dt)
 	}
 	state->Update(dt);
 	shield->Update(dt);
-	enemy1->Update(dt);
-	enemy2->Update(dt);
-	enemy3->Update(dt);
 }
 void Captain::Render()
 {
 	state->Render();
 	shield->Render();
-	enemy1->Render();
-	enemy2->Render();
-	enemy3->Render();
 }

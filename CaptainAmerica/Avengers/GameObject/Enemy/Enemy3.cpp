@@ -1,6 +1,6 @@
 #include "Enemy3.h"
 
-Enemy3::Enemy3()
+Enemy3::Enemy3(int positionX, int positionY)
 {
 	LoadResource();
 
@@ -8,8 +8,8 @@ Enemy3::Enemy3()
 
 	this->isLeft = false;
 	this->vx = 0;
-	this->SetPositionX(400);
-	this->SetPositionY(200);
+	this->SetPositionX(positionX);
+	this->SetPositionY(positionY);
 
 	collider.x = x;
 	collider.y = y;
